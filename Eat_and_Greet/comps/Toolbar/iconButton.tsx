@@ -26,15 +26,6 @@ const iconButtonStyles = StyleSheet.create({
   },
 });
 
-export { IconButton };
   export default IconButton;
 
-  const styles = StyleSheet.create({
-    iconSize: {
-      width: 45,
-      height: 45,
-      flexShrink: 0,
-      margin: 4,
-    },
-  });
   
