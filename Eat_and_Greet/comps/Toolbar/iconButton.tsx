@@ -26,6 +26,5 @@ const iconButtonStyles = StyleSheet.create({
   },
 });
 
-  export default IconButton;
-
+export default IconButton;
   
