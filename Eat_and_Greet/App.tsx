@@ -8,7 +8,7 @@ export default function App() {
     <View style={styles.container}>
       <Toolbar />
       <StatusBar style="auto" />
-      <TextBox />
+      <TextBox placeholder="Type ..." />
     </View>
   );
 }
