@@ -17,14 +17,14 @@ export function Toolbar() {
 
 const styles = StyleSheet.create({
   root: {
-    width: 425,
+    width: '100%',
     height: 78,
     flexShrink: 1,
     justifyContent: 'space-between',
     flexDirection: 'row',
   },
   background: {
-    width: 425,
+    width: '100%',
     height: 60,
     flexShrink: 0,
     borderWidth: 1,
