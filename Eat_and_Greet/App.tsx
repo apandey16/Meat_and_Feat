@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
-import { Toolbar } from './Toolbar/toolbar'; 
+import { Toolbar } from './comps/Toolbar/toolbar'; 
 
 export default function App() {
   return (
