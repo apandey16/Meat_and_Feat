@@ -1,3 +1,4 @@
 {
+  "include": ["./assets/images/Logo.png"],
   "extends": "@tsconfig/react-native/tsconfig.json"
 }
