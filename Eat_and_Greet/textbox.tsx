@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 import { TextInput, View, StyleSheet } from 'react-native';
 
-const TextBox = () => {
+interface TextBoxProps {
+  placeholder: string;
+}
+
+const TextBox = ( {placeholder} : TextBoxProps ) => {
 const [text, setText] = useState('');
 
-const handleTextChange = (inputText: string) => {
-    setText(inputText);
+const handleTextChange = (userInput: string) => {
+    setText(userInput);
 };
 
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.input}
-        placeholder="Type something..."
+        placeholder={placeholder}
         onChangeText={handleTextChange}
         value={text}
       />
@@ -27,7 +31,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: 'black',
     borderWidth: 1,
     padding: 10,
   },
