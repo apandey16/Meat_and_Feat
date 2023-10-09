@@ -8,7 +8,7 @@ Dev Setup:
 - Setup the stuff for React Native (like NodeJS, NPM, etc)
 - To run the server go the the ```Eat_and_Greet``` folder and then run ```npx expo start```
     - If you want to run a local emulation:
-        - ```npm run android````
+        - ```npm run android```
         - ```npm run ios``` (MacOS only)
 - To view the app server you can create a local emulation of the phone or download Expo Go and scan the QR code in the terminal
 
