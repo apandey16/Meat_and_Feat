@@ -10,7 +10,7 @@ function HomeScreen() {
         <Toolbar />
         <StatusBar style="auto" />
         <TextBox placeholder="Type ..." />
-        <Text>Home Screennnn Bruh</Text>
+        <Text>Home Screen Bruh</Text>
         <Text>Welcome to our app!</Text>
       </View>
     );
