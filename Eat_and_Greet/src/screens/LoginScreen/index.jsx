@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { StyleSheet, Button, Text, Image, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
