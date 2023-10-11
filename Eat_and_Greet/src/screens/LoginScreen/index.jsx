@@ -13,7 +13,7 @@ function LoginScreen() {
     return (
       <View style={styles.ScreenContainer}>
         <StatusBar style="auto" />
-        <Image style={LoginStyles.temp} source={require('../../../assets/images/logo.png')}/>
+        <Image style={LoginStyles.logoStyles} source={require('../../../assets/images/logo.png')}/>
         <CornerButton name="Log In" top="5%" onPressFunc={() => navigation.navigate('Home')}/>
         <CornerButton name="Make Account" top="6%" onPressFunc={() => navigation.navigate('Onboarding')}/>
       </View>
