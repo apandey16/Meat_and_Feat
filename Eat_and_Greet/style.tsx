@@ -13,7 +13,13 @@ const styles = StyleSheet.create({
         fontFamily: 'Courier New',
         fontSize:36,
         fontWeight:'bold'
-    }
+    },
+    ScreenContainer: {
+        flex: 1,
+        backgroundColor: '#7286D3',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }
     });
 
 export default styles;
