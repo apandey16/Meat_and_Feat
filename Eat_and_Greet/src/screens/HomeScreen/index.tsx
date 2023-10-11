@@ -1,10 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
-import { Toolbar } from '../../../comps/Toolbar/toolbar';
-import TextBox from '../../../comps/Toolbar/textbox';
+import { Toolbar } from '../../comps/Toolbar/toolbar';
 
-import styles from '../../../style';
+import TextBox from '../../comps/Textbox/textbox';
+
+import styles from '../../style';
 
 function HomeScreen() {
     return (

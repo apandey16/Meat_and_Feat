@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { TextInput, View, StyleSheet } from 'react-native';
+import { TextInput, View } from 'react-native';
+import styles from './style';
 
 interface TextBoxProps {
   placeholder: string;
@@ -23,21 +24,5 @@ const handleTextChange = (userInput: string) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    margin: 20,
-    width: '90%',
-    backgroundColor: '#FFF2F2',
-    borderRadius: 4,
-  },
-  input: {
-    height: 40,
-    borderColor: 'black',
-    borderWidth: 0.25,
-    padding: 10,
-    borderRadius: 4,
-  },
-});
 
 export default TextBox;
