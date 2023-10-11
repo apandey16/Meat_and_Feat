@@ -4,9 +4,11 @@ import { StatusBar } from 'expo-status-bar';
 import { Toolbar } from '../../../comps/Toolbar/toolbar';
 import TextBox from '../../../comps/Toolbar/textbox';
 
+import styles from '../../../style';
+
 function HomeScreen() {
     return (
-      <View style={styles.container}>
+      <View style={styles.ScreenContainer}>
         <Toolbar />
         <StatusBar style="auto" />
         <TextBox placeholder="Type ..." />
@@ -17,12 +19,3 @@ function HomeScreen() {
 }
 
 export default HomeScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
