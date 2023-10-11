@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
     CornerButtonOutline: {
         alignItems: 'center',
         justifyContent: 'center',
@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 2
     },
-    CornerButtonText: {
+    ButtonText: {
         fontFamily: 'Courier New',
         fontSize:36,
         fontWeight:'bold'
@@ -22,4 +22,4 @@ const styles = StyleSheet.create({
       }
     });
 
-export default styles;
+export default style;
