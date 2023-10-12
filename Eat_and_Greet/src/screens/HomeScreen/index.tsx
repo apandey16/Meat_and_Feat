@@ -33,7 +33,7 @@ function HomeScreen() {
                           textLine2='Events'
                           fontSize={40}
             />
-            <HomePageButton onPress={() => null}
+            <HomePageButton onPress={() => navigation.navigate('Chats')}
                           textLine1='My'
                           textLine2='Chats'
                           fontSize={40}
