@@ -14,8 +14,8 @@ function LoginScreen() {
       <View style={styles.ContentContainer}>
         <StatusBar style="auto" />
         <Image style={LoginStyles.logoStyles} source={require('../../../assets/images/logo.png')}/>
-        <RoundedHomeButton name="Log In" top="5%" onPress={() => navigation.navigate('Home')}/>
-        <RoundedHomeButton name="Make Account" top="6%" onPress={() => navigation.navigate('Onboarding')}/>
+        <RoundedHomeButton name="Log In" onPress={() => navigation.navigate('Home')}/>
+        <RoundedHomeButton name="Make Account" onPress={() => navigation.navigate('Onboarding')}/>
       </View>
     );
 }
