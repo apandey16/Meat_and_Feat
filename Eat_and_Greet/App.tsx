@@ -15,7 +15,7 @@ import SettingsScreen from "./src/screens/SettingsScreen";
 
 import HeaderBackButton from "./src/comps/HeaderBackButton";
 
-import navHeaderStyles from "./src/style";
+import {navHeaderStyles} from "./src/style";
 
 const stackArray = [ { name: "Login", comp: LoginScreen},
                      { name: "Onboarding", comp: OnboardingPagesNavigation},
