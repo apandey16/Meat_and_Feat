@@ -69,7 +69,25 @@ const style = StyleSheet.create({
         backgroundColor: '#E5E0FF', 
         borderRadius: 10,
         alignItems: 'center',
-    }
+    },
+    ContentContainer: {
+        flex: 1,
+        backgroundColor: "#7286D3",
+        alignItems: "center",
+        justifyContent: "center",
+      }
     });
 
+    export const navHeaderStyles = StyleSheet.create({
+        headerStyle: {
+          backgroundColor: "#8EA7E9",
+        },
+        headerTitleStyle: {
+          fontFamily: "Courier New",
+          fontWeight: "bold",
+          color: "black",
+          fontSize: 20
+        }
+      });
+      
 export default style;
