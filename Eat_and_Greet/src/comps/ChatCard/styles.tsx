@@ -11,6 +11,14 @@ const localstyle = StyleSheet.create({
       backgroundColor: '#E5E0FF',
       width: "90%",
     },
+    iconContainer: {
+      marginRight: 16,
+      alignSelf: 'flex-end',
+    },
+    textContainer: {
+      flex: 1,
+      alignSelf: 'flex-start',
+    },
     senderName: {
       fontWeight: 'bold',
       marginBottom: 4,
