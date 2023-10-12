@@ -1,13 +1,15 @@
-import { Text, View, StyleSheet, Alert } from 'react-native';
+import { Text, View, StyleSheet, Alert, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import styles from '../../style';
 import RoundedHomeButton from '../../comps/RoundedHomeButton/RoundedHomeButton';
 import CircularButton from '../../comps/CircularButton/CircularButton';
 
+const { width, height } = Dimensions.get('window');
+
 function SelectInterests() {
     const navigation = useNavigation();
-    const buttonSize = 81.66;
+    const buttonSize = width/5.7;
     const borderRadius = 20;
     
     return (
@@ -39,11 +41,12 @@ function SelectInterests() {
 
 const localStyles = StyleSheet.create({
     buttonRow: {    
-        flex: 3,
+        flex: 1,
         flexWrap: 'wrap',
         flexDirection: 'row',
         marginTop:20,
-        justifyContent: 'space-between',
+        justifyContent:"center",
+        // justifyContent: 'space-between',
     },
   });
 
