@@ -1,6 +1,8 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet, PixelRatio } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
+const fontScale = PixelRatio.getFontScale();
+const getFontSize = (size: number) => size / fontScale;
 
 const style = StyleSheet.create({
     CornerButtonOutline: {
@@ -13,35 +15,38 @@ const style = StyleSheet.create({
     },
     ButtonText: {
         fontFamily: 'Courier New',
-        fontSize:36,
-        fontWeight:'bold'
+        fontSize:getFontSize(24),
+        fontWeight:'bold',
     },
     HeaderText: {
         fontFamily: 'Courier New',
-        fontSize:36,
+        fontSize:getFontSize(36),
         marginTop: 10,
         fontWeight:'bold',
         textAlign:'center',
+        position: 'relative',
     },
     Subheading: {
         fontFamily: 'Courier New',
-        fontSize:24,
+        fontSize:getFontSize(24),
         fontWeight:'bold',
         alignSelf: 'center',
         textAlign:'center',
         marginTop: 10,
+        position: 'relative',
     },
     SubHeaderText: {
         fontFamily: 'Courier New',
-        fontSize:24,
+        fontSize:getFontSize(24),
         fontWeight:'bold',
         margin: 5,
         marginLeft: 40,
         alignSelf: 'flex-start',
+        position: 'relative',
     },
     Text: {
         fontFamily: 'Courier New',
-        fontSize:20,
+        fontSize:getFontSize(20),
         margin: 5,
         padding:10,
         alignSelf: 'center',

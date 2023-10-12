@@ -8,7 +8,7 @@ const CircularButtonStyles = StyleSheet.create({
         alignItems: 'center',
         alignSelf:'flex-start',
         marginLeft: 20,
-        marginTop: 30,
+        marginTop: 15,
         marginRight: 20,
         shadowOffset: { width: 2, height: 2 }, 
         shadowColor: '#000',
@@ -16,7 +16,7 @@ const CircularButtonStyles = StyleSheet.create({
       },
       ButtonText:{
         fontFamily: 'Courier New',
-        fontSize:24,
+        fontSize:20,
         fontWeight:'bold',
         color: '#000',
         alignContent: 'center',

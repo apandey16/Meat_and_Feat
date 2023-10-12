@@ -23,7 +23,7 @@ function BasicInfo() {
                 <Text style={styles.SubHeaderText}>Create Password:</Text>
                 <TextBox placeholder="Password" top="-3%"/>
                 <RoundedHomeButton name="Profile Photo" height="7%" top="2%"onPress={() => navigation.navigate('Photo Upload')}/>
-                <RoundedHomeButton name="Next" height="7%" top="8%" onPress={() => navigation.navigate('Select Interests')}/> 
+                <RoundedHomeButton name="Next" height="7%" top="6%" onPress={() => navigation.navigate('Select Interests')}/> 
             </View>
         </View>
       </View>
