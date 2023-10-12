@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native';
 
 const CircularButtonStyles = StyleSheet.create({
     button: {
-        borderRadius: 25,
         backgroundColor: '#8EA7E9', 
         justifyContent: 'center',
         position: 'relative',
