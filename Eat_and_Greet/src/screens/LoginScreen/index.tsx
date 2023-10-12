@@ -2,17 +2,16 @@ import { Image, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 
-import LoginStyles from './index.styles';
-
 import RoundedHomeButton from '../../comps/RoundedHomeButton/RoundedHomeButton';
 
+import LoginStyles from './index.styles';
 import styles from '../../style';
 
 function LoginScreen() {
     const navigation = useNavigation();
 
     return (
-      <View style={styles.ScreenContainer}>
+      <View style={styles.ContentContainer}>
         <StatusBar style="auto" />
         <Image style={LoginStyles.logoStyles} source={require('../../../assets/images/logo.png')}/>
         <RoundedHomeButton name="Log In" top="5%" onPress={() => navigation.navigate('Home')}/>

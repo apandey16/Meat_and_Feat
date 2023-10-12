@@ -4,7 +4,7 @@ import styles from '../../style';
 
 function OnboardingScreen() {
     return (
-      <View style={styles.ScreenContainer}>
+      <View style={styles.ContentContainer}>
         <Text>This is the onboarding page</Text>
         <Text>Please Provide your social security number to create the account</Text>
       </View>
