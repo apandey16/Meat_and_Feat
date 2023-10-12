@@ -12,7 +12,7 @@ import ForumsScreen from "./src/screens/ForumsScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
 import SearchScreen from "./src/screens/SearchScreen";
 import SettingsScreen from "./src/screens/SettingsScreen";
-
+import ViewEventScreen from "./src/screens/ViewEventScreen";
 import HeaderBackButton from "./src/comps/HeaderBackButton";
 
 import {navHeaderStyles} from "./src/style";
@@ -23,7 +23,8 @@ const stackArray = [ { name: "Login", comp: LoginScreen},
                      { name: "Forums", comp: ForumsScreen}, 
                      { name: "Profile", comp: ProfileScreen}, 
                      { name: "Search", comp: SearchScreen}, 
-                     { name: "Settings", comp: SettingsScreen},  ];
+                     { name: "Settings", comp: SettingsScreen}, 
+                     { name: "ViewEvent", comp: ViewEventScreen}];
 
 const Stack = createNativeStackNavigator();
 const OnboardingNavigation = createNativeStackNavigator();
