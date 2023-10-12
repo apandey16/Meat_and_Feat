@@ -4,8 +4,9 @@ const TextboxStyles = StyleSheet.create({
     container: {
       margin: 20,
       width: '90%',
-      backgroundColor: '#FFF2F2',
+      backgroundColor: '#FFFFF2',
       borderRadius: 4,
+      marginBottom: 0,
     },
     input: {
       height: 40,
