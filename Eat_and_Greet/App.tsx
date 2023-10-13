@@ -27,7 +27,6 @@ const stackArray = [ { name: "Login", comp: LoginScreen},
                      { name: "Search", comp: SearchScreen}, 
                      { name: "Settings", comp: SettingsScreen}, 
                      { name: "Chats", comp: ChatsPage}, 
-                   
                      { name: "ViewEvent", comp: ViewEventScreen}];
 
 const Stack = createNativeStackNavigator();
