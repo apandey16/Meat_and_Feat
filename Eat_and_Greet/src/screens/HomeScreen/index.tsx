@@ -24,29 +24,29 @@ function HomeScreen() {
             <HomePageButton onPress={() => navigation.navigate('Search')}
                           textLine1='Find'
                           textLine2='Forums'
-                          fontSize={40}
+                          fontSize={35}
             />
           </View>
           <View style={localStyles.ButtonLine}>
             <HomePageButton onPress={() => null}
                           textLine1='My'
                           textLine2='Events'
-                          fontSize={40}
+                          fontSize={32}
             />
             <HomePageButton onPress={() => navigation.navigate('Chats')}
                           textLine1='My'
                           textLine2='Chats'
-                          fontSize={40}
+                          fontSize={32}
             />
           </View>
           <View style={localStyles.ButtonLine}>
             <HomePageButton onPress={() => navigation.navigate('Profile')}
                           textLine1='Account'
-                          fontSize={40}
+                          fontSize={32}
             />
             <HomePageButton onPress={() => navigation.navigate('Settings')}
                           textLine1='Settings'
-                          fontSize={35}
+                          fontSize={30}
             />
           </View>
         </View>
