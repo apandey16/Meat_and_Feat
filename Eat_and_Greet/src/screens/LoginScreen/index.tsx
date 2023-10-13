@@ -16,6 +16,7 @@ function LoginScreen() {
         <Image style={LoginStyles.logoStyles} source={require('../../../assets/images/logo.png')}/>
         <RoundedHomeButton name="Log In" onPress={() => navigation.navigate('Home')}/>
         <RoundedHomeButton name="Make Account" onPress={() => navigation.navigate('Onboarding')}/>
+        <RoundedHomeButton name="Dev Page" onPress={() => navigation.navigate('Dev Page')}/>
       </View>
     );
 }
