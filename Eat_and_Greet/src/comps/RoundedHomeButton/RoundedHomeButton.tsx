@@ -24,8 +24,8 @@ const RoundedHomeButton = (props : RoundedHomeButtonProps) => {
             margin: 5
         },
         sizing: {
-            width: props.width,
-            height: props.height, 
+            minWidth: props.width,
+            minHeight: props.height, 
         }
     })
 
