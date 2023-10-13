@@ -16,6 +16,7 @@ import ViewEventScreen from "./src/screens/ViewEventScreen";
 import ChatsPage from "./src/screens/ChatsPage/index";
 import PostEvent from "./src/screens/EventScreens/post";
 import BrowseEvent from "./src/screens/EventScreens/browse";
+import Temp from "./src/screens/Temp/index";
 
 import HeaderBackButton from "./src/comps/HeaderBackButton";
 
@@ -31,7 +32,8 @@ const stackArray = [ { name: "Login", comp: LoginScreen},
                      { name: "Chats", comp: ChatsPage}, 
                      { name: "Post Event", comp: PostEvent},
                      { name: "Browse Event", comp: BrowseEvent},
-                     { name: "ViewEvent", comp: ViewEventScreen}];
+                     { name: "View Event", comp: ViewEventScreen},
+                     {name: "Dev Page", comp: Temp}];
 
 const Stack = createNativeStackNavigator();
 const OnboardingNavigation = createNativeStackNavigator();
