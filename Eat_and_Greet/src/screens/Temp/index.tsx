@@ -16,6 +16,7 @@ function LoginScreen() {
         <RoundedHomeButton name="Login" onPress={() => navigation.navigate('Login')}/>
         <RoundedHomeButton name="Onboading" onPress={() => navigation.navigate('Onboarding')}/>
         <RoundedHomeButton name="Chats" onPress={() => navigation.navigate('Chats')}/>
+        <RoundedHomeButton name="Example Chat" onPress={() => navigation.navigate('Example Chat')}/>  
         <RoundedHomeButton name="Post Event" onPress={() => navigation.navigate('Post Event')}/>
         <RoundedHomeButton name="Browse Event" onPress={() => navigation.navigate('Browse Event')}/> 
         <RoundedHomeButton name="View Event" onPress={() => navigation.navigate('View Event')}/>  
