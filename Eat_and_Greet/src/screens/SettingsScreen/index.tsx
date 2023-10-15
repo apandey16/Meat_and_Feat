@@ -3,7 +3,9 @@ import { View } from 'react-native';
 import { List, Switch } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
-const SettingsScreen: React.FC = () => {
+import localStyles from './styles';
+
+const SettingsScreen = () => {
   const [notifications, setNotifications] = React.useState<boolean>(false);
 
   const toggleNotifications = () => {
@@ -13,11 +15,11 @@ const SettingsScreen: React.FC = () => {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, padding: 16, backgroundColor: '#7286D3' }}>
-      <View style={{ flex: 1, padding: 16, backgroundColor: '#E5E0FF' , borderRadius: 10}}>
+    <View style={localStyles.background}>
+      <View style={localStyles.outerBox}>
         
         <List.Section>
-          <List.Subheader>General Settings</List.Subheader>
+          <List.Subheader style={localStyles.subheader}>General Settings</List.Subheader>
           <List.Item
             title="Notifications"
             right={() => <Switch value={notifications} onValueChange={toggleNotifications} ios_backgroundColor={'#0000'}/>}
@@ -39,7 +41,7 @@ const SettingsScreen: React.FC = () => {
           />
         </List.Section>
         <List.Section style={{ marginTop: 10 }}>
-          <List.Subheader>Login</List.Subheader>
+          <List.Subheader style={localStyles.subheader}>Login</List.Subheader>
           <List.Item  
             title="Switch Account"
             onPress={() => console.log('switch account button press')} 
