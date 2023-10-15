@@ -1,4 +1,4 @@
-import { Image, View } from 'react-native';
+import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 
@@ -19,6 +19,7 @@ function LoginScreen() {
         <RoundedHomeButton name="Post Event" onPress={() => navigation.navigate('Post Event')}/>
         <RoundedHomeButton name="Browse Event" onPress={() => navigation.navigate('Browse Event')}/> 
         <RoundedHomeButton name="View Event" onPress={() => navigation.navigate('View Event')}/>  
+        <RoundedHomeButton name="Settings" onPress={() => navigation.navigate('Settings')}/>  
       </View>
     );
 }
