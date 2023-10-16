@@ -2,7 +2,7 @@ import { Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import styles from '../../style';
-import RoundedHomeButton from '../../comps/RoundedHomeButton/RoundedHomeButton';
+import RoundedButton from '../../comps/RoundedButton/RoundedButton';
 import TextBox from '../../comps/Textbox/textbox';
 
 function BasicInfo() {
@@ -22,8 +22,8 @@ function BasicInfo() {
                 <TextBox placeholder="eat&great@gmail.com" top="-3%"/>
                 <Text style={styles.SubHeaderText}>Create Password:</Text>
                 <TextBox placeholder="Password" top="-3%"/>
-                <RoundedHomeButton name="Profile Photo" height="7%" top="2%"onPress={() => navigation.navigate('Photo Upload')}/>
-                <RoundedHomeButton name="Next" height="7%" top="6%" onPress={() => navigation.navigate('Select Interests')}/> 
+                <RoundedButton name="Profile Photo" height="7%" top="2%"onPress={() => navigation.navigate('Photo Upload')}/>
+                <RoundedButton name="Next" height="7%" top="6%" onPress={() => navigation.navigate('Select Interests')}/> 
             </View>
         </View>
       </View>

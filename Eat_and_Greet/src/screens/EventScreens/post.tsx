@@ -5,7 +5,7 @@ import { Toolbar } from '../../comps/Toolbar/toolbar';
 
 import styles from '../../style';
 import React from 'react'
-import RoundedHomeButton from '../../comps/RoundedHomeButton/RoundedHomeButton';
+import RoundedButton from '../../comps/RoundedButton/RoundedButton';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -40,7 +40,7 @@ export default function PostEvent() {
           </View>
         </View>
       </SafeAreaView>
-      <RoundedHomeButton name="Post Event" top = "-2%"/>
+      <RoundedButton name="Post Event" top = "-2%"/>
       <Toolbar/>
       <StatusBar style = "auto"/>   
     </SafeAreaView>

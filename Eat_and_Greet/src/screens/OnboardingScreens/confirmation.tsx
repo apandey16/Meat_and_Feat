@@ -2,7 +2,7 @@ import { Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import styles from '../../style';
-import RoundedHomeButton from '../../comps/RoundedHomeButton/RoundedHomeButton';
+import RoundedButton from '../../comps/RoundedButton/RoundedButton';
 
 function Confirmation() {
     const navigation = useNavigation();
@@ -16,7 +16,7 @@ function Confirmation() {
                 <Text style={styles.Text}>
                 Your ID was successfully verified! Welcome to Eat&Greet!!
                     </Text>
-                <RoundedHomeButton name="Home Page" height="7%" top="10%" onPress={() => navigation.navigate('Home')}/> 
+                <RoundedButton name="Home Page" height="7%" top="10%" onPress={() => navigation.navigate('Home')}/> 
             </View>
         </View>
       </View>

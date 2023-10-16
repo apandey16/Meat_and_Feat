@@ -2,7 +2,7 @@ import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 
-import RoundedHomeButton from '../../comps/RoundedHomeButton/RoundedHomeButton';
+import RoundedButton from '../../comps/RoundedButton/RoundedButton';
 
 import styles from '../../style';
 
@@ -12,15 +12,15 @@ function LoginScreen() {
     return (
       <View style={styles.ContentContainer}>
         <StatusBar style="auto" />
-        <RoundedHomeButton name="Home" onPress={() => navigation.navigate('Home')}/>
-        <RoundedHomeButton name="Login" onPress={() => navigation.navigate('Login')}/>
-        <RoundedHomeButton name="Onboading" onPress={() => navigation.navigate('Onboarding')}/>
-        <RoundedHomeButton name="Chats" onPress={() => navigation.navigate('Chats')}/>
-        <RoundedHomeButton name="Example Chat" onPress={() => navigation.navigate('Example Chat')}/>  
-        <RoundedHomeButton name="Post Event" onPress={() => navigation.navigate('Post Event')}/>
-        <RoundedHomeButton name="Browse Event" onPress={() => navigation.navigate('Browse Event')}/> 
-        <RoundedHomeButton name="View Event" onPress={() => navigation.navigate('View Event')}/>  
-        <RoundedHomeButton name="Settings" onPress={() => navigation.navigate('Settings')}/>  
+        <RoundedButton name="Home" onPress={() => navigation.navigate('Home')}/>
+        <RoundedButton name="Login" onPress={() => navigation.navigate('Login')}/>
+        <RoundedButton name="Onboading" onPress={() => navigation.navigate('Onboarding')}/>
+        <RoundedButton name="Chats" onPress={() => navigation.navigate('Chats')}/>
+        <RoundedButton name="Example Chat" onPress={() => navigation.navigate('Example Chat')}/>  
+        <RoundedButton name="Post Event" onPress={() => navigation.navigate('Post Event')}/>
+        <RoundedButton name="Browse Event" onPress={() => navigation.navigate('Browse Event')}/> 
+        <RoundedButton name="View Event" onPress={() => navigation.navigate('View Event')}/>  
+        <RoundedButton name="Settings" onPress={() => navigation.navigate('Settings')}/>  
       </View>
     );
 }
