@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { View, PixelRatio } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 
@@ -7,6 +7,9 @@ import HomePageButton from '../../comps/HomePageButton';
 
 import styles from '../../style';
 import localStyles from './index.styles';
+
+const fontScale = PixelRatio.getFontScale();
+const getFontSize = (size: number) => size / fontScale;
 
 function HomeScreen() {
   const navigation = useNavigation();
@@ -19,34 +22,34 @@ function HomeScreen() {
             <HomePageButton onPress={() => navigation.navigate('Forums')}
                           textLine1='Subscribed'
                           textLine2='Forums'
-                          fontSize={24}
+                          fontSize={ getFontSize(24) }
             />
             <HomePageButton onPress={() => navigation.navigate('Search')}
                           textLine1='Find'
                           textLine2='Forums'
-                          fontSize={35}
+                          fontSize={ getFontSize(35) }
             />
           </View>
           <View style={localStyles.ButtonLine}>
             <HomePageButton onPress={() => null}
                           textLine1='My'
                           textLine2='Events'
-                          fontSize={32}
+                          fontSize={ getFontSize(32) }
             />
             <HomePageButton onPress={() => navigation.navigate('Chats')}
                           textLine1='My'
                           textLine2='Chats'
-                          fontSize={32}
+                          fontSize={ getFontSize(32) }
             />
           </View>
           <View style={localStyles.ButtonLine}>
             <HomePageButton onPress={() => navigation.navigate('Profile')}
                           textLine1='Account'
-                          fontSize={32}
+                          fontSize={ getFontSize(32) }
             />
             <HomePageButton onPress={() => navigation.navigate('Settings')}
                           textLine1='Settings'
-                          fontSize={30}
+                          fontSize={ getFontSize(30) }
             />
           </View>
         </View>
