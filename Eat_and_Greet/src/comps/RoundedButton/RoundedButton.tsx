@@ -2,7 +2,7 @@ import React from 'react';
 import {View, TouchableOpacity, TouchableHighlight, Text, StyleSheet} from 'react-native';
 import styles from '../../style';
 
-interface RoundedHomeButtonProps {
+interface RoundedButtonProps {
     name ?: string;
     top ?: any;
     left ?: any;
@@ -13,7 +13,7 @@ interface RoundedHomeButtonProps {
     onPress?: () => void;
 }
 
-const RoundedHomeButton = (props : RoundedHomeButtonProps) => {
+const RoundedButton = (props : RoundedButtonProps) => {
 
     const localstyle = StyleSheet.create({
         placement: { 
@@ -38,7 +38,7 @@ const RoundedHomeButton = (props : RoundedHomeButtonProps) => {
     );
 }
 
-const defaultProps: RoundedHomeButtonProps = {
+const defaultProps: RoundedButtonProps = {
     name : 'default name',
     top : 0,
     left : 0,
@@ -48,6 +48,6 @@ const defaultProps: RoundedHomeButtonProps = {
     height : "10%"
 };
 
-RoundedHomeButton.defaultProps = defaultProps;
+RoundedButton.defaultProps = defaultProps;
 
-export default RoundedHomeButton;
+export default RoundedButton;

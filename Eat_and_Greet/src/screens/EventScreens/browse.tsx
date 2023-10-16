@@ -5,7 +5,7 @@ import { Toolbar } from '../../comps/Toolbar/toolbar';
 
 import styles from '../../style';
 import React from 'react'
-import RoundedHomeButton from '../../comps/RoundedHomeButton/RoundedHomeButton';
+import RoundedButton from '../../comps/RoundedButton/RoundedButton';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -29,7 +29,7 @@ export default function BrowseEvent() {
           <Text style = {browseStyle.PostText}> Event Name... {'\n'} Date/Time... {'\n'} Spots Left... {'\n'} Description...</Text>
         </View>
       </SafeAreaView>
-      <RoundedHomeButton name="Post Event" top = "-2%"/>
+      <RoundedButton name="Post Event" top = "-2%"/>
       <Toolbar/>
       <StatusBar style = "auto"/>   
     </SafeAreaView>
