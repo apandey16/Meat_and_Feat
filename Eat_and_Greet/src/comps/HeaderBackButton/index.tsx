@@ -8,7 +8,7 @@ const HeaderBackButton = () => {
 
     const route = useRoute();
 
-    if(route.name === 'Login') {
+    if(route.name === 'Welcome') {
         return null;
     }
 
