@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import HomeScreen from './src/screens/HomeScreen';
+import TitleScreen from './src/screens/TitleScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import BasicInfo from './src/screens/OnboardingScreens/basicInfo';
 import Confirmation from './src/screens/OnboardingScreens/confirmation';
@@ -23,7 +24,8 @@ import HeaderBackButton from "./src/comps/HeaderBackButton";
 
 import {navHeaderStyles} from "./src/style";
 
-const stackArray = [ { name: "Login", comp: LoginScreen},
+const stackArray = [ { name: "Welcome", comp: TitleScreen},
+                     { name: "Login", comp: LoginScreen},
                      { name: "Onboarding", comp: OnboardingPagesNavigation},
                      { name: "Home", comp: HomeScreen}, 
                      { name: "Forums", comp: ForumsScreen}, 

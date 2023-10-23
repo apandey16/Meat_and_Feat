@@ -3,7 +3,7 @@ import { TextInput, View, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import localStyles from './index.styles';
 
-const TextBox = () => {
+const SpecificChatTextBox = () => {
     const [text, setText] = useState('');
     const handleTextChange = (userInput: string) => {
         setText(userInput);
@@ -24,4 +24,4 @@ const TextBox = () => {
   );
 };
 
-export default TextBox;
+export default SpecificChatTextBox;
