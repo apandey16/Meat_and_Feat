@@ -2,7 +2,7 @@ import { Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import styles from '../../style';
-import RoundedHomeButton from '../../comps/RoundedHomeButton/RoundedHomeButton';
+import RoundedButton from '../../comps/RoundedButton/RoundedButton';
 import TextBox from '../../comps/Textbox/textbox';
 
 function EmailVerify() {
@@ -22,7 +22,7 @@ function EmailVerify() {
                     Check your spam!
                     Or click HERE for a new code.
                     </Text>
-                <RoundedHomeButton name="Verify" height="7%" top="10%" onPress={() => navigation.navigate('ID Verification')}/> 
+                <RoundedButton name="Verify" height="7%" top="10%" onPress={() => navigation.navigate('ID Verification')}/> 
             </View>
         </View>
       </View>

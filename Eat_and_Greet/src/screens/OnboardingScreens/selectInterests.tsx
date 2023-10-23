@@ -2,7 +2,7 @@ import { Text, View, StyleSheet, Alert, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import styles from '../../style';
-import RoundedHomeButton from '../../comps/RoundedHomeButton/RoundedHomeButton';
+import RoundedButton from '../../comps/RoundedButton/RoundedButton';
 import CircularButton from '../../comps/CircularButton/CircularButton';
 
 const { width, height } = Dimensions.get('window');
@@ -32,7 +32,7 @@ function SelectInterests() {
                     <CircularButton onPress={() => Alert.alert("Clicked Button", "Selected Interest")} title='Study' buttonSize={buttonSize} borderRadius={borderRadius}/>
                     <CircularButton onPress={() => Alert.alert("Clicked Button", "Selected Interest")} title='Other' buttonSize={buttonSize} borderRadius={borderRadius}/>
                 </View>
-                <RoundedHomeButton name="Next" height="7%" top="-8%" onPress={() => navigation.navigate('Email Verification')}/> 
+                <RoundedButton name="Next" height="7%" top="-8%" onPress={() => navigation.navigate('Email Verification')}/> 
             </View>
         </View>
       </View>

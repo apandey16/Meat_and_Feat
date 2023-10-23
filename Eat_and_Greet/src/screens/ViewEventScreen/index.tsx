@@ -1,7 +1,7 @@
 import { Image, View, Text, TouchableOpacity } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Toolbar } from '../../comps/Toolbar/toolbar';
-import RoundedHomeButton from '../../comps/RoundedHomeButton/RoundedHomeButton';
+import RoundedButton from '../../comps/RoundedButton/RoundedButton';
 import styles from '../../style';
 import localstyles from './style';
 
@@ -32,7 +32,7 @@ function ViewEventScreen() {
               </View>
             </View>
           </View>
-        <RoundedHomeButton name='Join Event' width={'80%'}/>
+        <RoundedButton name='Join Event' width={'80%'}/>
         </View>
         <Toolbar />
       </View>
