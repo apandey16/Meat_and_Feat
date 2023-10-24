@@ -37,6 +37,12 @@ const stackArray = [ { name: "Login", comp: LoginScreen},
                      { name: "View Event", comp: ViewEventScreen},
                      {name: "Dev Page", comp: Temp}];
 
+const onboardingStackArray = [ { name:"Basic Info", comp: BasicInfo },
+                               { name: "Confirmation", comp: Confirmation },
+                               { name: "ID Verification", comp: IdVerify },
+                               { name:"Select Interests", comp: SelectInterests },
+                               { name: "Email Verification", comp: EmailVerify } ];
+
 const Stack = createNativeStackNavigator();
 const OnboardingNavigation = createNativeStackNavigator();
 
@@ -51,7 +57,7 @@ export default function App() {
         }}
       >
         {stackArray.map((stackObj) => (
-          <Stack.Screen name={stackObj.name} component={stackObj.comp} />
+          <Stack.Screen name={stackObj.name} component={stackObj.comp} key={stackObj.name}/>
         ))}
       </Stack.Navigator>
     </NavigationContainer>
@@ -61,11 +67,9 @@ export default function App() {
 function OnboardingPagesNavigation(){
   return (
     <OnboardingNavigation.Navigator>
-      <OnboardingNavigation.Screen name="Basic Info" component={BasicInfo} />
-      <OnboardingNavigation.Screen name="Confirmation" component={Confirmation} />
-      <OnboardingNavigation.Screen name="ID Verification" component={IdVerify} />
-      <OnboardingNavigation.Screen name="Select Interests" component={SelectInterests} />
-      <OnboardingNavigation.Screen name="Email Verification" component={EmailVerify} />
+      {onboardingStackArray.map((stackObj) => (
+          <OnboardingNavigation.Screen name={stackObj.name} component={stackObj.comp} key={stackObj.name}/>
+        ))}
     </OnboardingNavigation.Navigator>
   );
 }
