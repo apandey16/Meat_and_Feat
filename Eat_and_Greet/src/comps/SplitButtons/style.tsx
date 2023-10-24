@@ -1,16 +1,20 @@
 import { StyleSheet } from 'react-native';
 
-const CircularButtonStyles = StyleSheet.create({
+const SplitButtonStyles = StyleSheet.create({
     button: {
-        borderRadius: 50,
-        backgroundColor: '#CEC8EC', 
-        justifyContent: 'center',
-        position: 'relative',
-        alignItems: 'center',
-        shadowOffset: { width: 2, height: 2 }, 
-        shadowColor: '#000',
-        shadowOpacity: 0.5, 
-      }
+      flex: 1, 
+      backgroundColor: '#E5E0FF'
+    },
+    view: {
+      flex: 0.03, 
+      backgroundColor:'black'
+    },
+    fullbar: {
+      flexDirection: 'row', 
+      backgroundColor: 'black', 
+      height: 45, 
+      padding: 2
+    }
 });
 
-export default CircularButtonStyles;
+export default SplitButtonStyles;
