@@ -28,7 +28,12 @@ function ExampleChatScreen() {
         <View style={[styles.InnerBox, {height: height - 265} ]}>
           <View style={[styles.InnerBox, {height: height - 320, justifyContent: 'flex-end'} ]}>
             {messageArray.map((messageObj) => (
-              <SpecificChatMessage message={messageObj.message} sentFromMe={messageObj.sentFromMe} timeStamp={messageObj.timeStamp}/>
+              <SpecificChatMessage 
+                message={messageObj.message}
+                sentFromMe={messageObj.sentFromMe} 
+                timeStamp={messageObj.timeStamp} 
+                key={messageObj.message + messageObj.timeStamp}
+              />
             ))}
           </View>
           <TextBox />

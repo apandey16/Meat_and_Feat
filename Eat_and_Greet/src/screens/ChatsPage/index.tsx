@@ -9,16 +9,25 @@ import styles from '../../style';
 function HomeScreen() {
     const navigation = useNavigation();
 
+    const chatArray = [ { senderName: "Basketball Chat", timestamp:"4:45 PM", isRead: false, nav: () => navigation.navigate('Example Chat'), message: "Steph said: Game@2:30 tmrw" },
+                        { senderName: "@logidoke", timestamp:"12:12 PM", isRead: false, nav: () => navigation.navigate('Example Chat'), message: "Sent a meme on Instagram, check it out" },
+                        { senderName: "@steelstine", timestamp:"10:31 AM", isRead: true, nav: () => navigation.navigate('Example Chat'), message: "Car go VROOOM, just like me on coffee" },
+                        { senderName: "@camalam2002", timestamp:"10:30 AM", isRead: false, nav: () => navigation.navigate('Example Chat'), message: "I am here to code bugs and chew gum, and I'm all out of gum" },
+                        { senderName: "@robertvermeulen_", timestamp:"6:15 AM", isRead: true, nav: () => navigation.navigate('Example Chat'), message: "Hello there! Wanna go on a run?" } 
+                      ];
+
     return (
       <View style={styles.ScreenContainer}>
       <View style={styles.OuterBox}>
-  
-        <ChatCard senderName="Basketball Chat" message="Steph said: Game@2:30 tmrw" timestamp="4:45 PM" onPress={() => navigation.navigate('Example Chat')}/>
-        <ChatCard senderName="@logidoke" message="Sent a meme on Instagram, check it out" timestamp="12:12 PM" isRead={false} onPress={() => navigation.navigate('Example Chat')}/>
-        <ChatCard senderName="@steelstine" message="Car go VROOOM, just like me on coffee" timestamp="10:31 AM" isRead={true} onPress={() => navigation.navigate('Example Chat')}/>
-        <ChatCard senderName="@camalam2002" message="I am here to code bugs and chew gum, and I'm all out of gum" timestamp="10:30 AM" isRead={false} onPress={() => navigation.navigate('Example Chat')}/>
-        <ChatCard senderName="@robertvermeulen_" message="Hello there! Wanna go on a run?" timestamp="6:15 AM" isRead={true} onPress={() => navigation.navigate('Example Chat')}/>
-
+        {chatArray.map((chatObj) => (
+          <ChatCard senderName={chatObj.senderName}
+                    message={chatObj.message} 
+                    timestamp={chatObj.timestamp}
+                    isRead={chatObj.isRead} 
+                    onPress={chatObj.nav}
+                    key={chatObj.senderName}
+          />
+        ))}
       </View>
       <Toolbar />
     </View>
