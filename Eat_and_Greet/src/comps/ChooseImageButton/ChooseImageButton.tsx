@@ -24,11 +24,20 @@ const ChooseImageButton = (props: ChooseImageProps) => {
         },
         coloring: {
             backgroundColor: props.color, 
+        },
+        innerLining: {
+            flex: 1, 
+            alignItems: 'center', 
+            justifyContent: "center",  
+            width: 60, 
+            maxHeight: 60, 
+            borderRadius: 50, 
+            alignSelf: 'center' 
         }
     })
     return (
         <View style={[variablestyles.outerSizing, variablestyles.coloring, {position: 'relative'}]}>
-            <View style={{flex: 1, alignItems: 'center', justifyContent: "center",  width: 60, maxHeight: 60, borderRadius: 50, alignSelf: 'center' }}>
+            <View style={variablestyles.innerLining}>
                 <TouchableOpacity onPress={props.onPress}>
                     <Image style={variablestyles.innerSizing} source={require('../../../assets/images/placeholder.png')} resizeMode="contain"></Image>
                 </TouchableOpacity>
