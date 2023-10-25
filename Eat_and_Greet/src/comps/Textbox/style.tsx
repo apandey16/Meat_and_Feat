@@ -4,7 +4,7 @@ const TextboxStyles = StyleSheet.create({
     container: {
       margin: 20,
       width: '90%',
-      height: '10%',
+      height: '25%',
       backgroundColor: '#FFFFF2',
       borderRadius: 4,
       marginBottom: 0,
