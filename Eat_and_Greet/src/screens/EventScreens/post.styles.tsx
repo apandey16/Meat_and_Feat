@@ -27,7 +27,7 @@ const postStyle = StyleSheet.create({
       height: "50%",
       borderRadius: 5,
       bottom: "10%",
-      marginTop: 10
+      marginTop: 10,
     },
     DateTimeContainer:
     {
@@ -74,7 +74,7 @@ const postStyle = StyleSheet.create({
       width: "94%",
       height: "83%",
       bottom: "9%",
-      alignContent: "center",
+      alignItems: "center",
       justifyContent: "center",
       left: "3%"
     },
