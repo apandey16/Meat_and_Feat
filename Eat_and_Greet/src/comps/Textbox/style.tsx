@@ -11,6 +11,7 @@ const TextboxStyles = StyleSheet.create({
       borderColor: 'black',
       borderWidth: 0.25,
       alignContent: 'center',
+      justifyContent: "center",
     },
     input: {
       height: 40,

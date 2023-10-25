@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 
@@ -13,7 +13,8 @@ function LoginScreen() {
       <View style={styles.ContentContainer}>
         <StatusBar style="auto" />
         <RoundedButton name="Home" onPress={() => navigation.navigate('Home')}/>
-        <RoundedButton name="Login" onPress={() => navigation.navigate('Login')}/>
+        <RoundedButton name="Title" onPress={() => navigation.navigate('Welcome')}/>
+        <RoundedButton name="Login Page" onPress={() => navigation.navigate('Login')}/>
         <RoundedButton name="Onboading" onPress={() => navigation.navigate('Onboarding')}/>
         <RoundedButton name="Chats" onPress={() => navigation.navigate('Chats')}/>
         <RoundedButton name="Example Chat" onPress={() => navigation.navigate('Example Chat')}/>  
