@@ -10,10 +10,9 @@ interface TextBoxProps {
   right ?: any;
   width ?: any;
   height ?: any;
-  onTextChange ?: any;
 }
 
-const TextBox = ( {placeholder, top, left, bottom, right, width, height, onTextChange} : TextBoxProps ) => {
+const TextBox = ( {placeholder, top, left, bottom, right, width, height} : TextBoxProps ) => {
 const [text, setText] = useState('');
 const handleTextChange = (userInput: string) => {
     setText(userInput);  
@@ -37,7 +36,7 @@ const localstyle = StyleSheet.create({
     <View style= {[styles.container, localstyle.placement, localstyle.sizing]}>
       <TextInput
         style={styles.input}
-        onChangeText={onTextChange ? onTextChange : handleTextChange}
+        onChangeText={handleTextChange}
         placeholder={placeholder}
         value={text}
       />
