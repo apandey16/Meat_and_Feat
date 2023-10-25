@@ -1,10 +1,9 @@
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Alert } from 'react-native';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 
 import RoundedButton from '../../comps/RoundedButton/RoundedButton';
-import TextBox from '../../comps/Textbox/textbox';
 import ScreenSplitLine from '../../comps/ScreenSplitLine';
 import { auth } from '../../firebase/config';
 
@@ -27,11 +26,11 @@ function LoginScreen() {
           navigation.navigate('Home');
         } catch (error) {
           if (error.code === 'auth/invalid-email' || error.code === 'auth/wrong-password') {
-            console.log('Your email or password was incorrect');
+            Alert.alert('Your email or password was incorrect');
           } else if (error.code === 'auth/email-already-in-use') {
-            console.log('An account with this email already exists');
+            Alert.alert('An account with this email already exists');
           } else {
-            console.log('There was a problem with your request');
+            Alert.alert('There was a problem with your request. Please try again later.');
           }
         }
       };
@@ -43,13 +42,11 @@ function LoginScreen() {
             <View style={ [styles.InnerBox, localStyles.InnerBox] }>
                 <View style={localStyles.SignInSectionContainer}>
                     <Text style={ [styles.SubHeaderText, localStyles.SubHeaderText] }>Username</Text>
-                    <TextInput placeholder="Enter Username" style={[tbStyle.placement, tbStyle.sizing, textboxStyles.container]} onChangeText={setEmail} />
-                    {/* <TextBox placeholder="Enter Username" top="-15%" left="-3%" height="25%" width="90%" onTextChange={setEmail}/> */}
+                    <TextInput placeholder="Enter Username" style={[textboxStyles.placement, textboxStyles.sizing, textboxStyles.container]} onChangeText={setEmail} />
                 </View>
                 <View style={localStyles.SignInSectionContainer2}>
                     <Text style={ [styles.SubHeaderText, localStyles.SubHeaderText] }>Password</Text>
-                    <TextInput placeholder="Enter password" style={[tbStyle.placement, tbStyle.sizing, textboxStyles.container]} onChangeText={setPassword} secureTextEntry />
-                    {/* <TextBox placeholder="Enter Password" top="-15%" left="-3%" height="25%" width="90%" onTextChange={setPassword}/> */}
+                    <TextInput placeholder="Enter password" style={[textboxStyles.placement, textboxStyles.sizing, textboxStyles.container]} onChangeText={setPassword} secureTextEntry />
                 </View>
                 <RoundedButton name="Sign In" top="-5%" width="65%" height="15%" onPress={loginUser}/>
             </View>
@@ -71,16 +68,5 @@ function LoginScreen() {
     );
 }
 
-const tbStyle = StyleSheet.create({
-    placement: { 
-        left: "-3%",
-        top: "-15%",
-        position: 'relative'
-    },
-    sizing: {
-        width: "90%",
-        height: "25%", 
-    }
-  })
 
 export default LoginScreen;

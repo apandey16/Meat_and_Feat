@@ -18,6 +18,15 @@ const TextboxStyles = StyleSheet.create({
       padding: 10,
       alignContent: 'center',
     },
+    placement: { 
+      left: "-3%",
+      top: "-15%",
+      position: 'relative'
+  },
+  sizing: {
+      width: "90%",
+      height: "25%", 
+  }
   });
 
 export default TextboxStyles;
