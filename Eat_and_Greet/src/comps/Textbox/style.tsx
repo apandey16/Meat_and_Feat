@@ -4,7 +4,7 @@ const TextboxStyles = StyleSheet.create({
     container: {
       margin: 20,
       width: '90%',
-      height: '10%',
+      height: '25%',
       backgroundColor: '#FFFFF2',
       borderRadius: 4,
       marginBottom: 0,
@@ -18,6 +18,15 @@ const TextboxStyles = StyleSheet.create({
       padding: 10,
       alignContent: 'center',
     },
+    placement: { 
+      left: "-3%",
+      top: "-15%",
+      position: 'relative'
+  },
+  sizing: {
+      width: "90%",
+      height: "25%", 
+  }
   });
 
 export default TextboxStyles;

@@ -15,7 +15,7 @@ interface TextBoxProps {
 const TextBox = ( {placeholder, top, left, bottom, right, width, height} : TextBoxProps ) => {
 const [text, setText] = useState('');
 const handleTextChange = (userInput: string) => {
-    setText(userInput);
+    setText(userInput);  
 };
 const localstyle = StyleSheet.create({
   placement: { 
@@ -36,8 +36,8 @@ const localstyle = StyleSheet.create({
     <View style= {[styles.container, localstyle.placement, localstyle.sizing]}>
       <TextInput
         style={styles.input}
-        placeholder={placeholder}
         onChangeText={handleTextChange}
+        placeholder={placeholder}
         value={text}
       />
     </View>

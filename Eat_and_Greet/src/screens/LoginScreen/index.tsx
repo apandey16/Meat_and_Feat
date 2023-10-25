@@ -1,17 +1,39 @@
-import { View, Text } from 'react-native';
+import { View, Text, TextInput, Alert } from 'react-native';
+import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 
 import RoundedButton from '../../comps/RoundedButton/RoundedButton';
-import TextBox from '../../comps/Textbox/textbox';
 import ScreenSplitLine from '../../comps/ScreenSplitLine';
+import { auth } from '../../firebase/config';
 
 
 import localStyles from './index.styles';
 import styles from '../../style';
+import textboxStyles from '../../comps/Textbox/style'
+import { signInWithEmailAndPassword } from 'firebase/auth';
+
 
 function LoginScreen() {
     const navigation = useNavigation();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const loginUser = async () => {
+        try {
+          await signInWithEmailAndPassword(auth, email, password);
+          console.log('User logged in successfully');
+          navigation.navigate('Home');
+        } catch (error) {
+          if (error.code === 'auth/invalid-email' || error.code === 'auth/wrong-password') {
+            Alert.alert('Your email or password was incorrect');
+          } else if (error.code === 'auth/email-already-in-use') {
+            Alert.alert('An account with this email already exists');
+          } else {
+            Alert.alert('There was a problem with your request. Please try again later.');
+          }
+        }
+      };
 
     return (
       <View style={ [styles.ScreenContainer, {justifyContent: 'flex-start'}] }>
@@ -20,13 +42,13 @@ function LoginScreen() {
             <View style={ [styles.InnerBox, localStyles.InnerBox] }>
                 <View style={localStyles.SignInSectionContainer}>
                     <Text style={ [styles.SubHeaderText, localStyles.SubHeaderText] }>Username</Text>
-                    <TextBox placeholder="Enter Username" top="-15%" left="-3%" height="25%" width="90%"/>
+                    <TextInput placeholder="Enter Username" style={[textboxStyles.placement, textboxStyles.sizing, textboxStyles.container]} onChangeText={setEmail} />
                 </View>
                 <View style={localStyles.SignInSectionContainer2}>
                     <Text style={ [styles.SubHeaderText, localStyles.SubHeaderText] }>Password</Text>
-                    <TextBox placeholder="Enter Password" top="-15%" left="-3%" height="25%" width="90%"/>
+                    <TextInput placeholder="Enter password" style={[textboxStyles.placement, textboxStyles.sizing, textboxStyles.container]} onChangeText={setPassword} secureTextEntry />
                 </View>
-                <RoundedButton name="Sign In" top="-5%" width="65%" height="15%" onPress={() => navigation.navigate('Home')}/>
+                <RoundedButton name="Sign In" top="-5%" width="65%" height="15%" onPress={loginUser}/>
             </View>
         </View>
         <View style={ [ {height: '5%'} ] }></View>
@@ -45,5 +67,6 @@ function LoginScreen() {
       </View>
     );
 }
+
 
 export default LoginScreen;
