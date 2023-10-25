@@ -45,17 +45,6 @@ const postStyle = StyleSheet.create({
       fontWeight: 'bold',
       fontSize: 20,
     },
-    DateTimeBox:
-    {
-      backgroundColor: "#FFF",
-      width: "94%",
-      height: "20%",
-      bottom: "15%",
-      alignContent: "center",
-      justifyContent: "center",
-      left: "3%",
-      marginTop: 6
-    },
     TitleCategoryBox:
     {
       backgroundColor: "#FFF",

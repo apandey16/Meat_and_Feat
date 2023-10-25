@@ -10,6 +10,7 @@ import { Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import postStyle from './post.styles';
+import TextBox from '../../comps/Textbox/textbox';
 
 export default function PostEvent() {
   return (
@@ -19,15 +20,11 @@ export default function PostEvent() {
       <SafeAreaView style={postStyle.InfoContainer}>
         <View style={postStyle.TitleCategoryContainer}>
           <Text style = {postStyle.LabelText}> Title {'\n'}</Text>
-          <View style={postStyle.TitleCategoryBox}>
-            <Text> Enter Title Here...</Text>
-          </View>
+          <TextBox placeholder="Enter Title Here..." top={"-80%"} height={"50%"} width={"90%"}/>
         </View>
         <View style={postStyle.TitleCategoryContainer}>
           <Text style = {postStyle.LabelText}> Category {'\n'}</Text>
-          <View style={postStyle.TitleCategoryBox}>
-            <Text> Enter Category Here...</Text>
-          </View>
+          <TextBox placeholder="Enter Category Here..." top={"-80%"} height={"50%"} width={"90%"}/>
         </View><View style={postStyle.ImageContainer}>
           <Text style = {postStyle.LabelText}> Image(optional) {'\n'}</Text>
           <View style={postStyle.ImageBox}>
@@ -36,15 +33,9 @@ export default function PostEvent() {
           </View>
         </View><View style={postStyle.DateTimeContainer}>
           <Text style = {postStyle.LabelText}> Date & Time {'\n'}</Text>
-          <View style={postStyle.DateTimeBox}>
-            <Text> Pick Date</Text>
-          </View>
-          <View style={postStyle.DateTimeBox}>
-            <Text> Enter Start Time...</Text>
-          </View>
-          <View style={postStyle.DateTimeBox}>
-            <Text> Enter End Time...</Text>
-          </View>
+          <TextBox placeholder="Enter Date..." top={"-30%"} height={"20%"} width={"90%"}/>
+          <TextBox placeholder="Enter Start Time..." top={"-38%"} height={"20%"} width={"90%"}/>
+          <TextBox placeholder="Enter End Time..." top={"-46%"} height={"20%"} width={"90%"}/>
         </View>
       </SafeAreaView>
       <RoundedButton name="Post Event" top = "-2%"/>
