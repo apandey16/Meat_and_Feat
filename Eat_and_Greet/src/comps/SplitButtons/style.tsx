@@ -14,7 +14,7 @@ const SplitButtonStyles = StyleSheet.create({
     fullbar: {
       flexDirection: 'row', 
       backgroundColor: 'black', 
-      height: 90, 
+      height: 45, 
       padding: 2
     }
 });
