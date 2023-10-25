@@ -11,7 +11,10 @@ const style = StyleSheet.create({
         position: 'relative',
         backgroundColor: '#8EA7E9',
         borderRadius: 10,
-        borderWidth: 2
+        borderWidth: 2,
+        shadowOffset: { width: 2, height: 2 }, 
+        shadowColor: '#000',
+        shadowOpacity: 0.5
     },
     ButtonText: {
         fontFamily: 'Courier New',
@@ -80,6 +83,12 @@ const style = StyleSheet.create({
         backgroundColor: "#7286D3",
         alignItems: "center",
         justifyContent: "center",
+      },
+    CenterText: {
+        textAlign: 'center'
+    },
+    FlexOne: {
+        flex: 1
       }
     });
 

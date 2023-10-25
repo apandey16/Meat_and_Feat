@@ -17,20 +17,32 @@ const ChooseImageButton = (props: ChooseImageProps) => {
             justifyContent: 'center',
         },
         innerSizing: {
-            height: props.buttonSize - props.buttonSize/2.5,
-            width: props.buttonSize - props.buttonSize/2.5,
-            marginLeft: props.buttonSize/5,
-            marginBottom: props.buttonSize/10
+            position: 'relative',
+            maxHeight: props.buttonSize - props.buttonSize/4,
+            width: props.buttonSize - props.buttonSize/4,
+            borderRadius: props.buttonSize - props.buttonSize/4
         },
         coloring: {
             backgroundColor: props.color, 
+        },
+        innerLining: {
+            flex: 1, 
+            alignItems: 'center', 
+            justifyContent: "center",  
+            width: 60, 
+            maxHeight: 60, 
+            borderRadius: 50, 
+            alignSelf: 'center' 
         }
     })
     return (
         <View style={[variablestyles.outerSizing, variablestyles.coloring, {position: 'relative'}]}>
-            <TouchableOpacity onPress={props.onPress}>
-                <Image style={[variablestyles.innerSizing, {position: 'relative'}]} source={require('../../../assets/images/uploadImage.png')}></Image>
-            </TouchableOpacity>
+            <View style={variablestyles.innerLining}>
+                <TouchableOpacity onPress={props.onPress}>
+                    <Image style={variablestyles.innerSizing} source={require('../../../assets/images/placeholder.png')} resizeMode="contain"></Image>
+                </TouchableOpacity>
+            </View>
+            
         </View>
     )
   }
