@@ -1,34 +1,27 @@
 import React, {useState} from 'react';
-import { Text, View, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
 import { Toolbar } from '../../comps/Toolbar/toolbar';
 import ChooseImageButton from "../../comps/ChooseImageButton/ChooseImageButton";
 import styles from '../../style';
+import localstyles from './style';
 import SplitButton from '../../comps/SplitButtons/SplitButton';
 import UserInformation from '../../comps/UserInformation/UserInformation';
 
 function ProfileScreen() {
-  const [UserInfoVisible, setUserInfoVisible] = useState(true);
-  const [EventsHostedVisible, setEventsHostedVisible] = useState(false);
-  const [EventsAttendedVisible, setEventsAttendedVisible] = useState(false);
+  const [VisibleState, setVisibleState] = useState(0);
 
   const toggleUserInfoVisibility = () => {
-    setUserInfoVisible(true);
-    setEventsAttendedVisible(false);
-    setEventsHostedVisible(false);
+    setVisibleState(0);
   }
 
   const toggleEventsAttendedVisibility = () => {
-    setUserInfoVisible(false);
-    setEventsAttendedVisible(true);
-    setEventsHostedVisible(false);
+    setVisibleState(1);
   }
 
   const toggleEventsHostedVisibility = () => {
-    setUserInfoVisible(false);
-    setEventsAttendedVisible(false);
-    setEventsHostedVisible(true);
+    setVisibleState(2);
   }
 
     return (
@@ -74,9 +67,9 @@ function ProfileScreen() {
 
             <View id="Interest Level" style={localstyles.InterestContainer}>
               <SplitButton onPress1={toggleUserInfoVisibility} onPress2={toggleEventsHostedVisibility} onPress3={toggleEventsAttendedVisibility}></SplitButton>
-                {UserInfoVisible ? <UserInformation></UserInformation> : <View/> }
-                {EventsHostedVisible ? <Text> woohoo </Text> : <View/>}
-                {EventsAttendedVisible ? <Text> yeah boy </Text> : <View/>}
+                {VisibleState == 0 ? <UserInformation></UserInformation> : <View/> }
+                {VisibleState == 1 ? <Text> woohoo </Text> : <View/>}
+                {VisibleState == 2 ? <Text> yeah boy </Text> : <View/>}
             </View> 
           </View> 
         </ScrollView>
@@ -84,89 +77,5 @@ function ProfileScreen() {
       </View>
     );
 }
-
-const localstyles = StyleSheet.create({
-  InnerContainer: {
-    flex: 1, 
-    flexDirection: 'column',
-    backgroundColor:'#8EA7E9', 
-    margin: 10, 
-    minWidth: "93.5%",
-  },
-  TopContainer: {
-    flex: 1, 
-    flexDirection: 'row', 
-    margin: 5, 
-    padding: 5
-  },
-  EditButtonsContainer: {
-    height: 30, 
-    minWidth: 'auto',
-    width:80, 
-    backgroundColor: '#E5E0FF', 
-    borderRadius: 10, 
-    alignSelf: 'flex-start', 
-    shadowOffset: { width: 2, height: 2 }, 
-    shadowColor: '#000',
-    shadowOpacity: 0.5,
-  },
-  EditButtonText: {
-    textAlign: 'center',
-    lineHeight: 30
-  },
-  TopRightDivider: {
-    flexDirection: 'column', 
-    minWidth: '70%'
-  },
-  SmallMargin: {
-    marginLeft: 10
-  },
-  TopRightSideTop: {
-    flex: 1, 
-    flexDirection: 'row', 
-    minWidth: "70%"
-  },
-  FriendText: {
-    textAlign: 'center', 
-    color: 'white', 
-    shadowOffset: { width: 2, height: 2 }, 
-    shadowColor: '#000',
-    shadowOpacity: 0.5
-  },
-  DescriptionContainer: {
-    flex: 2.5, 
-    margin : 5
-  },
-  DescriptionContainerOuter: {
-    flex: 1, 
-    backgroundColor:'#E5E0FF', 
-    margin: 10, 
-    width: "80%", 
-    alignSelf: 'center', 
-    borderRadius: 10
-  },
-  DescriptionContainerInner: {
-    flex: 1, 
-    flexDirection: 'column', 
-    backgroundColor:'#FFF2F2', 
-    margin: 10, 
-    width: "90%", 
-    alignSelf: 'center', 
-    borderRadius: 10
-  },
-  InterestContainer: {
-    flex: 4, 
-    flexDirection: 'column', 
-    margin: 5, 
-    backgroundColor: '#E5E0FF'
-  },
-  BottomMargin: {
-    marginBottom: 10
-  },
-  SmallPadding: {
-    padding: 5
-  }
-});
-
 
 export default ProfileScreen;

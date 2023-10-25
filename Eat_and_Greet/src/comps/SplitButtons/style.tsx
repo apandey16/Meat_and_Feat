@@ -3,7 +3,9 @@ import { StyleSheet } from 'react-native';
 const SplitButtonStyles = StyleSheet.create({
     button: {
       flex: 1, 
-      backgroundColor: '#E5E0FF'
+      backgroundColor: '#E5E0FF',
+      justifyContent: 'center',
+      flexDirection: 'column'
     },
     view: {
       flex: 0.03, 
@@ -12,7 +14,7 @@ const SplitButtonStyles = StyleSheet.create({
     fullbar: {
       flexDirection: 'row', 
       backgroundColor: 'black', 
-      height: 45, 
+      height: 90, 
       padding: 2
     }
 });
