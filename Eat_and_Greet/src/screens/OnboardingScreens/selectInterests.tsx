@@ -7,6 +7,20 @@ import CircularButton from '../../comps/CircularButton/CircularButton';
 
 const { width, height } = Dimensions.get('window');
 
+const interestArray = [ {title: "Park"},
+                       {title: "Walk"},
+                       {title: "Runs"},
+                       {title: "TV"},
+                       {title: "Games"},
+                       {title: "Gym"},
+                       {title: "Sport"},
+                       {title: "Meals"},
+                       {title: "Cars"},
+                       {title: "Music"},
+                       {title: "Study"},
+                       {title: "Other"}
+                    ];
+
 function SelectInterests() {
     const navigation = useNavigation();
     const buttonSize = width/5.7;
@@ -19,18 +33,13 @@ function SelectInterests() {
                 <Text style={styles.HeaderText}>Some Basic Info:</Text>
                 <Text style={styles.Subheading}>Select all interests</Text>
                 <View style={localStyles.buttonRow}>
-                    <CircularButton onPress={() => Alert.alert("Clicked Button", "Selected Interest")} title='Park' buttonSize={buttonSize} borderRadius={borderRadius}/>
-                    <CircularButton onPress={() => Alert.alert("Clicked Button", "Selected Interest")} title='Walk' buttonSize={buttonSize} borderRadius={borderRadius}/>
-                    <CircularButton onPress={() => Alert.alert("Clicked Button", "Selected Interest")} title='Runs' buttonSize={buttonSize} borderRadius={borderRadius}/>
-                    <CircularButton onPress={() => Alert.alert("Clicked Button", "Selected Interest")} title='TV' buttonSize={buttonSize} borderRadius={borderRadius}/>
-                    <CircularButton onPress={() => Alert.alert("Clicked Button", "Selected Interest")} title='Games' buttonSize={buttonSize} borderRadius={borderRadius}/>
-                    <CircularButton onPress={() => Alert.alert("Clicked Button", "Selected Interest")} title='Gym' buttonSize={buttonSize} borderRadius={borderRadius}/>
-                    <CircularButton onPress={() => Alert.alert("Clicked Button", "Selected Interest")} title='Sport' buttonSize={buttonSize} borderRadius={borderRadius}/>
-                    <CircularButton onPress={() => Alert.alert("Clicked Button", "Selected Interest")} title='Meals' buttonSize={buttonSize} borderRadius={borderRadius}/>
-                    <CircularButton onPress={() => Alert.alert("Clicked Button", "Selected Interest")} title='Cars' buttonSize={buttonSize} borderRadius={borderRadius}/>
-                    <CircularButton onPress={() => Alert.alert("Clicked Button", "Selected Interest")} title='Music' buttonSize={buttonSize} borderRadius={borderRadius}/>
-                    <CircularButton onPress={() => Alert.alert("Clicked Button", "Selected Interest")} title='Study' buttonSize={buttonSize} borderRadius={borderRadius}/>
-                    <CircularButton onPress={() => Alert.alert("Clicked Button", "Selected Interest")} title='Other' buttonSize={buttonSize} borderRadius={borderRadius}/>
+                    {interestArray.map((interestObj) => (
+                         <CircularButton onPress={() => Alert.alert("Clicked Button", "Selected Interest")}
+                                         title={interestObj.title} 
+                                         buttonSize={buttonSize} 
+                                         borderRadius={borderRadius}
+                                         key={interestObj.title}/>
+                    ))}
                 </View>
                 <RoundedButton name="Next" height="7%" top="-8%" onPress={() => navigation.navigate('Email Verification')}/> 
             </View>
