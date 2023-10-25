@@ -10,7 +10,7 @@ import SplitButton from '../../comps/SplitButtons/SplitButton';
 import UserInformation from '../../comps/UserInformation/UserInformation';
 
 function ProfileScreen() {
-  const [VisibleState, setVisibleState] = useState(0);
+  const [visibleState, setVisibleState] = useState(0);
 
   const toggleUserInfoVisibility = () => {
     setVisibleState(0);
@@ -67,9 +67,9 @@ function ProfileScreen() {
 
             <View id="Interest Level" style={localstyles.InterestContainer}>
               <SplitButton onPress1={toggleUserInfoVisibility} onPress2={toggleEventsHostedVisibility} onPress3={toggleEventsAttendedVisibility}></SplitButton>
-                {VisibleState == 0 ? <UserInformation></UserInformation> : <View/> }
-                {VisibleState == 1 ? <Text> woohoo </Text> : <View/>}
-                {VisibleState == 2 ? <Text> yeah boy </Text> : <View/>}
+                {visibleState == 0 ? <UserInformation></UserInformation> : <View/> }
+                {visibleState == 1 ? <Text> woohoo </Text> : <View/>}
+                {visibleState == 2 ? <Text> yeah boy </Text> : <View/>}
             </View> 
           </View> 
         </ScrollView>
