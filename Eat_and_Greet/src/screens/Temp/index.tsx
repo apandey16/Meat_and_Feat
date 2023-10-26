@@ -5,6 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import RoundedButton from '../../comps/RoundedButton/RoundedButton';
 
 import styles from '../../style';
+import React from 'react';
 
 function LoginScreen() {
     const navigation = useNavigation();

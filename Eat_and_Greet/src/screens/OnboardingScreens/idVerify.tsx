@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import styles from '../../style';
 import RoundedButton from '../../comps/RoundedButton/RoundedButton';
+import React from 'react';
 
 function IdVerify() {
     const navigation = useNavigation();

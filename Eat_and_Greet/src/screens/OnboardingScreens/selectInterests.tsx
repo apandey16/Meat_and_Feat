@@ -4,8 +4,9 @@ import { useNavigation } from '@react-navigation/native';
 import styles from '../../style';
 import RoundedButton from '../../comps/RoundedButton/RoundedButton';
 import CircularButton from '../../comps/CircularButton/CircularButton';
+import React from 'react';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 const interestArray = [ {title: "Park"},
                        {title: "Walk"},
