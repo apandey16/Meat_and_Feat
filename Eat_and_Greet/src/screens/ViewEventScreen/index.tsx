@@ -4,6 +4,7 @@ import { Toolbar } from '../../comps/Toolbar/toolbar';
 import RoundedButton from '../../comps/RoundedButton/RoundedButton';
 import styles from '../../style';
 import localstyles from './style';
+import React from 'react';
 
 function ViewEventScreen() {
 

@@ -5,6 +5,7 @@ import ChatCard from '../../comps/ChatCard/ChatCard';
 import { Toolbar } from '../../comps/Toolbar/toolbar';
 
 import styles from '../../style';
+import React from 'react';
 
 function HomeScreen() {
     const navigation = useNavigation();

@@ -8,6 +8,7 @@ import SpecificChatMessage from '../../comps/SpecificChat/SpecificChatMessage';
 import TextBox from '../../comps/SpecificChat/SpecificChatTextbox';
 
 import styles from '../../style';
+import React from 'react';
 
 const messageArray = [ { sentFromMe: true, timeStamp: "4:45 PM", message: "Hey Jimmy, how's it going"},
                        { sentFromMe: false, timeStamp: "4:53 PM", message: "Brand new whip got no keys \nTailor my clothes, no starch please\nSoon as I nut, you can gon' leave\nGot M's in the bank, like \"yes, indeed\""},

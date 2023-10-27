@@ -6,6 +6,7 @@ import RoundedButton from '../../comps/RoundedButton/RoundedButton';
 
 import LoginStyles from './index.styles';
 import styles from '../../style';
+import React from 'react';
 
 function LoginScreen() {
     const navigation = useNavigation();

@@ -4,6 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Toolbar } from '../../comps/Toolbar/toolbar';
 
 import styles from '../../style';
+import React from 'react';
 
 function SearchScreen() {
     return (

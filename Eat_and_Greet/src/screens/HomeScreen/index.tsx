@@ -7,6 +7,7 @@ import HomePageButton from '../../comps/HomePageButton';
 
 import styles from '../../style';
 import localStyles from './index.styles';
+import React from 'react';
 
 const fontScale = PixelRatio.getFontScale();
 const getFontSize = (size: number) => size / fontScale;
