@@ -11,6 +11,7 @@ Dev Setup:
         - ```npm run android```
         - ```npm run ios``` (MacOS only)
 - To view the app server you can create a local emulation of the phone or download Expo Go and scan the QR code in the terminal
+- To get the Web API key, downwolad the .env file in the Google Drive and add it to your local repo (the .env file will never be pushed becuase it is in the .gitignore)
 
 Documentation:
 - [React Native](https://reactnative.dev/docs/environment-setup)
