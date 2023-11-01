@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
 import { Toolbar } from '../../comps/Toolbar/toolbar';
@@ -6,7 +6,6 @@ import { Toolbar } from '../../comps/Toolbar/toolbar';
 import styles from '../../style';
 import React from 'react'
 import RoundedButton from '../../comps/RoundedButton/RoundedButton';
-import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function PostEvent() {

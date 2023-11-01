@@ -49,6 +49,8 @@ const onboardingStackArray = [ { name:"Basic Info", comp: BasicInfo },
 const Stack = createNativeStackNavigator();
 const OnboardingNavigation = createNativeStackNavigator();
 
+const headerLeftFunction = () => <HeaderBackButton />;
+
 export default function App() {
   return (
     <NavigationContainer>
@@ -56,7 +58,7 @@ export default function App() {
         screenOptions={{
           ...navHeaderStyles,
           headerBackTitleVisible: true,
-          headerLeft: () => <HeaderBackButton />,
+          headerLeft: headerLeftFunction,
         }}
       >
         {stackArray.map((stackObj) => (
