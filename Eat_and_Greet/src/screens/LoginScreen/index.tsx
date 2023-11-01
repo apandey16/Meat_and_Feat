@@ -12,7 +12,6 @@ import localStyles from './index.styles';
 import styles from '../../style';
 import textboxStyles from '../../comps/Textbox/style'
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import React from 'react';
 
 
 function LoginScreen() {
