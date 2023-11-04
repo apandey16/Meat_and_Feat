@@ -1,4 +1,4 @@
-import { View, Dimensions } from 'react-native';
+import { View, Dimensions, ScrollView } from 'react-native';
 
 const { height } = Dimensions.get('window');
 
@@ -8,6 +8,7 @@ import SpecificChatMessage from '../../comps/SpecificChat/SpecificChatMessage';
 import TextBox from '../../comps/SpecificChat/SpecificChatTextbox';
 
 import styles from '../../style';
+import localstyles from './style';
 import React from 'react';
 
 const messageArray = [ { sentFromMe: true, timeStamp: "4:45 PM", message: "Hey Jimmy, how's it going"},
@@ -27,7 +28,10 @@ function ExampleChatScreen() {
       <View style={styles.OuterBox}>
         <SpecificChatHeader />
         <View style={[styles.InnerBox, {height: height - 265} ]}>
+
           <View style={[styles.InnerBox, {height: height - 320, justifyContent: 'flex-end'} ]}>
+          <ScrollView style={localstyles.ScrollChats}>
+
             {messageArray.map((messageObj) => (
               <SpecificChatMessage 
                 message={messageObj.message}
@@ -36,7 +40,10 @@ function ExampleChatScreen() {
                 key={messageObj.message + messageObj.timeStamp}
               />
             ))}
+          </ScrollView>
+
           </View>
+        
           <TextBox />
         </View>
       </View>

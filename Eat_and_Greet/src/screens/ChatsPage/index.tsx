@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import ChatCard from '../../comps/ChatCard/ChatCard'; 
 
@@ -19,19 +19,21 @@ function HomeScreen() {
 
     return (
       <View style={styles.ScreenContainer}>
-      <View style={styles.OuterBox}>
-        {chatArray.map((chatObj) => (
-          <ChatCard senderName={chatObj.senderName}
-                    message={chatObj.message} 
-                    timestamp={chatObj.timestamp}
-                    isRead={chatObj.isRead} 
-                    onPress={chatObj.nav}
-                    key={chatObj.senderName}
-          />
-        ))}
+        <ScrollView>
+          <View style={styles.OuterBox}>
+            {chatArray.map((chatObj) => (
+              <ChatCard senderName={chatObj.senderName}
+                        message={chatObj.message} 
+                        timestamp={chatObj.timestamp}
+                        isRead={chatObj.isRead} 
+                        onPress={chatObj.nav}
+                        key={chatObj.senderName}
+              />
+            ))}
+          </View>
+        </ScrollView>
+        <Toolbar />
       </View>
-      <Toolbar />
-    </View>
     );
 
 }

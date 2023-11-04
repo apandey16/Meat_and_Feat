@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Text, View, ScrollView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
 import { Toolbar } from "../../comps/Toolbar/toolbar";
@@ -13,6 +13,7 @@ export default function BrowseEvent() {
   return (
     <SafeAreaView style={styles.ScreenContainer}>
       <SafeAreaView style={browseStyle.InfoContainer}>
+        <ScrollView>
         <View style={browseStyle.SortContainer}>
           <Text style={browseStyle.SortText}> Sort </Text>
         </View>
@@ -51,6 +52,7 @@ export default function BrowseEvent() {
             Description...
           </Text>
         </View>
+        </ScrollView>
       </SafeAreaView>
       <RoundedButton name="Post Event" top="-2%" />
       <Toolbar />
