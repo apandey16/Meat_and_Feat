@@ -20,13 +20,6 @@ import browseStyle from "./index.styles";
 import { Toolbar } from "../../comps/Toolbar/toolbar";
 import RoundedButton from "../../comps/RoundedButton/RoundedButton";
 
-/*
-NEXT STEPS:
-PLAN NEW EVENT BUTTON FUNCTIONALITY
-SORTED CONTAINER
-MAKE VIEW EVENT PAGE
-*/
-
 interface EventData {
   Category: string;
   Date: string;
