@@ -28,10 +28,8 @@ function ExampleChatScreen() {
       <View style={styles.OuterBox}>
         <SpecificChatHeader />
         <View style={[styles.InnerBox, {height: height - 265} ]}>
-
           <View style={[styles.InnerBox, {height: height - 320, justifyContent: 'flex-end'} ]}>
-          <ScrollView style={localstyles.ScrollChats}>
-
+            <ScrollView style={localstyles.ScrollChats}>
             {messageArray.map((messageObj) => (
               <SpecificChatMessage 
                 message={messageObj.message}
@@ -40,10 +38,8 @@ function ExampleChatScreen() {
                 key={messageObj.message + messageObj.timeStamp}
               />
             ))}
-          </ScrollView>
-
+            </ScrollView>
           </View>
-        
           <TextBox />
         </View>
       </View>
