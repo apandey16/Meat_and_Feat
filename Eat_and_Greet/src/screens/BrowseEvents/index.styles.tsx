@@ -7,6 +7,14 @@ const browseStyle = StyleSheet.create({
     width: 340,
     top: -35,
   },
+  ScrollContainer: {
+    padding: 0,
+    margin: 0,
+    bottom: 50,
+  },
+  InnerScrollContainer: {
+    marginTop: 40
+  },
   PostContainer: {
     backgroundColor: "#E5E0FF",
     width: 340,
@@ -15,7 +23,7 @@ const browseStyle = StyleSheet.create({
     borderColor: "#8EA7E9",
     bottom: 50,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "flex-start",
   },
   PostText: {
     fontFamily: "Courier New",

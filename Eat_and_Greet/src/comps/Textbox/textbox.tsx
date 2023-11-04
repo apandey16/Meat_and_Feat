@@ -10,12 +10,14 @@ interface TextBoxProps {
   right ?: any;
   width ?: any;
   height ?: any;
+  onTextChange: any;
 }
 
-const TextBox = ( {placeholder, top, left, bottom, right, width, height} : TextBoxProps ) => {
+const TextBox = ( {placeholder, top, left, bottom, right, width, height, onTextChange} : TextBoxProps ) => {
 const [text, setText] = useState('');
 const handleTextChange = (userInput: string) => {
     setText(userInput);  
+    onTextChange(userInput);
 };
 const localstyle = StyleSheet.create({
   placement: { 
@@ -51,7 +53,8 @@ const defaultProps: TextBoxProps = {
   bottom : 0,
   right : 0,
   width : "80%",
-  height : "5%"
+  height : "5%",
+  onTextChange: () => {}
 };
 TextBox.defaultProps = defaultProps;
 
