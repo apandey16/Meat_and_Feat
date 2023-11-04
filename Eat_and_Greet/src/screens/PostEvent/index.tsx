@@ -15,24 +15,23 @@ import TextBox from "../../comps/Textbox/textbox";
 export default function PostEvent() {
   const [Title, setTitle] = useState("");
   const [Category, setCategory] = useState("");
-  const [Date, setDate] = useState("");
+  const [EventDate, setEventDate] = useState("");
   const [StartTime, setStartTime] = useState("");
   const [EndTime, setEndTime] = useState("");
 
   const addPostToDB = async () => {
     if (Title.length > 0) {
       if (Category.length > 0) {
-        if (Date.length > 0) {
+        if (EventDate.length > 0) {
           if (StartTime.length > 0) {
             if (EndTime.length > 0) {
               try {
-                console.log(Title, Date);
                 const querySnapshot = await getDocs(
                   query(
                     collection(db, "Events"),
                     where("Title", "==", Title),
                     where("Category", "==", Category),
-                    where("Date", "==", Date)
+                    where("Date", "==", EventDate)
                   )
                 );
 
@@ -41,13 +40,12 @@ export default function PostEvent() {
                 } else {
                   const docRef = await addDoc(collection(db, "Events"), {
                     Category: Category,
-                    Date: Date,
+                    Date: EventDate,
                     EndTime: EndTime,
                     Host: "RobV",
                     StartTime: StartTime,
                     Title: Title,
                   });
-                  console.log("Event Added with ID: ", docRef.id);
                 }
               } catch (error) {
                 console.error("Error adding document: ", error);
@@ -109,7 +107,7 @@ export default function PostEvent() {
             top={"-30%"}
             height={"20%"}
             width={"90%"}
-            onTextChange={setDate}
+            onTextChange={setEventDate}
           />
           <TextBox
             placeholder="Enter Start Time..."
