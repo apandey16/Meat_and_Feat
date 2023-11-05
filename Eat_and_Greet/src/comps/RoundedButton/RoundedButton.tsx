@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, TouchableOpacity, TouchableHighlight, Text, StyleSheet} from 'react-native';
+import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import styles from '../../style';
 
 interface RoundedButtonProps {

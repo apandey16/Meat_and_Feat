@@ -6,7 +6,7 @@ const getFontSize = (size: number) => size / fontScale;
 const localStyles = StyleSheet.create({
     SentMessageOuterContainer: {
         paddingBottom: 10,
-        paddingRight: 10,
+        // paddingRight: 10,
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -19,7 +19,7 @@ const localStyles = StyleSheet.create({
     },
     RecievedMessageOuterContainer: {
         paddingBottom: 10,
-        paddingLeft: 10,
+        // paddingLeft: 10,
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',

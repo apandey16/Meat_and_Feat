@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Text, View, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
+
 import { StatusBar } from "expo-status-bar";
 import { db } from "../../firebase/config";
 import {
@@ -73,8 +74,9 @@ export default function BrowseEvent() {
   }, []);
 
   return (
-    <SafeAreaView style={styles.ScreenContainer}>
-      <SafeAreaView style={browseStyle.InfoContainer}>
+    <View style={styles.ScreenContainer}>
+      <View style={browseStyle.InfoContainer}>
+        
         <View style={browseStyle.SortContainer}>
           <Text style={browseStyle.SortText}> Sort </Text>
         </View>
@@ -105,6 +107,6 @@ export default function BrowseEvent() {
       />
       <Toolbar />
       <StatusBar style="auto" />
-    </SafeAreaView>
+    </View>
   );
 }

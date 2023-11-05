@@ -1,5 +1,6 @@
-import { View, Text, TextInput, Alert } from 'react-native';
+import { View, Text, TextInput, Alert, ScrollView } from 'react-native';
 import { useState } from 'react';
+
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 
@@ -10,9 +11,8 @@ import { auth } from '../../firebase/config';
 
 import localStyles from './index.styles';
 import styles from '../../style';
-import textboxStyles from '../../comps/Textbox/style'
+import textboxStyles from '../../comps/Textbox/style';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import React from 'react';
 
 
 function LoginScreen() {
@@ -37,6 +37,8 @@ function LoginScreen() {
       };
 
     return (
+      <ScrollView>
+        <View style={styles.Background}>
       <View style={ [styles.ScreenContainer, {justifyContent: 'flex-start'}] }>
         <StatusBar style="auto" />
         <View style={ [styles.OuterBox, localStyles.OuterBox] }>
@@ -66,6 +68,9 @@ function LoginScreen() {
         <View style={ [ {height: '5%'} ] }></View>
         <RoundedButton name="Make Account" onPress={() => navigation.navigate('Onboarding')}/>
       </View>
+      </View>
+      </ScrollView>
+
     );
 }
 
