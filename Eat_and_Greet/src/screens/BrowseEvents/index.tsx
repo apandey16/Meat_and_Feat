@@ -5,12 +5,7 @@ import { StatusBar } from "expo-status-bar";
 import { db } from "../../firebase/config";
 import {
   collection,
-  setDoc,
-  doc,
-  addDoc,
   getDocs,
-  query,
-  where,
 } from "firebase/firestore";
 
 import styles from "../../style";

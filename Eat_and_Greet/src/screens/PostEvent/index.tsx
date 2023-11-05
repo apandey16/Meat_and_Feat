@@ -20,15 +20,15 @@ export default function PostEvent() {
   const [endTime, setEndTime] = useState("");
 
   let inputs = [title, category, eventDate, startTime, endTime];
-  var missing = new Array();
+  const inputsAsString = ["Title", "Category", "Event Date", "Start Time", "End Time"];
 
   const addPostToDB = async () => {
-    inputs.forEach( function (input) {
-      if(input.length <= 0){
-        missing.push(input.toString);
+    let missing = new Array();
+    for (let i = 0; i < inputs.length; i++){
+      if(inputs[i].length <= 0){
+        missing.push(inputsAsString[i])
       }
     }
-    ) 
     if (missing.length == 0) {
       try {
         const querySnapshot = await getDocs(
@@ -56,7 +56,7 @@ export default function PostEvent() {
         console.error("Error adding document: ", error);
       }
     } else {
-      Alert.alert("Event Posting Is Missing The Following Data: " + missing.toString);
+      Alert.alert("Event Posting Is Missing The Following Data: " + missing.toString());
     }
   };
 
