@@ -57,32 +57,35 @@ const style = StyleSheet.create({
         position: 'relative',
     }, 
     ScreenContainer: {
+        flexDirection: 'column',
         flex: 1,
         backgroundColor: '#7286D3',
         alignItems: 'center',
         justifyContent: 'center',
+        minHeight: height
       },
     OuterBox: {
         width: width - 25, 
-        height: height - 185,
         margin: 6,
         backgroundColor: '#8EA7E9', 
         borderRadius: 10,
         alignItems: 'center',
+        justifyContent: 'center'
     }, 
     InnerBox: {
         width: width - 65, 
-        height: height - 210,
         margin: 10,
+        paddingBottom: 10,
         backgroundColor: '#E5E0FF', 
         borderRadius: 10,
-        alignItems: 'center',
+        alignItems: 'center'
     },
     ContentContainer: {
         flex: 1,
         backgroundColor: "#7286D3",
         alignItems: "center",
         justifyContent: "center",
+        paddingVertical: 20,
       },
     CenterText: {
         textAlign: 'center'
