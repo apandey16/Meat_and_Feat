@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Text, View, Image, Alert } from "react-native";
 import { StatusBar } from "expo-status-bar";
+import { db } from "../../firebase/config";
+import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 
 import styles from "../../style";
 import postStyle from "./index.styles";
-import { db } from "../../firebase/config";
-import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 
 import { Toolbar } from "../../comps/Toolbar/toolbar";
 import RoundedButton from "../../comps/RoundedButton/RoundedButton";

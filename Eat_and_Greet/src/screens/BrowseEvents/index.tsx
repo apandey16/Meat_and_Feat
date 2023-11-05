@@ -53,18 +53,6 @@ const getEventsData = async (): Promise<EventData[]> => {
   }
 };
 
-
-interface EventData {
-  Category: string;
-  Date: string;
-  EndTime: string;
-  Host: string;
-  StartTime: string;
-  Title: string;
-}
-
-
-
 export default function BrowseEvent() {
   const [data, setData] = useState(postData);
 
