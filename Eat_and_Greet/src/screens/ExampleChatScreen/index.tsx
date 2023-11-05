@@ -42,8 +42,9 @@ function ExampleChatScreen() {
           </View>
           <TextBox />
         </View>
+
       </View>
-      <Toolbar />
+    <Toolbar />
     </View>
     );
 

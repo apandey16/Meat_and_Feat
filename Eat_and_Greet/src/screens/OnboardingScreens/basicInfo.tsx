@@ -10,6 +10,7 @@ function BasicInfo() {
     const navigation = useNavigation();
     
     return (
+      <View style={styles.Background}>
       <ScrollView>
         <View style={styles.ScreenContainer}>
           <View style={styles.OuterBox}>
@@ -30,6 +31,7 @@ function BasicInfo() {
           <RoundedButton name="Next" height="7%" onPress={() => navigation.navigate('Select Interests')}/> 
         </View>
       </ScrollView>
+      </View>
     );
 }
 

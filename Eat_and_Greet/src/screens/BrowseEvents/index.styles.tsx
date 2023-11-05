@@ -4,16 +4,13 @@ const browseStyle = StyleSheet.create({
   InfoContainer: {
     backgroundColor: "#8EA7E9",
     height: 550,
-    width: 340,
-    top: -35,
-  },
+    width: 340  },
   PostContainer: {
     backgroundColor: "#E5E0FF",
     width: 340,
     height: 95,
     borderWidth: 10,
     borderColor: "#8EA7E9",
-    bottom: 50,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -27,7 +24,6 @@ const browseStyle = StyleSheet.create({
     height: 70,
     borderWidth: 10,
     borderColor: "#8EA7E9",
-    bottom: 50,
     justifyContent: "center",
   },
   SortText: {

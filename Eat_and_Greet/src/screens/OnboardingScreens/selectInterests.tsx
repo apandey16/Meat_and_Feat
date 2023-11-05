@@ -28,7 +28,8 @@ function SelectInterests() {
     const borderRadius = 20;
     
     return (
-    <ScrollView>
+        <ScrollView>
+        <View style={styles.Background}>
         <View style={styles.ScreenContainer}>
             <View style={styles.OuterBox}>
                 <View style={styles.InnerBox}>  
@@ -47,6 +48,7 @@ function SelectInterests() {
             <RoundedButton name="Next" height="7%" onPress={() => navigation.navigate('Email Verification')}/> 
             </View>
         </View>
+      </View>
       </ScrollView>
     );
 }

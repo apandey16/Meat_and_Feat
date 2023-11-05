@@ -11,7 +11,7 @@ function LoginScreen() {
     const navigation = useNavigation();
 
     return (
-      <ScrollView>
+      <ScrollView contentContainerStyle={{ minHeight: "100%" }}>
         <View style={[styles.ScreenContainer, {paddingVertical: "20%"}]}>
           <View style={[styles.ContentContainer]}>
             <StatusBar style="auto" /> 

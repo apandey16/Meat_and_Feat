@@ -7,16 +7,16 @@ import styles from "../../style";
 import React from "react";
 import RoundedButton from "../../comps/RoundedButton/RoundedButton";
 import browseStyle from "./index.styles";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function BrowseEvent() {
   return (
-    <SafeAreaView style={styles.ScreenContainer}>
-      <SafeAreaView style={browseStyle.InfoContainer}>
-        <ScrollView>
+    <View style={styles.ScreenContainer}>
+      <View style={browseStyle.InfoContainer}>
+        
         <View style={browseStyle.SortContainer}>
           <Text style={browseStyle.SortText}> Sort </Text>
         </View>
+        <ScrollView>
         <View style={browseStyle.PostContainer}>
           <Text style={browseStyle.PostText}>
             {" "}
@@ -53,10 +53,10 @@ export default function BrowseEvent() {
           </Text>
         </View>
         </ScrollView>
-      </SafeAreaView>
-      <RoundedButton name="Post Event" top="-2%" />
+      </View>
+      <RoundedButton name="Post Event" />
       <Toolbar />
       <StatusBar style="auto" />
-    </SafeAreaView>
+    </View>
   );
 }

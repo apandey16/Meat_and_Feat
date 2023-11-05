@@ -38,6 +38,7 @@ function LoginScreen() {
 
     return (
       <ScrollView>
+        <View style={styles.Background}>
       <View style={ [styles.ScreenContainer, {justifyContent: 'flex-start'}] }>
         <StatusBar style="auto" />
         <View style={ [styles.OuterBox, localStyles.OuterBox] }>
@@ -66,6 +67,7 @@ function LoginScreen() {
             textSize={18} />
         <View style={ [ {height: '5%'} ] }></View>
         <RoundedButton name="Make Account" onPress={() => navigation.navigate('Onboarding')}/>
+      </View>
       </View>
       </ScrollView>
 

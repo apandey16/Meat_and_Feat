@@ -12,8 +12,9 @@ function LoginScreen() {
     const navigation = useNavigation();
 
     return (
-      <ScrollView horizontal={false}>
 
+      <ScrollView>
+      <View style={styles.Background}>
       <View style={styles.ScreenContainer}>
           <View style={styles.ContentContainer}>
           <StatusBar style="auto" />
@@ -23,8 +24,9 @@ function LoginScreen() {
             <RoundedButton name="Dev Page" onPress={() => navigation.navigate('Dev Page')}/>
           </View>
       </View>
-      </ScrollView>
+      </View>
 
+      </ScrollView>
     );
 }
 
