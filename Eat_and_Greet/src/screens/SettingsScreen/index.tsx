@@ -3,7 +3,10 @@ import { View } from 'react-native';
 import { List, Switch } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
+import { Toolbar } from '../../comps/Toolbar/toolbar';
+
 import localStyles from './styles';
+import styles from '../../style';
 
 const SettingsScreen = () => {
   const [notifications, setNotifications] = React.useState<boolean>(false);
@@ -18,6 +21,7 @@ const SettingsScreen = () => {
   const navigation = useNavigation();
 
   return (
+    <View style={styles.ScreenContainer}>
     <View style={localStyles.background}>
       <View style={localStyles.outerBox}>
         
@@ -58,6 +62,8 @@ const SettingsScreen = () => {
         </List.Section>
 
       </View>
+    </View>
+    <Toolbar />
     </View>
   );
 };

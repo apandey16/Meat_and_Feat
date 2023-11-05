@@ -4,20 +4,20 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from './src/screens/HomeScreen';
 import TitleScreen from './src/screens/TitleScreen';
 import LoginScreen from './src/screens/LoginScreen';
-import BasicInfo from './src/screens/OnboardingScreens/basicInfo';
-import Confirmation from './src/screens/OnboardingScreens/confirmation';
-import IdVerify from './src/screens/OnboardingScreens/idVerify';
-import SelectInterests from './src/screens/OnboardingScreens/selectInterests';
-import EmailVerify from './src/screens/OnboardingScreens/emailVerify';
+import BasicInfoScreen from './src/screens/OnboardingScreens/basicInfo';
+import ConfirmationScreen from './src/screens/OnboardingScreens/confirmation';
+import IdVerifyScreen from './src/screens/OnboardingScreens/idVerify';
+import SelectInterestsScreen from './src/screens/OnboardingScreens/selectInterests';
+import EmailVerifyScreen from './src/screens/OnboardingScreens/emailVerify';
 import ForumsScreen from "./src/screens/ForumsScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
 import SearchScreen from "./src/screens/SearchScreen";
 import SettingsScreen from "./src/screens/SettingsScreen";
 import ViewEventScreen from "./src/screens/ViewEventScreen";
-import ChatsPage from "./src/screens/ChatsPage/index";
+import ChatsScreen from "./src/screens/ChatsPage/index";
 import ExampleChatScreen from "./src/screens/ExampleChatScreen";
-import PostEvent from "./src/screens/EventScreens/post";
-import BrowseEvent from "./src/screens/EventScreens/browse";
+import PostEventScreen from "./src/screens/PostEvent";
+import BrowseEventScreen from "./src/screens/BrowseEvents";
 import Temp from "./src/screens/Temp/index";
 
 import HeaderBackButton from "./src/comps/HeaderBackButton";
@@ -33,18 +33,18 @@ const stackArray = [ { name: "Welcome", comp: TitleScreen},
                      { name: "Profile", comp: ProfileScreen}, 
                      { name: "Search", comp: SearchScreen}, 
                      { name: "Settings", comp: SettingsScreen}, 
-                     { name: "Chats", comp: ChatsPage}, 
+                     { name: "Chats", comp: ChatsScreen}, 
                      { name: "Example Chat", comp: ExampleChatScreen}, 
-                     { name: "Post Event", comp: PostEvent},
-                     { name: "Browse Event", comp: BrowseEvent},
+                     { name: "Post Event", comp: PostEventScreen},
+                     { name: "Browse Event", comp: BrowseEventScreen},
                      { name: "View Event", comp: ViewEventScreen},
                      {name: "Dev Page", comp: Temp}];
 
-const onboardingStackArray = [ { name:"Basic Info", comp: BasicInfo },
-                               { name: "Confirmation", comp: Confirmation },
-                               { name: "ID Verification", comp: IdVerify },
-                               { name:"Select Interests", comp: SelectInterests },
-                               { name: "Email Verification", comp: EmailVerify } ];
+const onboardingStackArray = [ { name:"Basic Info", comp: BasicInfoScreen },
+                               { name: "Confirmation", comp: ConfirmationScreen },
+                               { name: "ID Verification", comp: IdVerifyScreen },
+                               { name:"Select Interests", comp: SelectInterestsScreen },
+                               { name: "Email Verification", comp: EmailVerifyScreen } ];
 
 const Stack = createNativeStackNavigator();
 const OnboardingNavigation = createNativeStackNavigator();
