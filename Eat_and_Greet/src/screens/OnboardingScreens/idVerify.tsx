@@ -9,6 +9,7 @@ function IdVerify() {
     const navigation = useNavigation();
     
     return (
+        <View style={styles.Background}>
         <ScrollView>
         <View style={styles.ScreenContainer}>
         <View style={styles.OuterBox}>
@@ -23,6 +24,7 @@ function IdVerify() {
         </View>
       </View>
       </ScrollView>
+      </View>
     );
 }
 

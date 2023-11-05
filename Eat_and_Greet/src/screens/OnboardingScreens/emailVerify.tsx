@@ -10,6 +10,7 @@ function EmailVerify() {
     const navigation = useNavigation();
     
     return (
+    <View style={styles.Background}>
     <ScrollView>
         <View style={styles.ScreenContainer}>
             <View style={styles.OuterBox}>
@@ -29,6 +30,7 @@ function EmailVerify() {
             </View>
         </View>
       </ScrollView>
+      </View>
     );
 }
 

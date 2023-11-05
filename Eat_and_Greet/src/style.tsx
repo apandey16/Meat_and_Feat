@@ -61,9 +61,7 @@ const style = StyleSheet.create({
         flex: 1,
         backgroundColor: '#7286D3',
         alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: height
-      },
+        justifyContent: 'center'},
     OuterBox: {
         width: width - 25, 
         margin: 6,
@@ -92,7 +90,11 @@ const style = StyleSheet.create({
     },
     FlexOne: {
         flex: 1
-      }
+      },
+    Background: {
+        minHeight: height,
+        backgroundColor: '#7286D3',
+    }
     });
 
     export const navHeaderStyles = StyleSheet.create({
