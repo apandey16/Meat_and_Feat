@@ -2,68 +2,61 @@ import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Text, View, Image, Alert } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { db } from "../../firebase/config";
-import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 
 import styles from "../../style";
 import postStyle from "./index.styles";
+import { db } from "../../firebase/config";
+import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 
 import { Toolbar } from "../../comps/Toolbar/toolbar";
 import RoundedButton from "../../comps/RoundedButton/RoundedButton";
 import TextBox from "../../comps/Textbox/textbox";
 
 export default function PostEvent() {
-  const [Title, setTitle] = useState("");
-  const [Category, setCategory] = useState("");
-  const [EventDate, setEventDate] = useState("");
-  const [StartTime, setStartTime] = useState("");
-  const [EndTime, setEndTime] = useState("");
+  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("");
+  const [eventDate, setEventDate] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+
+  let inputs = [title, category, eventDate, startTime, endTime];
+  var missing = new Array();
 
   const addPostToDB = async () => {
-    if (Title.length > 0) {
-      if (Category.length > 0) {
-        if (EventDate.length > 0) {
-          if (StartTime.length > 0) {
-            if (EndTime.length > 0) {
-              try {
-                const querySnapshot = await getDocs(
-                  query(
-                    collection(db, "Events"),
-                    where("Title", "==", Title),
-                    where("Category", "==", Category),
-                    where("Date", "==", EventDate)
-                  )
-                );
+    inputs.forEach( function (input) {
+      if(input.length <= 0){
+        missing.push(input.toString);
+      }
+    }
+    ) 
+    if (missing.length == 0) {
+      try {
+        const querySnapshot = await getDocs(
+          query(
+            collection(db, "Events"),
+            where("Title", "==", title),
+            where("Category", "==", category),
+            where("Date", "==", eventDate)
+          )
+        );
 
-                if (!querySnapshot.empty) {
-                  Alert.alert("This Event is Already Happening Today");
-                } else {
-                  const docRef = await addDoc(collection(db, "Events"), {
-                    Category: Category,
-                    Date: EventDate,
-                    EndTime: EndTime,
-                    Host: "RobV",
-                    StartTime: StartTime,
-                    Title: Title,
-                  });
-                }
-              } catch (error) {
-                console.error("Error adding document: ", error);
-              }
-            } else {
-              Alert.alert("Please Enter an End Time");
-            }
-          } else {
-            Alert.alert("Please Enter a Start Time");
-          }
+        if (!querySnapshot.empty) {
+          Alert.alert("This Event is Already Happening Today");
         } else {
-          Alert.alert("Please Enter a Date");
+          await addDoc(collection(db, "Events"), {
+            Category: category,
+            Date: eventDate,
+            EndTime: endTime,
+            Host: "RobV",
+            StartTime: startTime,
+            Title: title,
+          });
         }
-      } else {
-        Alert.alert("Please Enter a Category");
+      } catch (error) {
+        console.error("Error adding document: ", error);
       }
     } else {
-      Alert.alert("Please Enter a Title");
+      Alert.alert("Event Posting Is Missing The Following Data: " + missing.toString);
     }
   };
 
