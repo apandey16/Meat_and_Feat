@@ -20,15 +20,23 @@ function BasicInfo() {
       try {
         if (password === confirmPassword) {
           await createUserWithEmailAndPassword(auth, email, password);
+          navigation.navigate('Home');
         } else {
           setError("Passwords don't match");
         }
       } catch (e) {
-        setError('There was a problem creating your account');
+        console.log(e);
+        if (e.code === 'auth/email-already-in-use') { 
+          setError('That email address is already in use!');
+        } else if (e.code === 'auth/invalid-email') {
+          setError('That email address is invalid!');
+        } else if (e.code === 'auth/weak-password') {
+          setError('Password is too weak!');
+        } else {
+          setError('There was a problem creating your account');
+        }
       }
-    };
-    
-  
+    };    
     
     return (
       <ScrollView>
@@ -36,6 +44,7 @@ function BasicInfo() {
           <View style={styles.OuterBox}>
               <View style={styles.InnerBox}>  
                   <Text style={styles.HeaderText}>Let's Get Started...</Text>
+                  {error && <Text style={style.error}>{error}</Text>}
                   <Text style={styles.SubHeaderText}>Name:</Text>
                   <TextInput
                     value={name}
@@ -88,8 +97,8 @@ function BasicInfo() {
           </View>
           <Button
             title="Create Account"
-            onPress={createAccount}
-            disabled={!email || !password || !confirmPassword}
+            onPress={() => {createAccount()}}
+            disabled={!email || !password || !confirmPassword || !name || !dob}
           />
         </View>
       </ScrollView>
