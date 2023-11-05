@@ -10,7 +10,7 @@ import { auth } from '../../firebase/config';
 
 import localStyles from './index.styles';
 import styles from '../../style';
-import textboxStyles from '../../comps/Textbox/style'
+import textboxStyles from '../../comps/Textbox/style';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
 
