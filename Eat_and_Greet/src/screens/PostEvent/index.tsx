@@ -1,18 +1,65 @@
-import { Text, View } from "react-native";
+import React, { useState } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Text, View, Image, Alert } from "react-native";
 import { StatusBar } from "expo-status-bar";
-
-import { Toolbar } from "../../comps/Toolbar/toolbar";
+import { db } from "../../firebase/config";
+import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 
 import styles from "../../style";
-import React from "react";
-import RoundedButton from "../../comps/RoundedButton/RoundedButton";
-import { Image } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-
 import postStyle from "./index.styles";
+
+import { Toolbar } from "../../comps/Toolbar/toolbar";
+import RoundedButton from "../../comps/RoundedButton/RoundedButton";
 import TextBox from "../../comps/Textbox/textbox";
 
 export default function PostEvent() {
+  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("");
+  const [eventDate, setEventDate] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+
+  let inputs = [title, category, eventDate, startTime, endTime];
+  const inputsAsString = ["Title", "Category", "Event Date", "Start Time", "End Time"];
+
+  const addPostToDB = async () => {
+    let missing = new Array();
+    for (let i = 0; i < inputs.length; i++){
+      if(inputs[i].length <= 0){
+        missing.push(inputsAsString[i])
+      }
+    }
+    if (missing.length == 0) {
+      try {
+        const querySnapshot = await getDocs(
+          query(
+            collection(db, "Events"),
+            where("Title", "==", title),
+            where("Category", "==", category),
+            where("Date", "==", eventDate)
+          )
+        );
+
+        if (!querySnapshot.empty) {
+          Alert.alert("This Event is Already Happening Today");
+        } else {
+          await addDoc(collection(db, "Events"), {
+            Category: category,
+            Date: eventDate,
+            EndTime: endTime,
+            Host: "RobV",
+            StartTime: startTime,
+            Title: title,
+          });
+        }
+      } catch (error) {
+        console.error("Error adding document: ", error);
+      }
+    } else {
+      Alert.alert("Event Posting Is Missing The Following Data: " + missing.toString());
+    }
+  };
+
   return (
     <SafeAreaView style={styles.ScreenContainer}>
       <StatusBar style="auto" />
@@ -24,6 +71,7 @@ export default function PostEvent() {
             top={"-80%"}
             height={"50%"}
             width={"90%"}
+            onTextChange={setTitle}
           />
         </View>
         <View style={postStyle.TitleCategoryContainer}>
@@ -33,6 +81,7 @@ export default function PostEvent() {
             top={"-80%"}
             height={"50%"}
             width={"90%"}
+            onTextChange={setCategory}
           />
         </View>
         <View style={postStyle.ImageContainer}>
@@ -51,22 +100,25 @@ export default function PostEvent() {
             top={"-30%"}
             height={"20%"}
             width={"90%"}
+            onTextChange={setEventDate}
           />
           <TextBox
             placeholder="Enter Start Time..."
             top={"-38%"}
             height={"20%"}
             width={"90%"}
+            onTextChange={setStartTime}
           />
           <TextBox
             placeholder="Enter End Time..."
             top={"-46%"}
             height={"20%"}
             width={"90%"}
+            onTextChange={setEndTime}
           />
         </View>
       </SafeAreaView>
-      <RoundedButton name="Post Event" top="-2%" />
+      <RoundedButton name="Post Event" top="-2%" onPress={addPostToDB} />
       <Toolbar />
     </SafeAreaView>
   );

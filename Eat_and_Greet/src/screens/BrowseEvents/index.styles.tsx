@@ -4,7 +4,9 @@ const browseStyle = StyleSheet.create({
   InfoContainer: {
     backgroundColor: "#8EA7E9",
     height: 550,
+
     width: 340  },
+  
   PostContainer: {
     backgroundColor: "#E5E0FF",
     width: 340,
@@ -12,7 +14,7 @@ const browseStyle = StyleSheet.create({
     borderWidth: 10,
     borderColor: "#8EA7E9",
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "flex-start",
   },
   PostText: {
     fontFamily: "Courier New",
