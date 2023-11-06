@@ -3,7 +3,6 @@ import { useNavigation } from '@react-navigation/native';
 
 import styles from '../../style';
 import RoundedButton from '../../comps/RoundedButton/RoundedButton';
-import TextBox from '../../comps/Textbox/textbox';
 import React from 'react';
 
 function EmailVerify() {
