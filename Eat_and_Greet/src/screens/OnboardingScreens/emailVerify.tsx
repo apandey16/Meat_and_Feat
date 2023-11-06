@@ -12,6 +12,7 @@ function EmailVerify() {
     const auth = getAuth();
 
     const emailVerify = async () => {
+        auth.currentUser?.reload();
         try {
             if (auth.currentUser && !auth.currentUser?.emailVerified) {
                 await sendEmailVerification(auth.currentUser);         
