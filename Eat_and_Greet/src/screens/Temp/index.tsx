@@ -25,8 +25,6 @@ function LoginScreen() {
             <RoundedButton name="Browse Event" onPress={() => navigation.navigate('Browse Event')}/> 
             <RoundedButton name="View Event" onPress={() => navigation.navigate('View Event')}/>  
             <RoundedButton name="Settings" onPress={() => navigation.navigate('Settings')}/> 
-            <RoundedButton name="Email Verify" onPress={() => navigation.navigate('Email Verification')}/>
-            <RoundedButton name="Select Interests" onPress={() => navigation.navigate('Select Interests')}/>  
           </View>
         </View>
       </ScrollView>
