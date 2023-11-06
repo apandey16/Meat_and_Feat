@@ -44,7 +44,7 @@ function EmailVerify() {
                     <Text style={styles.Text}>
                         Didn’t get an email?
                         Check your spam!
-                        Or request another email by clicking Verify!
+                        Or request another email by clicking Verify Email!
                         </Text>
                     <RoundedButton name="Verify Email" height="7%" onPress={() => emailVerify()}/>
                     <RoundedButton name="Continue" height="7%" onPress={() => cont()}/>  
