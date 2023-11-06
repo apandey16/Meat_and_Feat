@@ -18,6 +18,7 @@ import ChatsScreen from "./src/screens/ChatsPage/index";
 import ExampleChatScreen from "./src/screens/ExampleChatScreen";
 import PostEventScreen from "./src/screens/PostEvent";
 import BrowseEventScreen from "./src/screens/BrowseEvents";
+import BrowseForumScreen from "./src/screens/BrowseForums";
 import Temp from "./src/screens/Temp/index";
 
 import HeaderBackButton from "./src/comps/HeaderBackButton";
@@ -38,6 +39,7 @@ const stackArray = [ { name: "Welcome", comp: TitleScreen},
                      { name: "Example Chat", comp: ExampleChatScreen}, 
                      { name: "Post Event", comp: PostEventScreen},
                      { name: "Browse Event", comp: BrowseEventScreen},
+                     { name: "Browse Forums", comp: BrowseForumScreen},
                      { name: "View Event", comp: ViewEventScreen},
                      {name: "Dev Page", comp: Temp}];
 
