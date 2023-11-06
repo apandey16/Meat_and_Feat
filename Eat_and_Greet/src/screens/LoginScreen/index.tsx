@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Alert, ScrollView } from 'react-native';
+import { View, Text, TextInput, Alert, ScrollView, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
 
 import { useNavigation } from '@react-navigation/native';
@@ -13,6 +13,7 @@ import localStyles from './index.styles';
 import styles from '../../style';
 import textboxStyles from '../../comps/Textbox/style';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import React from 'react';
 
 
 function LoginScreen() {
@@ -43,15 +44,21 @@ function LoginScreen() {
         <StatusBar style="auto" />
         <View style={ [styles.OuterBox, localStyles.OuterBox] }>
             <View style={ [styles.InnerBox, localStyles.InnerBox] }>
-                <View style={localStyles.SignInSectionContainer}>
+                <View style={localStyles.SignInSectionContainer2}>
                     <Text style={ [styles.SubHeaderText, localStyles.SubHeaderText] }>Username</Text>
                     <TextInput placeholder="Enter Username" style={[textboxStyles.placement, textboxStyles.sizing, textboxStyles.container]} onChangeText={setEmail} />
                 </View>
-                <View style={localStyles.SignInSectionContainer2}>
+                <View style={localStyles.SignInSectionContainer}>
                     <Text style={ [styles.SubHeaderText, localStyles.SubHeaderText] }>Password</Text>
                     <TextInput placeholder="Enter password" style={[textboxStyles.placement, textboxStyles.sizing, textboxStyles.container]} onChangeText={setPassword} secureTextEntry />
                 </View>
-                <RoundedButton name="Sign In" top="-5%" width="65%" height="15%" onPress={loginUser}/>
+                <View style={localStyles.SignInSectionContainer}>
+                  <TouchableOpacity onPress={() => navigation.navigate('Password Reset')}>
+                        <Text style={[localStyles.link]}>Reset Password</Text>
+                    </TouchableOpacity>
+                    <RoundedButton name="Sign In" top="-5%" width="65%" height="15%" onPress={loginUser}/>
+                </View>                 
+                
             </View>
         </View>
         <View style={ [ {height: '5%'} ] }></View>
