@@ -12,13 +12,12 @@ function EmailVerify() {
     const auth = getAuth();
 
     const emailVerify = async () => {
-        console.log("in email verify");
         try {
             if (auth.currentUser && !auth.currentUser?.emailVerified) {
                 await sendEmailVerification(auth.currentUser);         
                 alert("Email Sent!");   
             } else {
-                alert("Email already verified!");
+                alert("Email already verified! Please click continue!");
             }
         } catch (e) {
             console.log(e);
@@ -26,9 +25,7 @@ function EmailVerify() {
     }
 
     const cont = () => { 
-        console.log("in cont");
         auth.currentUser?.reload();
-        console.log(auth.currentUser?.emailVerified);
         if (auth.currentUser?.emailVerified) {
             navigation.navigate('Home');
         } else {
@@ -45,10 +42,11 @@ function EmailVerify() {
                     <Text style={styles.HeaderText}>Email Verification</Text>
                     <Text style={styles.Subheading}>Please verify your email so we know you are real!</Text> 
                     <Text style={styles.Text}>
-                        Didn’t get a code?
+                        Didn’t get an email?
                         Check your spam!
+                        Or request another email by clicking Verify!
                         </Text>
-                    <RoundedButton name="Verify" height="7%" onPress={() => emailVerify()}/>
+                    <RoundedButton name="Verify Email" height="7%" onPress={() => emailVerify()}/>
                     <RoundedButton name="Continue" height="7%" onPress={() => cont()}/>  
                 </View>
             </View>

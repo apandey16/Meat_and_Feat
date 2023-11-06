@@ -59,8 +59,6 @@ export default function App() {
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      console.log("User is logged in");
-      console.log(loggedIn); 
       setLoggedIn(true);
     } else {
       setLoggedIn(false);
