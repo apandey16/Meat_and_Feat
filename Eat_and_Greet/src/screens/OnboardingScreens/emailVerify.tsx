@@ -4,9 +4,32 @@ import { useNavigation } from '@react-navigation/native';
 import styles from '../../style';
 import RoundedButton from '../../comps/RoundedButton/RoundedButton';
 import React from 'react';
+import { onAuthStateChanged, sendEmailVerification, getAuth } from 'firebase/auth';
 
 function EmailVerify() {
     const navigation = useNavigation();
+    
+    const auth = getAuth();
+
+    const emailVerify = async () => {
+        try {
+            if (auth.currentUser && !auth.currentUser?.emailVerified) {
+                alert("Email Sent!");
+                await sendEmailVerification(auth.currentUser);            
+                navigation.navigate('Home');
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+
+    // onAuthStateChanged(auth, async (user) => {
+    //     if (user) {
+    //         await sendEmailVerification(user);            
+    //         navigation.navigate('Home');
+    //     } 
+    //   });
     
     return (
     <View style={styles.Background}>
@@ -20,7 +43,7 @@ function EmailVerify() {
                         Didn’t get a code?
                         Check your spam!
                         </Text>
-                    <RoundedButton name="Verify" height="7%" onPress={() => navigation.navigate('ID Verification')}/> 
+                    <RoundedButton name="Verify" height="7%" onPress={() => emailVerify()}/> 
                 </View>
             </View>
         </View>

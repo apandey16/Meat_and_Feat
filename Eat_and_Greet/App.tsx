@@ -40,7 +40,8 @@ const stackArray = [ { name: "Welcome", comp: TitleScreen},
                      { name: "Post Event", comp: PostEventScreen},
                      { name: "Browse Event", comp: BrowseEventScreen},
                      { name: "View Event", comp: ViewEventScreen},
-                     {name: "Dev Page", comp: Temp}];
+                     {name: "Dev Page", comp: Temp},
+                     { name: "Email Verification", comp: EmailVerifyScreen } ];
 
 const onboardingStackArray = [ { name:"Basic Info", comp: BasicInfoScreen },
                                { name: "Confirmation", comp: ConfirmationScreen },
@@ -59,6 +60,8 @@ export default function App() {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       console.log("User is logged in");
+      console.log(user.email); 
+      console.log(user.emailVerified);
       setLoggedIn(true);
     } else {
       setLoggedIn(false);
