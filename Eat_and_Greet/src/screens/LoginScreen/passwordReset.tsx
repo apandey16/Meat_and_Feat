@@ -1,5 +1,5 @@
 import { View, Text, TextInput, Alert, ScrollView } from 'react-native';
-import { useState } from 'react';
+import { useState, React } from 'react';
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -10,7 +10,6 @@ import { auth } from '../../firebase/config';
 import localStyles from './index.styles';
 import styles from '../../style';
 import { sendPasswordResetEmail } from 'firebase/auth';
-import React from 'react';
 
 function PasswordReset() {
     const navigation = useNavigation();

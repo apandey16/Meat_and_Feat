@@ -1,5 +1,5 @@
 import { View, Text, TextInput, Alert, ScrollView, TouchableOpacity } from 'react-native';
-import { useState } from 'react';
+import { useState, React} from 'react';
 
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
@@ -13,7 +13,6 @@ import localStyles from './index.styles';
 import styles from '../../style';
 import textboxStyles from '../../comps/Textbox/style';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import React from 'react';
 
 
 function LoginScreen() {

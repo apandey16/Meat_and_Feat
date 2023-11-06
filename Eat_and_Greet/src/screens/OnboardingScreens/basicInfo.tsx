@@ -1,4 +1,4 @@
-import { Text, View, ScrollView, StyleSheet, TextInput, Button, Pressable, Alert } from 'react-native';
+import { Text, View, ScrollView, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import styles from '../../style';
