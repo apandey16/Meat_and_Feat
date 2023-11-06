@@ -25,10 +25,10 @@ export default function BrowseForum() {
         <View style={browseStyle.SortContainer}>
             <Text style={browseStyle.SortText}> Sort </Text>
         </View>
-        <ScrollView contentContainerStyle={browseStyle.ScrollContainer}>
-        <TouchableOpacity style={browseStyle.PostContainer}onPress={() => navigation.navigate('Browse Event')}>
+        <ScrollView>
+            <TouchableOpacity style={browseStyle.PostContainer}onPress={() => navigation.navigate('Browse Event')}>
                 <Text style={browseStyle.PostText}> Food </Text>
-        </TouchableOpacity>
+            </TouchableOpacity>
             <TouchableOpacity style={browseStyle.PostContainer}onPress={() => navigation.navigate('Browse Event')}>
                 <Text style={browseStyle.PostText}> Live Events </Text>
             </TouchableOpacity>
@@ -44,15 +44,12 @@ export default function BrowseForum() {
             <TouchableOpacity style={browseStyle.PostContainer}onPress={() => navigation.navigate('Browse Event')}>
                 <Text style={browseStyle.PostText}> Arts & Crafts </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={browseStyle.PostContainer}onPress={() => navigation.navigate('Browse Event')}>
-                <Text style={browseStyle.PostText}> Arts & Crafts </Text>
-            </TouchableOpacity>
         </ScrollView>
       </View>
       <RoundedButton
         name="Create Forum"
       />
-      <Toolbar />
+      <Toolbar/>
       <StatusBar style="auto" />
     </SafeAreaView>
   );

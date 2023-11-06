@@ -11,12 +11,13 @@ const browseStyle = StyleSheet.create({
   PostContainer: {
     backgroundColor: "#E5E0FF",
     width: "95%",
-    height: "15%",
+    height: "25%",
     borderRadius: 10,
     borderColor: "#8EA7E9",
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 10,
+    alignSelf: "center",
   },
   PostText: {
     fontFamily: "Courier New",
@@ -39,12 +40,6 @@ const browseStyle = StyleSheet.create({
     fontFamily: "Courier New",
     fontWeight: "bold",
   },
-  ScrollContainer: {
-    width: "100%",
-    height: "100%",
-    justifyItems: "space-evenly",
-    alignItems: "center",
-  }
 });
 
 export default browseStyle;
