@@ -29,7 +29,7 @@ function EmailVerify() {
         console.log("in cont");
         auth.currentUser?.reload();
         console.log(auth.currentUser?.emailVerified);
-        if (auth.currentUser && auth.currentUser?.emailVerified) {
+        if (auth.currentUser?.emailVerified) {
             navigation.navigate('Home');
         } else {
             alert("Please verify your email first!");
