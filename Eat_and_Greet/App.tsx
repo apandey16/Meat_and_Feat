@@ -24,7 +24,7 @@ import HeaderBackButton from "./src/comps/HeaderBackButton";
 
 import {navHeaderStyles} from "./src/style";
 import React, { useState } from "react";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, getAuth } from "firebase/auth";
 import { auth } from "./src/firebase/config";
 
 const stackArray = [ { name: "Welcome", comp: TitleScreen},
@@ -40,8 +40,7 @@ const stackArray = [ { name: "Welcome", comp: TitleScreen},
                      { name: "Post Event", comp: PostEventScreen},
                      { name: "Browse Event", comp: BrowseEventScreen},
                      { name: "View Event", comp: ViewEventScreen},
-                     {name: "Dev Page", comp: Temp},
-                     { name: "Email Verification", comp: EmailVerifyScreen } ];
+                     {name: "Dev Page", comp: Temp}];
 
 const onboardingStackArray = [ { name:"Basic Info", comp: BasicInfoScreen },
                                { name: "Confirmation", comp: ConfirmationScreen },
@@ -57,11 +56,12 @@ const headerLeftFunction = () => <HeaderBackButton />;
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
+  const auth = getAuth();
+
   onAuthStateChanged(auth, (user) => {
     if (user) {
       console.log("User is logged in");
-      console.log(user.email); 
-      console.log(user.emailVerified);
+      console.log(loggedIn); 
       setLoggedIn(true);
     } else {
       setLoggedIn(false);

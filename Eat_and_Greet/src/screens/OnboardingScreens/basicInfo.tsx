@@ -20,6 +20,7 @@ function BasicInfo() {
       try {
         if (password === confirmPassword) {
           await createUserWithEmailAndPassword(auth, email, password);
+          console.log("account created")
           navigation.navigate('Email Verification');
         } else {
           setError("Passwords don't match");

@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import styles from '../../style';
 import RoundedButton from '../../comps/RoundedButton/RoundedButton';
 import React from 'react';
-import { onAuthStateChanged, sendEmailVerification, getAuth } from 'firebase/auth';
+import { sendEmailVerification, getAuth } from 'firebase/auth';
 
 function EmailVerify() {
     const navigation = useNavigation();
@@ -12,24 +12,29 @@ function EmailVerify() {
     const auth = getAuth();
 
     const emailVerify = async () => {
+        console.log("in email verify");
         try {
             if (auth.currentUser && !auth.currentUser?.emailVerified) {
-                alert("Email Sent!");
-                await sendEmailVerification(auth.currentUser);            
-                navigation.navigate('Home');
+                await sendEmailVerification(auth.currentUser);         
+                alert("Email Sent!");   
+            } else {
+                alert("Email already verified!");
             }
         } catch (e) {
             console.log(e);
         }
     }
 
-
-    // onAuthStateChanged(auth, async (user) => {
-    //     if (user) {
-    //         await sendEmailVerification(user);            
-    //         navigation.navigate('Home');
-    //     } 
-    //   });
+    const cont = () => { 
+        console.log("in cont");
+        auth.currentUser?.reload();
+        console.log(auth.currentUser?.emailVerified);
+        if (auth.currentUser && auth.currentUser?.emailVerified) {
+            navigation.navigate('Home');
+        } else {
+            alert("Please verify your email first!");
+        }
+    }
     
     return (
     <View style={styles.Background}>
@@ -43,7 +48,8 @@ function EmailVerify() {
                         Didn’t get a code?
                         Check your spam!
                         </Text>
-                    <RoundedButton name="Verify" height="7%" onPress={() => emailVerify()}/> 
+                    <RoundedButton name="Verify" height="7%" onPress={() => emailVerify()}/>
+                    <RoundedButton name="Continue" height="7%" onPress={() => cont()}/>  
                 </View>
             </View>
         </View>
