@@ -17,11 +17,12 @@ const LoginScreenStyles = StyleSheet.create({
     SignInSectionContainer: {
         width: '100%',
         justifyContent: 'center',
+        top: '-5%'
     },
     SignInSectionContainer2: {
         width: '100%',
         justifyContent: 'center',
-        top: '-10%'
+        top: '5%'
     },
     SubHeaderText: {
         alignSelf: 'flex-start',
@@ -31,6 +32,34 @@ const LoginScreenStyles = StyleSheet.create({
     SecondaryOptionsContainer: {
         width: '100%'
     },
+    link: {
+        color: 'blue',
+        marginBottom: 20,
+        alignSelf: 'center',
+        textAlign:'center', 
+        position: 'relative',
+      },
+      container: {
+        margin: "10%",
+        bottom: '10%',
+        width: '90%',
+        backgroundColor: '#FFFFF2',
+        borderRadius: 4,
+        marginBottom: 0,
+        borderColor: 'black',
+        borderWidth: 0.25,
+        alignContent: 'center',
+        justifyContent: "center",
+        alignSelf: 'center',
+      },
+      input: {
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 4,
+        paddingVertical: 8,
+        paddingHorizontal: 12,
+        marginBottom: 16,
+      },
 });
 
 

@@ -1,7 +1,8 @@
-import { Text, View, ScrollView, StyleSheet, TextInput, Button } from 'react-native';
+import { Text, View, ScrollView, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import styles from '../../style';
+import localStyles from './styles';
 import RoundedButton from '../../comps/RoundedButton/RoundedButton';
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
@@ -45,7 +46,7 @@ function BasicInfo() {
           <View style={styles.OuterBox}>
               <View style={styles.InnerBox}>  
                   <Text style={styles.HeaderText}>Let's Get Started...</Text>
-                  {error && <Text style={style.error}>{error}</Text>}
+                  {error && <Text style={styles.error}>{error}</Text>}
                   <Text style={styles.SubHeaderText}>Name:</Text>
                   <TextInput
                     value={name}
@@ -53,7 +54,7 @@ function BasicInfo() {
                     placeholder="First Last"
                     autoCapitalize="none"
                     placeholderTextColor="#aaa"
-                    style={[style.input, style.container]}
+                    style={[localStyles.input, localStyles.container]}
                   />
                   <Text style={styles.SubHeaderText}>Date of Birth:</Text>
                   <TextInput
@@ -62,7 +63,7 @@ function BasicInfo() {
                     placeholder="mm/dd/yyyy"
                     autoCapitalize="none"
                     placeholderTextColor="#aaa"
-                    style={[style.input, style.container]}
+                    style={[localStyles.input, localStyles.container]}
                   />
                   <Text style={styles.SubHeaderText}>Email Address:</Text>
                   <TextInput
@@ -72,7 +73,7 @@ function BasicInfo() {
                     placeholder="eat&greet@gmail.com"
                     autoCapitalize="none"
                     placeholderTextColor="#aaa"
-                    style={[style.input, style.container]}
+                    style={[localStyles.input, localStyles.container]}
                   />
                   <Text style={styles.SubHeaderText}>Create Password:</Text>
                   <TextInput
@@ -82,7 +83,7 @@ function BasicInfo() {
                     placeholder="Enter password"
                     autoCapitalize="none"
                     placeholderTextColor="#aaa"
-                    style={[style.input, style.container]}
+                    style={[localStyles.input, localStyles.container]}
                   />
                   <TextInput
                     value={confirmPassword}
@@ -91,47 +92,16 @@ function BasicInfo() {
                     placeholder="Confirm password"
                     autoCapitalize="none"
                     placeholderTextColor="#aaa"
-                    style={[style.input, style.container]}
+                    style={[localStyles.input, localStyles.container]}
                   />
-                  <RoundedButton name="Profile Photo" height="7%" onPress={() => navigation.navigate('Photo Upload')}/>
               </View>
           </View>
-          <Button
-            title="Create Account"
-            onPress={() => {createAccount()}}
-            disabled={!email || !password || !confirmPassword || !name || !dob}
-          />
+          <RoundedButton name="Create Account" height="7%" onPress={() => {createAccount()}} disabled={!email || !password || !confirmPassword || !name || !dob}/>
         </View>
       </ScrollView>
       </View>
     );
 }
-
-const style = StyleSheet.create({
-  container: {
-    margin: 10,
-    width: '79%',
-    backgroundColor: '#FFFFF2',
-    borderRadius: 4,
-    marginBottom: 0,
-    borderColor: 'black',
-    borderWidth: 0.25,
-    alignContent: 'center',
-    justifyContent: "center",
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 4,
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    marginBottom: 16,
-  },
-  error: {
-    marginBottom: 20,
-    color: 'red',
-  },
-});
 
 
 export default BasicInfo;

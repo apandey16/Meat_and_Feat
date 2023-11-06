@@ -18,6 +18,7 @@ import ChatsScreen from "./src/screens/ChatsPage/index";
 import ExampleChatScreen from "./src/screens/ExampleChatScreen";
 import PostEventScreen from "./src/screens/PostEvent";
 import BrowseEventScreen from "./src/screens/BrowseEvents";
+import PasswordReset from "./src/screens/LoginScreen/passwordReset";
 import Temp from "./src/screens/Temp/index";
 
 import HeaderBackButton from "./src/comps/HeaderBackButton";
@@ -39,6 +40,7 @@ const stackArray = [ { name: "Welcome", comp: TitleScreen},
                      { name: "Post Event", comp: PostEventScreen},
                      { name: "Browse Event", comp: BrowseEventScreen},
                      { name: "View Event", comp: ViewEventScreen},
+                     { name: "Password Reset", comp: PasswordReset},
                      {name: "Dev Page", comp: Temp}];
 
 const onboardingStackArray = [ { name:"Basic Info", comp: BasicInfoScreen },

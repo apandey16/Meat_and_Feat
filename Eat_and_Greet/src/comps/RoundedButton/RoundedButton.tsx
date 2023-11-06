@@ -11,6 +11,7 @@ interface RoundedButtonProps {
     width ?: any;
     height ?: any;
     onPress?: () => void;
+    disabled?: boolean;
 }
 
 const RoundedButton = (props : RoundedButtonProps) => {
@@ -31,7 +32,7 @@ const RoundedButton = (props : RoundedButtonProps) => {
 
     return (
             <View style={[styles.CornerButtonOutline, localstyle.placement, localstyle.sizing]}>
-               <TouchableOpacity onPress={props.onPress}>
+               <TouchableOpacity onPress={props.onPress} disabled={props.disabled}>
                  <Text style={styles.ButtonText}>{props.name}</Text>
                </TouchableOpacity>
             </View>        

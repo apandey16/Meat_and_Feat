@@ -94,7 +94,11 @@ const style = StyleSheet.create({
     Background: {
         minHeight: height,
         backgroundColor: '#7286D3',
-    }
+    },
+    error: {
+        marginBottom: 20,
+        color: 'red',
+      },
     });
 
     export const navHeaderStyles = StyleSheet.create({
