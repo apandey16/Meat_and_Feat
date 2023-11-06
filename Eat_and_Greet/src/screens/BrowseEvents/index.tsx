@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, ScrollView } from "react-native";
+import { Text, View, ScrollView, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { db } from "../../firebase/config";
@@ -75,19 +75,23 @@ export default function BrowseEvent() {
         </View>
         <ScrollView>
             {data.map((postObj) => (
-              <View
-                style={browseStyle.PostContainer}
-                key={postObj.Title + postObj.Date + postObj.StartTime}
-              >
-                <Text style={browseStyle.PostText}>
-                  {postObj.Title}
-                  {"\n"}
-                  {postObj.Date}
-                  {"\n"}
-                  {postObj.StartTime} - {postObj.EndTime}
-                  {"\n"}Spots Left...
-                </Text>
-              </View>
+              
+                <View
+                  style={browseStyle.PostContainer}
+                  key={postObj.Title + postObj.Date + postObj.StartTime}
+                >
+                  <TouchableOpacity onPress={() => navigation.navigate('View Event')}>
+                  <Text style={browseStyle.PostText}>
+                    {postObj.Title}
+                    {"\n"}
+                    {postObj.Date}
+                    {"\n"}
+                    {postObj.StartTime} - {postObj.EndTime}
+                    {"\n"}Spots Left...
+                  </Text>
+                  </TouchableOpacity>
+                </View>
+              
             ))}
         </ScrollView>
       </View>
