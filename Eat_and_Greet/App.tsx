@@ -55,17 +55,6 @@ const OnboardingNavigation = createNativeStackNavigator();
 const headerLeftFunction = () => <HeaderBackButton />;
 
 export default function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  const auth = getAuth();
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setLoggedIn(true);
-    } else {
-      setLoggedIn(false);
-    }
-  });
 
   return (
     <NavigationContainer>
