@@ -41,8 +41,7 @@ function BasicInfo() {
     };    
 
     const birthday = (event: any, selectedDate: any) => {
-      const currentDate = selectedDate;
-      setDob(currentDate);
+      setDob(selectedDate);
     };
     
     return (
