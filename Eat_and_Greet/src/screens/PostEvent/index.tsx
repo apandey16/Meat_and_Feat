@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Text, View, Image, Alert } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { db } from "../../firebase/config";
-import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
+import { collection, setDoc, getDocs, updateDoc, query, where, doc, QuerySnapshot } from "firebase/firestore";
 
 import styles from "../../style";
 import postStyle from "./index.styles";
@@ -21,6 +21,20 @@ export default function PostEvent() {
 
   let inputs = [title, category, eventDate, startTime, endTime];
   const inputsAsString = ["Title", "Category", "Event Date", "Start Time", "End Time"];
+
+
+  const getNumberOfEventsData = async (numberOfEventsSnapshot : QuerySnapshot): Promise<number[]> => {
+    try {
+      let fetchedEventData: number[] = [];
+      numberOfEventsSnapshot.forEach((doc) => {
+        fetchedEventData.push(doc.data().numberOfEvents as number);
+      });
+      return fetchedEventData;
+    } catch (error) {
+      console.error("Error Getting Data From DB: ", error);
+      return [];
+    }
+  };
 
   const addPostToDB = async () => {
     let missing = new Array();
@@ -43,14 +57,19 @@ export default function PostEvent() {
         if (!querySnapshot.empty) {
           Alert.alert("This Event is Already Happening Today");
         } else {
-          await addDoc(collection(db, "Events"), {
+          const numberOfEventsSnapshot = await getDocs(collection(db, "Number of Events"));
+          let uidList : number[] = await getNumberOfEventsData(numberOfEventsSnapshot);
+          let uid : number = uidList[0] + 1
+          await setDoc(doc(db, "Events", uid.toString()), {
             Category: category,
             Date: eventDate,
             EndTime: endTime,
             Host: "RobV",
             StartTime: startTime,
             Title: title,
+            id: uid
           });
+          await updateDoc(doc(db, "Number of Events", "Counter"),  { numberOfEvents: uid });
         }
       } catch (error) {
         console.error("Error adding document: ", error);

@@ -21,6 +21,7 @@ interface EventData {
   Host: string;
   StartTime: string;
   Title: string;
+  id: number;
 }
 
 const postData = [
@@ -31,6 +32,7 @@ const postData = [
     Host: "",
     StartTime: "",
     Title: "Loading Events Now",
+    id: -1
   },
 ];
 
@@ -80,7 +82,7 @@ export default function BrowseEvent() {
                   style={browseStyle.PostContainer}
                   key={postObj.Title + postObj.Date + postObj.StartTime}
                 >
-                  <TouchableOpacity onPress={() => navigation.navigate('View Event')}>
+                  <TouchableOpacity onPress={() => navigation.navigate('View Event', { id : postObj.id})}>
                   <Text style={browseStyle.PostText}>
                     {postObj.Title}
                     {"\n"}
