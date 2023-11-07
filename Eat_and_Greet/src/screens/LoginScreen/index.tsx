@@ -61,12 +61,6 @@ function LoginScreen() {
             </View>
         </View>
         <View style={ [ {height: '5%'} ] }></View>
-        <ScreenSplitLine
-            displayText="Or"
-            textSize={32} />
-        <View style={ [ {height: '5%'} ] }></View>
-        <RoundedButton name="Log In With Google" onPress={() => null}/>
-        <View style={ [ {height: '5%'} ] }></View>
         <ScreenSplitLine 
             displayText="Dont Have an Account?"
             displayText2="Create One Now!"
