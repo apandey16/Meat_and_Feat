@@ -2,11 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Text, View, ScrollView, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import { db } from "../../firebase/config";
-import {
-  collection,
-  getDocs,
-} from "firebase/firestore";
 
 import styles from "../../style";
 import browseStyle from "./index.styles";
