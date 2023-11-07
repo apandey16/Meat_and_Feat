@@ -23,6 +23,7 @@ function LoginScreen() {
             <RoundedButton name="Example Chat" onPress={() => navigation.navigate('Example Chat')}/>  
             <RoundedButton name="Post Event" onPress={() => navigation.navigate('Post Event')}/>
             <RoundedButton name="Browse Event" onPress={() => navigation.navigate('Browse Event')}/> 
+            <RoundedButton name="Browse Forum" onPress={() => navigation.navigate('Browse Forums')}/>
             <RoundedButton name="View Event" onPress={() => navigation.navigate('View Event')}/>  
             <RoundedButton name="Settings" onPress={() => navigation.navigate('Settings')}/> 
           </View>
