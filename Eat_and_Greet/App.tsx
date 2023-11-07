@@ -24,8 +24,7 @@ import Temp from "./src/screens/Temp/index";
 import HeaderBackButton from "./src/comps/HeaderBackButton";
 
 import {navHeaderStyles} from "./src/style";
-import React, { useState } from "react";
-import { onAuthStateChanged, getAuth } from "firebase/auth";
+import React from "react";
 
 const stackArray = [ { name: "Welcome", comp: TitleScreen},
                      { name: "Login", comp: LoginScreen},
@@ -55,17 +54,6 @@ const OnboardingNavigation = createNativeStackNavigator();
 const headerLeftFunction = () => <HeaderBackButton />;
 
 export default function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  const auth = getAuth();
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setLoggedIn(true);
-    } else {
-      setLoggedIn(false);
-    }
-  });
 
   return (
     <NavigationContainer>
