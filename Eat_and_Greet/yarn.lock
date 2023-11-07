@@ -17,13 +17,6 @@
   dependencies:
     "@babel/highlight" "^7.10.4"
 
-"@babel/code-frame@7.10.4", "@babel/code-frame@~7.10.4":
-  version "7.10.4"
-  resolved "https://registry.npmjs.org/@babel/code-frame/-/code-frame-7.10.4.tgz"
-  integrity sha512-vG6SvB6oYEhvgisZNFRmRCUkLz11c7rp+tbNTynGqc6mS1d5ATd/sGyV6W0KZZnXRKMTzZDRgQT3Ou9jhpAfUg==
-  dependencies:
-    "@babel/highlight" "^7.10.4"
-
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.22.13":
   version "7.22.13"
   resolved "https://registry.npmjs.org/@babel/code-frame/-/code-frame-7.22.13.tgz"
@@ -1546,8 +1539,7 @@
     "@firebase/util" "1.9.3"
     tslib "^2.1.0"
 
-
-"@firebase/app-compat@0.2.22", "@firebase/app-compat@0.x":
+"@firebase/app-compat@0.2.22":
   version "0.2.22"
   resolved "https://registry.npmjs.org/@firebase/app-compat/-/app-compat-0.2.22.tgz"
   integrity sha512-kyksJFA19Oz5HZmR56s/ziOM6ivDBF9JYwC0ufacooYNd2sQ3pRsi5MZAYb1FR9hCE7MgoHuPmTtBHA7S/Cv8g==
@@ -1563,8 +1555,7 @@
   resolved "https://registry.npmjs.org/@firebase/app-types/-/app-types-0.9.0.tgz"
   integrity sha512-AeweANOIo0Mb8GiYm3xhTEBVCmPwTYAu9Hcd2qSkLuga/6+j9b1Jskl5bpiSQWy9eJ/j5pavxj6eYogmnuzm+Q==
 
-
-"@firebase/app@0.9.22", "@firebase/app@0.x":
+"@firebase/app@0.9.22":
   version "0.9.22"
   resolved "https://registry.npmjs.org/@firebase/app/-/app-0.9.22.tgz"
   integrity sha512-4hbUg9ojPbn4Gj21Z/GnJbiLQYOzkwBDFT5vBkQgUJJGS28qQLG6eZZ1DwLKh8lcrNJc4MR90OPaJWhSzJCR2w==
@@ -2271,6 +2262,13 @@
     graceful-fs "^4.1.3"
     prompts "^2.4.0"
     semver "^7.5.2"
+
+"@react-native-community/datetimepicker@7.2.0":
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/@react-native-community/datetimepicker/-/datetimepicker-7.2.0.tgz#db8c03dbf49bf3c24b06b617a8467d8b05511f62"
+  integrity sha512-dO1sQy83M/EvnHE2egto05iwXZX7EYn5f/VDMp6afZFRFXRiRo7CzB3VFg4B55gJRJMNBv06NYMLPM3SlpnEGQ==
+  dependencies:
+    invariant "^2.2.4"
 
 "@react-native/assets-registry@^0.72.0":
   version "0.72.0"

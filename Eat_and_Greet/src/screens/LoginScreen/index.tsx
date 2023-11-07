@@ -1,5 +1,5 @@
 import { View, Text, TextInput, Alert, ScrollView, TouchableOpacity } from 'react-native';
-import { useState, React} from 'react';
+import React, { useState } from 'react';
 
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
@@ -60,12 +60,6 @@ function LoginScreen() {
                 
             </View>
         </View>
-        <View style={ [ {height: '5%'} ] }></View>
-        <ScreenSplitLine
-            displayText="Or"
-            textSize={32} />
-        <View style={ [ {height: '5%'} ] }></View>
-        <RoundedButton name="Log In With Google" onPress={() => null}/>
         <View style={ [ {height: '5%'} ] }></View>
         <ScreenSplitLine 
             displayText="Dont Have an Account?"
