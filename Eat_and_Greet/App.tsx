@@ -24,8 +24,7 @@ import Temp from "./src/screens/Temp/index";
 import HeaderBackButton from "./src/comps/HeaderBackButton";
 
 import {navHeaderStyles} from "./src/style";
-import React, { useState } from "react";
-import { onAuthStateChanged, getAuth } from "firebase/auth";
+import React from "react";
 
 const stackArray = [ { name: "Welcome", comp: TitleScreen},
                      { name: "Login", comp: LoginScreen},
