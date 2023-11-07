@@ -7,12 +7,13 @@ import RoundedButton from '../../comps/RoundedButton/RoundedButton';
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase/config';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 function BasicInfo() {
     const navigation = useNavigation();
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
-    const [dob, setDob] = useState('');
+    const [dob, setDob] = useState(new Date());
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState(null);
@@ -38,6 +39,10 @@ function BasicInfo() {
         }
       }
     };    
+
+    const birthday = (event: any, selectedDate: any) => {
+      setDob(selectedDate);
+    };
     
     return (
       <View style={styles.Background}>
@@ -57,14 +62,12 @@ function BasicInfo() {
                     style={[localStyles.input, localStyles.container]}
                   />
                   <Text style={styles.SubHeaderText}>Date of Birth:</Text>
-                  <TextInput
+                  <DateTimePicker
                     value={dob}
-                    onChangeText={setDob}
-                    placeholder="mm/dd/yyyy"
-                    autoCapitalize="none"
-                    placeholderTextColor="#aaa"
-                    style={[localStyles.input, localStyles.container]}
+                    mode='date'
+                    onChange={birthday}
                   />
+
                   <Text style={styles.SubHeaderText}>Email Address:</Text>
                   <TextInput
                     value={email}
