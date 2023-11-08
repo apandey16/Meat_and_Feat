@@ -9,6 +9,7 @@ import browseStyle from "./index.styles";
 import { Toolbar } from "../../comps/Toolbar/toolbar";
 import RoundedButton from "../../comps/RoundedButton/RoundedButton";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Alert } from "react-native";
 
 export default function BrowseForum() {
 
@@ -43,6 +44,7 @@ export default function BrowseForum() {
       </View>
       <RoundedButton
         name="Create Forum"
+        onPress={() => Alert.prompt('Enter Forum Name:')}
       />
       <Toolbar/>
       <StatusBar style="auto" />
