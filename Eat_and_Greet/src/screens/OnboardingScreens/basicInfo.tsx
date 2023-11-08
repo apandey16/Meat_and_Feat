@@ -6,8 +6,9 @@ import localStyles from './styles';
 import RoundedButton from '../../comps/RoundedButton/RoundedButton';
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebase/config';
+import { auth, db } from '../../firebase/config';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { addDoc, collection } from 'firebase/firestore';
 
 function BasicInfo() {
     const navigation = useNavigation();
@@ -22,6 +23,17 @@ function BasicInfo() {
       try {
         if (password === confirmPassword) {
           await createUserWithEmailAndPassword(auth, email, password);
+          try {
+            const docRef = await addDoc(collection(db, "Users"), {
+              name: name,
+              email: email,
+              dob: dob,
+              uid: auth.currentUser?.uid,
+            });
+            console.log("Document written with ID: ", docRef.id);
+          } catch (e) {
+            console.error("Error adding document: ", e);
+          }
           navigation.navigate('Email Verification');
         } else {
           setError("Passwords don't match");
@@ -67,7 +79,6 @@ function BasicInfo() {
                     mode='date'
                     onChange={birthday}
                   />
-
                   <Text style={styles.SubHeaderText}>Email Address:</Text>
                   <TextInput
                     value={email}
