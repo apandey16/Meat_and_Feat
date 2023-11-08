@@ -6,13 +6,15 @@ import localStyles from './styles';
 import RoundedButton from '../../comps/RoundedButton/RoundedButton';
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebase/config';
+import { auth, db } from '../../firebase/config';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { addDoc, collection } from 'firebase/firestore';
 
 function BasicInfo() {
     const navigation = useNavigation();
     const [email, setEmail] = useState('');
-    const [name, setName] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState(''); 
     const [dob, setDob] = useState(new Date());
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -22,6 +24,18 @@ function BasicInfo() {
       try {
         if (password === confirmPassword) {
           await createUserWithEmailAndPassword(auth, email, password);
+          try {
+            const docRef = await addDoc(collection(db, "Users"), {
+              firstName: firstName,
+              lastName: lastName,
+              email: email,
+              dob: dob,
+              uid: auth.currentUser?.uid,
+            });
+            console.log("Document written with ID: ", docRef.id);
+          } catch (e) {
+            console.error("Error adding document: ", e);
+          }
           navigation.navigate('Email Verification');
         } else {
           setError("Passwords don't match");
@@ -54,9 +68,17 @@ function BasicInfo() {
                   {error && <Text style={styles.error}>{error}</Text>}
                   <Text style={styles.SubHeaderText}>Name:</Text>
                   <TextInput
-                    value={name}
-                    onChangeText={setName}
-                    placeholder="First Last"
+                    value={firstName}
+                    onChangeText={setFirstName}
+                    placeholder="First Name"
+                    autoCapitalize="none"
+                    placeholderTextColor="#aaa"
+                    style={[localStyles.input, localStyles.container]}
+                  />
+                  <TextInput
+                    value={lastName}
+                    onChangeText={setLastName}
+                    placeholder="Last Name"
                     autoCapitalize="none"
                     placeholderTextColor="#aaa"
                     style={[localStyles.input, localStyles.container]}
@@ -67,7 +89,6 @@ function BasicInfo() {
                     mode='date'
                     onChange={birthday}
                   />
-
                   <Text style={styles.SubHeaderText}>Email Address:</Text>
                   <TextInput
                     value={email}
@@ -99,7 +120,7 @@ function BasicInfo() {
                   />
               </View>
           </View>
-          <RoundedButton name="Create Account" height="7%" onPress={() => {createAccount()}} disabled={!email || !password || !confirmPassword || !name || !dob}/>
+          <RoundedButton name="Create Account" height="7%" onPress={() => {createAccount()}} disabled={!email || !password || !confirmPassword || !firstName || !lastName ||!dob}/>
         </View>
       </ScrollView>
       </View>
