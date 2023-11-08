@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../../firebase/config';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { addDoc, collection } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 
 function BasicInfo() {
     const navigation = useNavigation();
@@ -25,14 +25,13 @@ function BasicInfo() {
         if (password === confirmPassword) {
           await createUserWithEmailAndPassword(auth, email, password);
           try {
-            const docRef = await addDoc(collection(db, "Users"), {
+            await setDoc(doc(db, "Users", auth.currentUser?.uid), {
               firstName: firstName,
               lastName: lastName,
               email: email,
               dob: dob,
               uid: auth.currentUser?.uid,
             });
-            console.log("Document written with ID: ", docRef.id);
           } catch (e) {
             console.error("Error adding document: ", e);
           }
