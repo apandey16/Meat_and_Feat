@@ -13,7 +13,8 @@ import { addDoc, collection } from 'firebase/firestore';
 function BasicInfo() {
     const navigation = useNavigation();
     const [email, setEmail] = useState('');
-    const [name, setName] = useState('');
+    const [first, setFirstName] = useState('');
+    const [last, setLastName] = useState(''); 
     const [dob, setDob] = useState(new Date());
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -25,7 +26,8 @@ function BasicInfo() {
           await createUserWithEmailAndPassword(auth, email, password);
           try {
             const docRef = await addDoc(collection(db, "Users"), {
-              name: name,
+              firstName: first,
+              lastName: last,
               email: email,
               dob: dob,
               uid: auth.currentUser?.uid,
@@ -66,9 +68,17 @@ function BasicInfo() {
                   {error && <Text style={styles.error}>{error}</Text>}
                   <Text style={styles.SubHeaderText}>Name:</Text>
                   <TextInput
-                    value={name}
-                    onChangeText={setName}
-                    placeholder="First Last"
+                    value={first}
+                    onChangeText={setFirstName}
+                    placeholder="First Name"
+                    autoCapitalize="none"
+                    placeholderTextColor="#aaa"
+                    style={[localStyles.input, localStyles.container]}
+                  />
+                  <TextInput
+                    value={last}
+                    onChangeText={setLastName}
+                    placeholder="Last Name"
                     autoCapitalize="none"
                     placeholderTextColor="#aaa"
                     style={[localStyles.input, localStyles.container]}
@@ -110,7 +120,7 @@ function BasicInfo() {
                   />
               </View>
           </View>
-          <RoundedButton name="Create Account" height="7%" onPress={() => {createAccount()}} disabled={!email || !password || !confirmPassword || !name || !dob}/>
+          <RoundedButton name="Create Account" height="7%" onPress={() => {createAccount()}} disabled={!email || !password || !confirmPassword || !first || !last ||!dob}/>
         </View>
       </ScrollView>
       </View>
