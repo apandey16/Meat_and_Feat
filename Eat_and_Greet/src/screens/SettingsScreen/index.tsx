@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import { List, Switch } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
@@ -30,8 +30,12 @@ const SettingsScreen = () => {
   };
 
   const toggleFunction = () => <Switch value={notifications} onValueChange={toggleNotifications} ios_backgroundColor={'#0000'}/>;
-  const chevronFunction = () => <List.Icon icon="chevron-right" />;
-
+  const chevronFunction = () => <Image style={{
+    resizeMode: 'contain',
+    height: 10,
+    width: 10,
+  }} source={require('../../../assets/images/chevron-right.png')} />
+  
   return (
     <View style={styles.ScreenContainer}>
     <View style={localStyles.background}>
