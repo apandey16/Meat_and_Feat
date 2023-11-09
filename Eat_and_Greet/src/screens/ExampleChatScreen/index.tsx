@@ -19,7 +19,6 @@ const messageArray = [ { sentFromMe: true, timeStamp: "4:45 PM", message: "Hey J
                        { sentFromMe: false, timeStamp: "10:12 PM", message: "Forgive me lord, I have allowed this fallacy in my logic to slip my brain. I will be better next time"},
                        { sentFromMe: true, timeStamp: "10:15 PM", message: "You are a fool"},
                        { sentFromMe: false, timeStamp: "11:33 PM", message: "According to all known laws of aviation, there is no way a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don't care what humans think is impossible."},
-                       { sentFromMe: false, timeStamp: "11:33 PM", message: "According to all known laws of aviation, there is no way a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don't care what humans think is impossible."},
                       ];
 
 function ExampleChatScreen() {

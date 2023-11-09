@@ -33,7 +33,7 @@ export default class GrowingTextbox extends Component {
     <TextInput
       placeholder="Your Placeholder"
       onChangeText={(value) => this.handleText(value)}
-      style={[newStyle]}
+      style={newStyle}
       editable={true}
       multiline={true}
       value={value}
