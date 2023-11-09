@@ -22,6 +22,7 @@ interface EventData {
   StartTime: string;
   Title: string;
   id: number;
+  description: string;
 }
 
 const postData = [
@@ -32,7 +33,8 @@ const postData = [
     Host: "",
     StartTime: "",
     Title: "Loading Events Now",
-    id: -1
+    id: -1,
+    description: "" 
   },
 ];
 

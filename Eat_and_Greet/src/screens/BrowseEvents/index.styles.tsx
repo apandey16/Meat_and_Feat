@@ -4,7 +4,6 @@ const browseStyle = StyleSheet.create({
   InfoContainer: {
     backgroundColor: "#8EA7E9",
     height: 550,
-
     width: 340  },
   
   PostContainer: {

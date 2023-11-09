@@ -17,6 +17,7 @@ interface EventData {
   StartTime: string;
   Title: string;
   id: number;
+  description: string;
 }
 
 const postData = [
@@ -27,7 +28,8 @@ const postData = [
     Host: "",
     StartTime: "",
     Title: "Loading Events Now",
-    id: -1
+    id: -1,
+    description: ""
   },
 ];
 
@@ -81,10 +83,9 @@ function ViewEventScreen() {
               <View style={localstyles.descriptionContainerStyling}>
                 <Text style={localstyles.descriptionTextStyling}>Date: {data[0]?.Date} </Text>
                 <Text style={localstyles.descriptionTextStyling}>Time: {data[0]?.StartTime} - {data[0]?.EndTime} </Text>
-
                 <Text style={localstyles.descriptionTextStyling}>Host Name: {data[0]?.Host} </Text>
                 <Text style={localstyles.descriptionTextStyling}>Spots Filled: 1/4 </Text>
-                <Text style={localstyles.descriptionTextStyling}>Description: This is Cameron's Birthday Party please attend it!! </Text>
+                <Text style={localstyles.descriptionTextStyling}>Description: {data[0]?.description} </Text>
               </View>
             </View>
           </View>
