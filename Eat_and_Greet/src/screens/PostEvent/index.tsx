@@ -1,26 +1,36 @@
 import React, { useState } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Text, View, Image, Alert } from "react-native";
+import { Text, View, Image, Alert, ScrollView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { db } from "../../firebase/config";
 import { collection, setDoc, getDocs, updateDoc, query, where, doc, QuerySnapshot } from "firebase/firestore";
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import { useNavigation } from "@react-navigation/native";
+
 
 import styles from "../../style";
 import postStyle from "./index.styles";
 
 import { Toolbar } from "../../comps/Toolbar/toolbar";
 import RoundedButton from "../../comps/RoundedButton/RoundedButton";
+import GrowingTextbox from "../../comps/GrowingTextbox/textbox";
 import TextBox from "../../comps/Textbox/textbox";
+
+import DateTimePicker from '@react-native-community/datetimepicker';
+
+
 
 export default function PostEvent() {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
-  const [eventDate, setEventDate] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
+  const [dateOfEvent, setDateOfEvent] = useState(new Date());
+  const [startTime, setStartTime] = useState(new Date());
+  const [endTime, setEndTime] = useState(new Date());
+  const [description, setDescription] = useState("");
 
-  let inputs = [title, category, eventDate, startTime, endTime];
-  const inputsAsString = ["Title", "Category", "Event Date", "Start Time", "End Time"];
+  const navigation = useNavigation();
+
+  let inputs = [title, category, dateOfEvent, startTime, endTime, description];
+  const inputsAsString = ["Title", "Category", "Event Date", "Start Time", "End Time", "Description"];
 
 
   const getNumberOfEventsData = async (numberOfEventsSnapshot : QuerySnapshot): Promise<number[]> => {
@@ -50,7 +60,7 @@ export default function PostEvent() {
             collection(db, "Events"),
             where("Title", "==", title),
             where("Category", "==", category),
-            where("Date", "==", eventDate)
+            where("Date", "==", dateOfEvent.toDateString())
           )
         );
 
@@ -62,14 +72,17 @@ export default function PostEvent() {
           let uid : number = uidList[0] + 1
           await setDoc(doc(db, "Events", uid.toString()), {
             Category: category,
-            Date: eventDate,
-            EndTime: endTime,
+            Date: dateOfEvent.toDateString(),
+            EndTime: endTime.toTimeString().split(' ')[0],
             Host: "RobV",
-            StartTime: startTime,
+            StartTime: startTime.toTimeString().split(' ')[0],
             Title: title,
-            id: uid
+            id: uid,
+            description: description
           });
           await updateDoc(doc(db, "Number of Events", "Counter"),  { numberOfEvents: uid });
+          Alert.alert("Post Successfully Added!");
+          navigation.navigate('Browse Event');
         }
       } catch (error) {
         console.error("Error adding document: ", error);
@@ -79,15 +92,28 @@ export default function PostEvent() {
     }
   };
 
+  const date = (event: any, selectedDate: Date) => {
+    setDateOfEvent(selectedDate);
+  };
+
+  const startingTime = (event: any, selectedTime: any) => {
+    setStartTime(selectedTime);
+  } 
+
+  const endingTime = (event: any, selectedTime: any) => {
+    setEndTime(selectedTime);
+  }
+
   return (
-    <SafeAreaView style={styles.ScreenContainer}>
+    <View style={[styles.ScreenContainer]}>
       <StatusBar style="auto" />
-      <SafeAreaView style={postStyle.InfoContainer}>
+      <View style={[postStyle.InfoContainer, {height: "80%"}]}>
+        <KeyboardAwareScrollView contentContainerStyle={{ flexGrow: 1, alignItems: "center"}}>
         <View style={postStyle.TitleCategoryContainer}>
           <Text style={postStyle.LabelText}> Title {"\n"}</Text>
           <TextBox
             placeholder="Enter Title Here..."
-            top={"-80%"}
+            top={"-60%"}
             height={"50%"}
             width={"90%"}
             onTextChange={setTitle}
@@ -97,7 +123,7 @@ export default function PostEvent() {
           <Text style={postStyle.LabelText}> Category {"\n"}</Text>
           <TextBox
             placeholder="Enter Category Here..."
-            top={"-80%"}
+            top={"-60%"}
             height={"50%"}
             width={"90%"}
             onTextChange={setCategory}
@@ -113,32 +139,43 @@ export default function PostEvent() {
           </View>
         </View>
         <View style={postStyle.DateTimeContainer}>
-          <Text style={postStyle.LabelText}> Date & Time {"\n"}</Text>
-          <TextBox
-            placeholder="Enter Date..."
-            top={"-30%"}
-            height={"20%"}
-            width={"90%"}
-            onTextChange={setEventDate}
-          />
-          <TextBox
-            placeholder="Enter Start Time..."
-            top={"-38%"}
-            height={"20%"}
-            width={"90%"}
-            onTextChange={setStartTime}
-          />
-          <TextBox
-            placeholder="Enter End Time..."
-            top={"-46%"}
-            height={"20%"}
-            width={"90%"}
-            onTextChange={setEndTime}
-          />
+          
+          <Text style={[postStyle.LabelText, {alignSelf: "center", flex: 1}]}> Date {"\n"}</Text>
+          <DateTimePicker style={{alignSelf: "center", flex: 1}}
+                    value={dateOfEvent}
+                    mode='date'
+                    onChange={date}
+                  />
+                  </View>
+          <View style={postStyle.DateTimeContainer}>
+          <Text style={[postStyle.LabelText, {alignSelf: "center", flex: 1}]}> Start Time {"\n"}</Text>
+          <DateTimePicker style={{alignSelf: "center", flex: 1}}
+                    value={startTime}
+                    mode='time'
+                    onChange={startingTime}
+                  />
         </View>
-      </SafeAreaView>
-      <RoundedButton name="Post Event" top="-2%" onPress={addPostToDB} />
+        <View style={postStyle.DateTimeContainer}>
+          <Text style={[postStyle.LabelText, {alignSelf: "center", flex: 1}]}> End Time {"\n"}</Text>
+          <DateTimePicker style={{alignSelf: "center", flex: 1}}
+                    value={endTime}
+                    mode='time'
+                    onChange={endingTime}
+                  />
+        </View>
+        <View style={postStyle.DescriptionContainer}>
+          <Text style={postStyle.LabelText}>Description</Text>
+          <GrowingTextbox
+            placeholder="Enter Description..."
+            height={"80%"}
+            width={"90%"}
+            onTextChange={setDescription}
+        />
+        </View>
+      </KeyboardAwareScrollView>
+      </View>
+      <RoundedButton name="Post Event" onPress={addPostToDB} />
       <Toolbar />
-    </SafeAreaView>
+    </View>
   );
 }
