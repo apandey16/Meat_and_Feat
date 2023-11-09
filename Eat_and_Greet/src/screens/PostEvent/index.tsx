@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, Image, Alert, ScrollView } from "react-native";
+import { Text, View, Image, Alert } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { db } from "../../firebase/config";
 import { collection, setDoc, getDocs, updateDoc, query, where, doc, QuerySnapshot } from "firebase/firestore";
