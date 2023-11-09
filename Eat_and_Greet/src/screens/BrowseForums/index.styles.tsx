@@ -11,7 +11,7 @@ const browseStyle = StyleSheet.create({
   PostContainer: {
     backgroundColor: "#E5E0FF",
     width: "95%",
-    height: "25%",
+    height: 75,
     borderRadius: 10,
     borderColor: "#8EA7E9",
     justifyContent: "center",
@@ -22,7 +22,7 @@ const browseStyle = StyleSheet.create({
   PostText: {
     fontFamily: "Courier New",
     fontWeight: "bold",
-    fontSize: 30
+    fontSize: 35
   },
   SortContainer: {
     backgroundColor: "#FFF",
