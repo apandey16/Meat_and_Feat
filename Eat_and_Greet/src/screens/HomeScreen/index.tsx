@@ -25,7 +25,7 @@ function HomeScreen() {
                           textLine2='Forums'
                           fontSize={ getFontSize(24) }
             />
-            <HomePageButton onPress={() => navigation.navigate('Search')}
+            <HomePageButton onPress={() => navigation.navigate('Browse Forums')}
                           textLine1='Find'
                           textLine2='Forums'
                           fontSize={ getFontSize(35) }
