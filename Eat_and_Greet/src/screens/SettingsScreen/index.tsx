@@ -7,7 +7,8 @@ import { Toolbar } from '../../comps/Toolbar/toolbar';
 
 import localStyles from './styles';
 import styles from '../../style';
-import { signOut, getAuth } from 'firebase/auth';
+import { signOut, getAuth, deleteUser } from 'firebase/auth';
+import { doc, deleteDoc, getFirestore } from "firebase/firestore";
 
 const SettingsScreen = () => {
   const [notifications, setNotifications] = React.useState<boolean>(false);
@@ -19,12 +20,30 @@ const SettingsScreen = () => {
   };
 
   const auth = getAuth();
+
   const logout = async () => {
     try {
       await signOut(auth);
       alert("Logged out!");
       navigation.navigate('Welcome');
     } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const db = getFirestore();
+
+  const deleteAccount = async () => {
+    try {
+      if (auth.currentUser != null){
+        await deleteDoc(doc(db, "Users", auth.currentUser.uid));
+        await deleteUser(auth.currentUser);
+        alert("Account Deleted");
+        navigation.navigate('Welcome');
+      }
+      
+    } catch (e) {
+      alert("Error Deleting Account");
       console.error(e);
     }
   };
@@ -68,6 +87,11 @@ const SettingsScreen = () => {
           <List.Item  
             title="Log Out"
             onPress={logout}
+            right={chevronFunction}
+          />
+          <List.Item  
+            title="Delete Account"
+            onPress={deleteAccount}
             right={chevronFunction}
           />
         </List.Section>
