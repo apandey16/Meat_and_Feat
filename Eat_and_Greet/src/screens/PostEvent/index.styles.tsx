@@ -25,6 +25,8 @@ const postStyle = StyleSheet.create({
     height: 300,
     borderRadius: 5,
     marginTop: 10,
+    alignSelf: "center",
+    paddingBottom: 10
   },
   DateTimeContainer: {
     backgroundColor: "#E5E0FF",
@@ -33,7 +35,7 @@ const postStyle = StyleSheet.create({
     borderRadius: 5,
     justifyContent: "center",
     marginTop: 15,
-    paddingVertical: 10,
+    padding: 10,
     flexDirection: "row",
     flex: 1
   },
@@ -57,6 +59,7 @@ const postStyle = StyleSheet.create({
     height: "83%",
     alignItems: "center",
     justifyContent: "center",
+    alignSelf: "center"
   },
   DateContainer: {
     backgroundColor: "#FFF",
