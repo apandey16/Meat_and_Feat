@@ -1,22 +1,23 @@
 import React, { useState } from "react";
 import { Text, View, Image, Alert } from "react-native";
+import DateTimePicker from '@react-native-community/datetimepicker';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+
 import { StatusBar } from "expo-status-bar";
+
 import { db } from "../../firebase/config";
 import { collection, setDoc, getDocs, updateDoc, query, where, doc, QuerySnapshot } from "firebase/firestore";
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import { useNavigation } from "@react-navigation/native";
-
-
-import styles from "../../style";
-import postStyle from "./index.styles";
+import { getAuth } from "firebase/auth";
 
 import { Toolbar } from "../../comps/Toolbar/toolbar";
 import RoundedButton from "../../comps/RoundedButton/RoundedButton";
 import GrowingTextbox from "../../comps/GrowingTextbox/textbox";
 import TextBox from "../../comps/Textbox/textbox";
+import NumberInput from "../../comps/NumberInput";
 
-import DateTimePicker from '@react-native-community/datetimepicker';
-
+import styles from "../../style";
+import postStyle from "./index.styles";
 
 
 export default function PostEvent() {
@@ -26,23 +27,45 @@ export default function PostEvent() {
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
   const [description, setDescription] = useState("");
+  const [name, setName] = useState("");
+  const [spots, setSpots] = useState("");
 
   const navigation = useNavigation();
 
+  
   let inputs = [title, category, dateOfEvent, startTime, endTime, description];
   const inputsAsString = ["Title", "Category", "Event Date", "Start Time", "End Time", "Description"];
 
 
-  const getNumberOfEventsData = async (numberOfEventsSnapshot : QuerySnapshot): Promise<number[]> => {
+  const getUser = async () : Promise<void> => {
+    try{
+      let user = getAuth().currentUser;
+      const querySnapshot = await getDocs(
+        query(
+          collection(db, "Users"),
+          where("email", "==", user?.email)
+        )
+      );
+      querySnapshot.forEach((doc) => {
+        const first = doc.data().firstName as string;
+        const last = doc.data().lastName as string;
+        setName(first.concat(" ", last));
+      });
+    } catch (error) {
+      console.error("Error Getting Data From DB: ", error);
+    }
+  }
+  getUser();
+  const getNumberOfEventsData = async (numberOfEventsSnapshot : QuerySnapshot): Promise<number> => {
     try {
-      let fetchedEventData: number[] = [];
+      let fetchedEventData: number = -1;
       numberOfEventsSnapshot.forEach((doc) => {
-        fetchedEventData.push(doc.data().numberOfEvents as number);
+        fetchedEventData = (doc.data().numberOfEvents as number);
       });
       return fetchedEventData;
     } catch (error) {
       console.error("Error Getting Data From DB: ", error);
-      return [];
+      return -1;
     }
   };
 
@@ -68,21 +91,23 @@ export default function PostEvent() {
           Alert.alert("This Event is Already Happening Today");
         } else {
           const numberOfEventsSnapshot = await getDocs(collection(db, "Number of Events"));
-          let uidList : number[] = await getNumberOfEventsData(numberOfEventsSnapshot);
-          let uid : number = uidList[0] + 1
+          let uid : number = await getNumberOfEventsData(numberOfEventsSnapshot) + 1;
+          const host = name;
           await setDoc(doc(db, "Events", uid.toString()), {
             Category: category,
             Date: dateOfEvent.toDateString(),
             EndTime: endTime.toTimeString().split(' ')[0],
-            Host: "RobV",
+            Host: host,
             StartTime: startTime.toTimeString().split(' ')[0],
             Title: title,
             id: uid,
-            description: description
+            description: description,
+            spots: spots,
+            participants: [getAuth().currentUser?.email]
           });
           await updateDoc(doc(db, "Number of Events", "Counter"),  { numberOfEvents: uid });
           Alert.alert("Post Successfully Added!");
-          navigation.navigate('Browse Event');
+          navigation.goBack();
         }
       } catch (error) {
         console.error("Error adding document: ", error);
@@ -137,6 +162,17 @@ export default function PostEvent() {
               style={{ width: "90%", height: "90%", resizeMode: "contain" }}
             />
           </View>
+        </View>
+        <View style={postStyle.DateTimeContainer}>
+          <Text style={[postStyle.LabelText, {alignSelf: "center", flex: 1}]}> Spots {"\n"}</Text>
+            <NumberInput
+              placeholder=""
+              top={"-5%"}
+              height={"90%"}
+              width={"25%"}
+              left={"25%"}
+              onTextChange={setSpots}
+              />
         </View>
         <View style={postStyle.DateTimeContainer}>
           
