@@ -15,7 +15,7 @@ import { Toolbar } from "../../comps/Toolbar/toolbar";
 import RoundedButton from "../../comps/RoundedButton/RoundedButton";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-interface forumData {
+interface FORUM_DATA {
   ForumName: string;
 }
 
@@ -25,12 +25,12 @@ const postData = [
   },
 ];
 
-const getForumsData = async (): Promise<forumData[]> => {
+const getForumsData = async (): Promise<FORUM_DATA[]> => {
   try {
     const docRef = await getDocs(collection(db, "Forums"));
-    let fetchedForumData: forumData[] = [];
+    let fetchedForumData: FORUM_DATA[] = [];
     docRef.forEach((doc) => {
-      fetchedForumData.push(doc.data() as forumData);
+      fetchedForumData.push(doc.data() as FORUM_DATA);
     });
     return fetchedForumData;
   } catch (error) {
