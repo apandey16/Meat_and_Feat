@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
+import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import styles from '../../style';
 
 interface RoundedButtonProps {
@@ -31,11 +31,9 @@ const RoundedButton = (props : RoundedButtonProps) => {
     })
 
     return (
-            <View style={[styles.CornerButtonOutline, localstyle.placement, localstyle.sizing]}>
-               <TouchableOpacity onPress={props.onPress} disabled={props.disabled}>
+        <TouchableOpacity onPress={props.onPress} disabled={props.disabled} style={[styles.CornerButtonOutline, localstyle.placement, localstyle.sizing]}>
                  <Text style={styles.ButtonText}>{props.name}</Text>
-               </TouchableOpacity>
-            </View>        
+        </TouchableOpacity>
     );
 }
 
