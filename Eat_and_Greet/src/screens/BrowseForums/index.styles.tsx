@@ -8,22 +8,6 @@ const browseStyle = StyleSheet.create({
     top: "-5%",
     borderRadius: 10,
 }, 
-  PostContainer: {
-    backgroundColor: "#E5E0FF",
-    width: "95%",
-    height: 75,
-    borderRadius: 10,
-    borderColor: "#8EA7E9",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 10,
-    alignSelf: "center",
-  },
-  PostText: {
-    fontFamily: "Courier New",
-    fontWeight: "bold",
-    fontSize: 35
-  },
   SortContainer: {
     backgroundColor: "#FFF",
     width: "95%",
@@ -39,6 +23,22 @@ const browseStyle = StyleSheet.create({
     left: "10%",
     fontFamily: "Courier New",
     fontWeight: "bold",
+  },
+  PostContainer: {
+    backgroundColor: "#E5E0FF",
+    width: "95%",
+    height: 75,
+    borderRadius: 10,
+    borderColor: "#8EA7E9",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 10,
+    alignSelf: "center",
+  },
+  PostText: {
+    fontFamily: "Courier New",
+    fontWeight: "bold",
+    fontSize: 35
   },
 });
 
