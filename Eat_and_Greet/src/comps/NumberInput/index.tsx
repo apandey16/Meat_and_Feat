@@ -17,7 +17,7 @@ const NumberInput = ( {placeholder, top, left, bottom, right, width, height, onT
 const [number, setNumber] = useState("");
 
 const onChanged = (userInput : string) => {
-    setNumber(userInput.replace(/[^0-9]/g, ''));
+    setNumber(userInput.replace(/\D/g, ''));
     onTextChange(userInput);
 }
 

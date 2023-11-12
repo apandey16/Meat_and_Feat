@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Image, View, Text, Alert } from 'react-native';
-import { useRoute } from '@react-navigation/native';
-import { useNavigation } from "@react-navigation/native";
+import { useRoute, useNavigation } from '@react-navigation/native';
 
 import { StatusBar } from 'expo-status-bar';
 

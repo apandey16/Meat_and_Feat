@@ -92,12 +92,11 @@ export default function PostEvent() {
         } else {
           const numberOfEventsSnapshot = await getDocs(collection(db, "Number of Events"));
           let uid : number = await getNumberOfEventsData(numberOfEventsSnapshot) + 1;
-          const host = name;
           await setDoc(doc(db, "Events", uid.toString()), {
             Category: category,
             Date: dateOfEvent.toDateString(),
             EndTime: endTime.toTimeString().split(' ')[0],
-            Host: host,
+            Host: name,
             StartTime: startTime.toTimeString().split(' ')[0],
             Title: title,
             id: uid,
