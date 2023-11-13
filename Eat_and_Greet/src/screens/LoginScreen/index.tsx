@@ -1,5 +1,5 @@
 import { View, Text, TextInput, Alert, ScrollView, TouchableOpacity } from 'react-native';
-import { useState, React} from 'react';
+import React, { useState} from 'react';
 
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
