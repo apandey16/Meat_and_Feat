@@ -15,22 +15,22 @@ import { Toolbar } from "../../comps/Toolbar/toolbar";
 import RoundedButton from "../../comps/RoundedButton/RoundedButton";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-interface FORUM_DATA {
+interface ForumData {
   ForumName: string;
 }
 
-const postData = [
+const loadingForumData = [
   {
-    ForumName: ""
+    ForumName: "Loading Forums..."
   },
 ];
 
-const getForumsData = async (): Promise<FORUM_DATA[]> => {
+const getForumsData = async (): Promise<ForumData[]> => {
   try {
     const docRef = await getDocs(collection(db, "Forums"));
-    let fetchedForumData: FORUM_DATA[] = [];
+    let fetchedForumData: ForumData[] = [];
     docRef.forEach((doc) => {
-      fetchedForumData.push(doc.data() as FORUM_DATA);
+      fetchedForumData.push(doc.data() as ForumData);
     });
     return fetchedForumData;
   } catch (error) {
@@ -40,7 +40,7 @@ const getForumsData = async (): Promise<FORUM_DATA[]> => {
 };
 
 export default function BrowseForum() {
-    const [data, setData] = useState(postData);
+    const [data, setData] = useState(loadingForumData);
 
     const navigation = useNavigation();
 
