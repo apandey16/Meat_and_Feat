@@ -72,8 +72,7 @@ export default function BrowseForum() {
             if (!querySnapshot.empty) {
             Alert.alert("A Forum with this name already exists.");
           } else {
-            let uid : string = ForumName;
-            await setDoc(doc(db, "Forums", uid.toString()), {
+            await setDoc(doc(db, "Forums", ForumName), {
               ForumName: ForumName
             });
             Alert.alert("Forum Successfully Created!");
