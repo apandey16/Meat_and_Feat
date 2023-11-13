@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, Alert } from "react-native";
+import { View, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 
@@ -8,7 +8,6 @@ import { collection, where, query, getDocs } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 import styles from "../../style";
-import browseStyle from "../BrowseEvents/index.styles";
 import localstyles from "./index.styles";
 
 import { Toolbar } from "../../comps/Toolbar/toolbar";
@@ -34,6 +33,7 @@ export default function MyEvents() {
       });
       if(fetchedEventData.length == 0){
         Alert.alert("You Have No Joined Events");
+        navigation.goBack();
         // Trying to put nav back to previous page here
       }
       return fetchedEventData;

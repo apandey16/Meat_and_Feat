@@ -33,7 +33,7 @@ function ViewEventScreen() {
 
   const route = useRoute();
   const id : number = route.params?.id;
-  const canJoin : Boolean = route.params?.canJoin;
+  const canJoin : boolean = route.params?.canJoin;
 
   const navigation = useNavigation();
 

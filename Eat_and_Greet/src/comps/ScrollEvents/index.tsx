@@ -7,7 +7,7 @@ import browseStyle from "../../screens/BrowseEvents/index.styles";
 
 interface ScrollEventProps {
     data : EventData[];
-    canJoin : Boolean;
+    canJoin : boolean;
   }
 
 const ScrollEvents = ({ data, canJoin } : ScrollEventProps) => {
