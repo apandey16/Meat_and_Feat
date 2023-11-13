@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View, ScrollView, TouchableOpacity, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
+import { db } from "../../firebase/config";
+import {
+  collection,
+  getDocs
+} from "firebase/firestore";
 
 import styles from "../../style";
 import browseStyle from "./index.styles";
@@ -10,9 +15,47 @@ import { Toolbar } from "../../comps/Toolbar/toolbar";
 import RoundedButton from "../../comps/RoundedButton/RoundedButton";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+interface ForumData {
+  ForumName: string;
+}
+
+const loadingForumData = [
+  {
+    ForumName: "Loading Forums..."
+  },
+];
+
+const getForumsData = async (): Promise<ForumData[]> => {
+  try {
+    const docRef = await getDocs(collection(db, "Forums"));
+    let fetchedForumData: ForumData[] = [];
+    docRef.forEach((doc) => {
+      fetchedForumData.push(doc.data() as ForumData);
+    });
+    return fetchedForumData;
+  } catch (error) {
+    console.error("Error Getting Data From DB: ", error);
+    return [];
+  }
+};
+
 export default function BrowseForum() {
+    const [data, setData] = useState(loadingForumData);
 
     const navigation = useNavigation();
+
+    const fetchData = async () => {
+      try {
+        const data = await getForumsData();
+        setData(data);
+      } catch (error) {
+        console.error("Error in Fetching Data: ", error);
+      }
+    };
+
+    useEffect(() => {
+      fetchData();
+    }, []);
 
   return (
     <SafeAreaView style={styles.ScreenContainer}>
@@ -21,24 +64,13 @@ export default function BrowseForum() {
             <Text style={browseStyle.SortText}> Sort </Text>
         </View>
         <ScrollView>
-            <TouchableOpacity style={browseStyle.PostContainer}onPress={() => navigation.navigate('Browse Event')}>
-                <Text style={browseStyle.PostText}> Food </Text>
+          {data.map((forumObj) => (  
+            <TouchableOpacity style={browseStyle.PostContainer}
+            key={forumObj.ForumName}
+            onPress={() => navigation.navigate('Browse Event')}>
+            <Text style={browseStyle.PostText}> {forumObj.ForumName} </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={browseStyle.PostContainer}onPress={() => navigation.navigate('Browse Event')}>
-                <Text style={browseStyle.PostText}> Live Events </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={browseStyle.PostContainer}onPress={() => navigation.navigate('Browse Event')}>
-                <Text style={browseStyle.PostText}> Music </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={browseStyle.PostContainer}onPress={() => navigation.navigate('Browse Event')}>
-                <Text style={browseStyle.PostText}> Gym </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={browseStyle.PostContainer}onPress={() => navigation.navigate('Browse Event')}>
-                <Text style={browseStyle.PostText}> BasketBall </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={browseStyle.PostContainer}onPress={() => navigation.navigate('Browse Event')}>
-                <Text style={browseStyle.PostText}> Arts & Crafts </Text>
-            </TouchableOpacity>
+            ))}
         </ScrollView>
       </View>
       <RoundedButton
