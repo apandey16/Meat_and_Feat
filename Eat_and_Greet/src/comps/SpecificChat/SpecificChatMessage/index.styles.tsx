@@ -15,7 +15,7 @@ const localStyles = StyleSheet.create({
     SentMessageInnerContainer: {
         backgroundColor: '#CFFFBE',
         borderRadius: 10,
-        maxWidth: '80%',
+        maxWidth: '70%',
     },
     RecievedMessageOuterContainer: {
         paddingBottom: 10,
@@ -28,7 +28,7 @@ const localStyles = StyleSheet.create({
     RecievedMessageInnerContainer: {
         backgroundColor: '#D5D5D5',
         borderRadius: 10,
-        maxWidth: '80%',
+        maxWidth: '70%',
     },
     MessageText: {
         fontFamily: 'Courier New',

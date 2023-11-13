@@ -3,7 +3,12 @@ import { TextInput, View, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import localStyles from './index.styles';
 
-const SpecificChatTextBox = () => {
+interface SCTBProps {
+  onTextChange: any;
+  onMessageSend: any;
+}
+
+const SpecificChatTextBox = (props: SCTBProps) => {
     const [text, setText] = useState('');
     const handleTextChange = (userInput: string) => {
         setText(userInput);
@@ -17,7 +22,7 @@ const SpecificChatTextBox = () => {
         onChangeText={handleTextChange}
         value={text}
       />
-      <TouchableOpacity style={localStyles.circleButton}>
+      <TouchableOpacity style={localStyles.circleButton} onPress={props.onMessageSend}>
             <Feather name="arrow-up" size={24} color="black" style={localStyles.arrowIcon}/>
       </TouchableOpacity>
     </View>

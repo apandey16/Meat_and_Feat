@@ -1,10 +1,14 @@
+import React from 'react';
 import { View, Text } from 'react-native';
 
 import style from '../../../style';
 import localStyles from './index.styles';
 import ChooseImageButton from '../../ChooseImageButton/ChooseImageButton';
 
-function SpecificChatHeader() {
+interface SCHTypes {
+  title ?: string;
+}
+const SpecificChatHeader = (props: SCHTypes) => {
     
     return (
       <View style={localStyles.HeaderContainer}>
@@ -12,7 +16,7 @@ function SpecificChatHeader() {
             <ChooseImageButton />
         </View>
         <View style={localStyles.HeaderTextContainer}>
-            <Text style={style.HeaderText}>Jimmy John</Text>
+            <Text style={style.HeaderText}>{props.title}</Text>
         </View>
       </View>
     );
