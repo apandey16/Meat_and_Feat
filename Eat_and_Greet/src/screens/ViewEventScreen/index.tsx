@@ -10,38 +10,13 @@ import { getAuth } from "firebase/auth";
 
 import { Toolbar } from '../../comps/Toolbar/toolbar';
 import RoundedButton from '../../comps/RoundedButton/RoundedButton';
+import { EventData } from "../../logic/eventDataInterface";
+import  createDefaultPostData from "../../logic/Factory";
 
 import styles from '../../style';
 import localstyles from './style';
 
-
-interface EventData {
-  Category: string;
-  Date: string;
-  EndTime: string;
-  Host: string;
-  StartTime: string;
-  Title: string;
-  id: number;
-  description: string;
-  spots: number;
-  participants: string[];
-}
-
-const postData = 
-  {
-    Category: "",
-    Date: "",
-    EndTime: "",
-    Host: "",
-    StartTime: "",
-    Title: "Loading Events Now",
-    id: -1,
-    description: "",
-    spots: -1,
-    participants: [""]
-  }
-;
+const postData = createDefaultPostData();
 
 const getEventData = async (uid : string): Promise<EventData> => {
   try {
@@ -58,6 +33,7 @@ function ViewEventScreen() {
 
   const route = useRoute();
   const id : number = route.params?.id;
+  const canJoin : Boolean = route.params?.canJoin;
 
   const navigation = useNavigation();
 
@@ -117,7 +93,6 @@ function ViewEventScreen() {
               </View>
               <View style={localstyles.imageContainerStyling}>
                 <View style={localstyles.imageStyling}>
-                  {/* Eventually will want to switch this to a box that an image will fill, no clue how to do that */}
                   <Image style={localstyles.pngStyling}source={require('../../../assets/images/uploadImage.png')}/>
                 </View>
               </View>
@@ -130,10 +105,15 @@ function ViewEventScreen() {
               </View>
             </View>
           </View>
+        {canJoin ?
         <RoundedButton 
           name='Join Event' 
           width={'80%'}
-          onPress={handleJoin}/>
+          onPress={handleJoin}/> : 
+        <RoundedButton 
+          name='Event Chat' 
+          width={'80%'}
+          onPress={() => Alert.alert("Redirect to event chat")}/>}
         </View>
         <Toolbar />
       </View>

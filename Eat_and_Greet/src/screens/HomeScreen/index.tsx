@@ -32,7 +32,7 @@ function HomeScreen() {
             />
           </View>
           <View style={localStyles.ButtonLine}>
-            <HomePageButton onPress={() => null}
+            <HomePageButton onPress={() => navigation.navigate('My Events')}
                           textLine1='My'
                           textLine2='Events'
                           fontSize={ getFontSize(32) }
