@@ -3,10 +3,7 @@ import { Text, View, ScrollView, TouchableOpacity, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { db } from "../../firebase/config";
-import {
-  collection,
-  getDocs
-} from "firebase/firestore";
+import {collection, getDocs, query, where, setDoc, doc} from "firebase/firestore";
 
 import styles from "../../style";
 import browseStyle from "./index.styles";
@@ -57,6 +54,36 @@ export default function BrowseForum() {
       fetchData();
     }, []);
 
+    const addForumToDB = async (ForumName: string) => {
+      if (ForumName.length > 14)
+      {
+        Alert.alert("Forum name is too long.");
+      }
+      else
+      {
+        try {
+          const querySnapshot = await getDocs(
+            query(
+              collection(db, "Forums"),
+              where("ForumName", "==", ForumName),
+            )
+          );
+  
+            if (!querySnapshot.empty) {
+            Alert.alert("A Forum with this name already exists.");
+          } else {
+            await setDoc(doc(db, "Forums", ForumName), {
+              ForumName: ForumName
+            });
+            Alert.alert("Forum Successfully Created!");
+            navigation.goBack();
+          }
+        } catch (error) {
+          console.error("Error adding document: ", error);
+        }
+      }
+      };
+
   return (
     <SafeAreaView style={styles.ScreenContainer}>
       <View style={browseStyle.InfoContainer}>
@@ -75,7 +102,8 @@ export default function BrowseForum() {
       </View>
       <RoundedButton
         name="Create Forum"
-        onPress={() => Alert.prompt('Enter Forum Name:')}
+        onPress={() => Alert.prompt('Enter Forum Name:', "Max 14 Characters", text => addForumToDB(text))}
+        top={"-2%"}
       />
       <Toolbar/>
       <StatusBar style="auto" />
