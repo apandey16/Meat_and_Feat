@@ -21,6 +21,7 @@ import BrowseEventScreen from "./src/screens/BrowseEvents";
 import PasswordReset from "./src/screens/LoginScreen/passwordReset";
 import BrowseForumScreen from "./src/screens/BrowseForums";
 import Temp from "./src/screens/Temp/index";
+import MyEvents from "./src/screens/MyEvents/index";
 
 import HeaderBackButton from "./src/comps/HeaderBackButton";
 
@@ -42,7 +43,8 @@ const stackArray = [ { name: "Welcome", comp: TitleScreen},
                      { name: "Browse Forums", comp: BrowseForumScreen},
                      { name: "View Event", comp: ViewEventScreen},
                      { name: "Password Reset", comp: PasswordReset},
-                     {name: "Dev Page", comp: Temp}];
+                     {name: "Dev Page", comp: Temp},
+                     {name: "My Events", comp: MyEvents}];
 
 const onboardingStackArray = [ { name:"Basic Info", comp: BasicInfoScreen },
                                { name: "Confirmation", comp: ConfirmationScreen },

@@ -1,42 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, ScrollView, TouchableOpacity } from "react-native";
+import { Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { db } from "../../firebase/config";
-import {
-  collection,
-  getDocs,
-} from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 import styles from "../../style";
 import browseStyle from "./index.styles";
 
 import { Toolbar } from "../../comps/Toolbar/toolbar";
 import RoundedButton from "../../comps/RoundedButton/RoundedButton";
+import ScrollEvents from "../../comps/ScrollEvents";
 
-interface EventData {
-  Category: string;
-  Date: string;
-  EndTime: string;
-  Host: string;
-  StartTime: string;
-  Title: string;
-  id: number;
-  description: string;
-}
+import { EventData } from "../../logic/eventDataInterface";
+import createDefaultPostData from "../../logic/Factory";
 
-const postData = [
-  {
-    Category: "",
-    Date: "",
-    EndTime: "",
-    Host: "",
-    StartTime: "",
-    Title: "Loading Events Now",
-    id: -1,
-    description: "" 
-  },
-];
+const postData = [createDefaultPostData()];
 
 const getEventsData = async (): Promise<EventData[]> => {
   try {
@@ -73,31 +52,10 @@ export default function BrowseEvent() {
   return (
     <View style={styles.ScreenContainer}>
       <View style={browseStyle.InfoContainer}>
-        
         <View style={browseStyle.SortContainer}>
           <Text style={browseStyle.SortText}> Sort </Text>
         </View>
-        <ScrollView>
-            {data.map((postObj) => (
-              
-                <View
-                  style={browseStyle.PostContainer}
-                  key={postObj.Title + postObj.Date + postObj.StartTime}
-                >
-                  <TouchableOpacity onPress={() => navigation.navigate('View Event', { id : postObj.id})}>
-                  <Text style={browseStyle.PostText}>
-                    {postObj.Title}
-                    {"\n"}
-                    {postObj.Date}
-                    {"\n"}
-                    {postObj.StartTime} - {postObj.EndTime}
-                    {"\n"}Spots Left...
-                  </Text>
-                  </TouchableOpacity>
-                </View>
-              
-            ))}
-        </ScrollView>
+        <ScrollEvents data={data} canJoin={true}></ScrollEvents>
       </View>
       <RoundedButton
         name="Plan New Event"
