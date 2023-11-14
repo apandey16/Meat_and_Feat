@@ -5,8 +5,8 @@ const getFontSize = (size: number) => size / fontScale;
 
 const localStyles = StyleSheet.create({
     SentMessageOuterContainer: {
+        paddingTop: 5,
         paddingBottom: 10,
-        // paddingRight: 10,
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -15,11 +15,11 @@ const localStyles = StyleSheet.create({
     SentMessageInnerContainer: {
         backgroundColor: '#CFFFBE',
         borderRadius: 10,
-        maxWidth: '80%',
+        maxWidth: '70%',
     },
     RecievedMessageOuterContainer: {
+        paddingTop: 5,
         paddingBottom: 10,
-        // paddingLeft: 10,
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -28,7 +28,7 @@ const localStyles = StyleSheet.create({
     RecievedMessageInnerContainer: {
         backgroundColor: '#D5D5D5',
         borderRadius: 10,
-        maxWidth: '80%',
+        maxWidth: '70%',
     },
     MessageText: {
         fontFamily: 'Courier New',

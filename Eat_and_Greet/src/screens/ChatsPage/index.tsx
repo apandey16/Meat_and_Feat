@@ -1,41 +1,78 @@
-import { View, ScrollView } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import ChatCard from '../../comps/ChatCard/ChatCard'; 
+import React, { useEffect, useState } from "react";
+import { View, ScrollView } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-import { Toolbar } from '../../comps/Toolbar/toolbar';
+import ChatCard from "../../comps/ChatCard/ChatCard";
+import { Toolbar } from "../../comps/Toolbar/toolbar";
 
-import styles from '../../style';
-import React from 'react';
+import fetchData from "../../helpers/ChatsScreen/FetchData";
+
+import ChatType from "../../types/ChatType";
+
+import styles from "../../style";
+
+const LoadingChatData: ChatType[] = [
+  {
+    Id: "-1",
+    Members: [],
+    Messages: [],
+    Title: "Loading Chats Now",
+  },
+];
 
 function HomeScreen() {
-    const navigation = useNavigation();
+  const [data, setData] = useState(LoadingChatData);
 
-    const chatArray = [ { senderName: "Basketball Chat", timestamp:"4:45 PM", isRead: false, nav: () => navigation.navigate('Example Chat'), message: "Steph said: Game@2:30 tmrw" },
-                        { senderName: "@logidoke", timestamp:"12:12 PM", isRead: false, nav: () => navigation.navigate('Example Chat'), message: "Sent a meme on Instagram, check it out" },
-                        { senderName: "@steelstine", timestamp:"10:31 AM", isRead: true, nav: () => navigation.navigate('Example Chat'), message: "Car go VROOOM, just like me on coffee" },
-                        { senderName: "@camalam2002", timestamp:"10:30 AM", isRead: false, nav: () => navigation.navigate('Example Chat'), message: "I am here to code bugs and chew gum, and I'm all out of gum" },
-                        { senderName: "@robertvermeulen_", timestamp:"6:15 AM", isRead: true, nav: () => navigation.navigate('Example Chat'), message: "Hello there! Wanna go on a run?" } 
-                      ];
+  const navigation = useNavigation();
 
-    return (
-      <View style={styles.ScreenContainer}>
-        <ScrollView>
-          <View style={styles.OuterBox}>
-            {chatArray.map((chatObj) => (
-              <ChatCard senderName={chatObj.senderName}
-                        message={chatObj.message} 
-                        timestamp={chatObj.timestamp}
-                        isRead={chatObj.isRead} 
-                        onPress={chatObj.nav}
-                        key={chatObj.senderName}
+  useEffect(() => {
+    fetchData(setData);
+  }, []);
+
+  return (
+    <View style={styles.ScreenContainer}>
+      <ScrollView>
+        <View style={styles.OuterBox}>
+          {data.map((chatObj) => {
+            let displayTime = "";
+            let displayMessage = "";
+            let onPressFunc = () => null;
+            const recentMessage = chatObj.Messages[chatObj.Messages.length - 1];
+            if (chatObj.Id != "-1") {
+              onPressFunc = () =>
+                //console.log(chatObj.Id)
+                navigation.navigate("Chat", { id: chatObj.Id });
+            }
+            if (recentMessage) {
+              displayTime = recentMessage.Time.toDate()
+                .toLocaleString("en-US", {
+                  year: "numeric",
+                  month: "numeric",
+                  day: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  hour12: true,
+                })
+                .toString();
+              displayMessage = recentMessage.Text;
+            }
+            return (
+              <ChatCard
+                senderName={chatObj.Title}
+                message={displayMessage}
+                timestamp={displayTime}
+                isRead={true}
+                onPress={onPressFunc}
+                key={chatObj.Id}
               />
-            ))}
-          </View>
-        </ScrollView>
-        <Toolbar />
-      </View>
-    );
-
+            );
+          })}
+        </View>
+      </ScrollView>
+      <Toolbar />
+    </View>
+  );
 }
 
 export default HomeScreen;
+

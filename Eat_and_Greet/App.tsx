@@ -15,7 +15,7 @@ import SearchScreen from "./src/screens/SearchScreen";
 import SettingsScreen from "./src/screens/SettingsScreen";
 import ViewEventScreen from "./src/screens/ViewEventScreen";
 import ChatsScreen from "./src/screens/ChatsPage/index";
-import ExampleChatScreen from "./src/screens/ExampleChatScreen";
+import ChatScreen from "./src/screens/ChatScreen";
 import PostEventScreen from "./src/screens/PostEvent";
 import BrowseEventScreen from "./src/screens/BrowseEvents";
 import PasswordReset from "./src/screens/LoginScreen/passwordReset";
@@ -36,7 +36,7 @@ const stackArray = [ { name: "Welcome", comp: TitleScreen},
                      { name: "Search", comp: SearchScreen}, 
                      { name: "Settings", comp: SettingsScreen}, 
                      { name: "Chats", comp: ChatsScreen}, 
-                     { name: "Example Chat", comp: ExampleChatScreen}, 
+                     { name: "Chat", comp: ChatScreen}, 
                      { name: "Post Event", comp: PostEventScreen},
                      { name: "Browse Event", comp: BrowseEventScreen},
                      { name: "Browse Forums", comp: BrowseForumScreen},
