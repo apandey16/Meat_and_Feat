@@ -3,8 +3,9 @@ import { StyleSheet } from "react-native";
 const browseStyle = StyleSheet.create({
   InfoContainer: {
     backgroundColor: "#8EA7E9",
-    height: 550,
-    width: 340  },
+    height: 560,
+    width: 340,
+    marginVertical: 10  },
   
   PostContainer: {
     backgroundColor: "#E5E0FF",

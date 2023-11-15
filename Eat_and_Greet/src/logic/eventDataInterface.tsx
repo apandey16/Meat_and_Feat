@@ -1,6 +1,6 @@
 export interface EventData {
     Category: string;
-    Date: string;
+    Date: Date;
     EndTime: string;
     Host: string;
     StartTime: string;
@@ -10,3 +10,9 @@ export interface EventData {
     spots: number;
     participants: string[];
   }
+
+  export function toDateTime(secs : number) {
+    var t = new Date(1970, 0, 1); // Epoch
+    t.setSeconds(secs);
+    return t;
+}

@@ -83,7 +83,7 @@ export default function PostEvent() {
             collection(db, "Events"),
             where("Title", "==", title),
             where("Category", "==", category),
-            where("Date", "==", dateOfEvent.toDateString())
+            where("Date", "==", dateOfEvent)
           )
         );
 
@@ -94,7 +94,7 @@ export default function PostEvent() {
           let uid : number = await getNumberOfEventsData(numberOfEventsSnapshot) + 1;
           await setDoc(doc(db, "Events", uid.toString()), {
             Category: category,
-            Date: dateOfEvent.toDateString(),
+            Date: dateOfEvent,
             EndTime: endTime.toTimeString().split(' ')[0],
             Host: name,
             StartTime: startTime.toTimeString().split(' ')[0],

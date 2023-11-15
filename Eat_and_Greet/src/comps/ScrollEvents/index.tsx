@@ -1,7 +1,8 @@
-import React from "react";
-import { Text, View, ScrollView, TouchableOpacity } from "react-native";
+import React, { useState, useCallback} from "react";
+import { Text, View, ScrollView, TouchableOpacity, RefreshControl } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { EventData } from "../../logic/eventDataInterface";
+import { EventData, toDateTime } from "../../logic/eventDataInterface";
+import RNRestart from 'react-native-restart';
 
 import browseStyle from "../../screens/BrowseEvents/index.styles";
 
@@ -10,11 +11,23 @@ interface ScrollEventProps {
     canJoin : boolean;
   }
 
-const ScrollEvents = ({ data, canJoin } : ScrollEventProps) => {
+
+const ScrollEvents = ({ data, canJoin }: ScrollEventProps) => {
     const navigation = useNavigation();
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const onRefresh = React.useCallback(() => {
+      setRefreshing(true);
+      RNRestart.Restart();
+      setTimeout(() => {
+        setRefreshing(false);
+      }, 2000);
+    }, []);
 
     return (
-        <ScrollView>
+        <ScrollView refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh}></RefreshControl>
+        }>
             {data.length > 0 ? data.map((postObj) => (
               
                 <View
@@ -25,7 +38,7 @@ const ScrollEvents = ({ data, canJoin } : ScrollEventProps) => {
                   <Text style={browseStyle.PostText}>
                     {postObj.Title}
                     {"\n"}
-                    {postObj.Date}
+                    {toDateTime(postObj.Date.seconds).toDateString()}
                     {"\n"}
                     {postObj.StartTime} - {postObj.EndTime}
                     {"\n"}{postObj.spots-postObj.participants.length} Spots Left

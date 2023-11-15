@@ -25,7 +25,7 @@ export default function MyEvents() {
   const getEventsData = async (): Promise<EventData[]> => {
     try {
     const user = getAuth().currentUser;
-      const ownedEvents  = query(collection(db, "Events"), where("participants","array-contains", user?.email));
+      const ownedEvents  = query(collection(db, "Events"), where("participants","array-contains", user?.email), where("Date", ">", new Date()));
       const docRef = await getDocs(ownedEvents);
       let fetchedEventData: EventData[] = [];
       docRef.forEach((doc) => {
