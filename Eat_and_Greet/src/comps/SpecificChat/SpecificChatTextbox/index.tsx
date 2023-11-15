@@ -16,7 +16,6 @@ const SpecificChatTextBox = (props: SCTBProps) => {
     props.onTextChange(userInput);
   };
   const handleMessageSend = () => {
-    console.log("begin send message")
     setText("");
     props.onMessageSend();
   };

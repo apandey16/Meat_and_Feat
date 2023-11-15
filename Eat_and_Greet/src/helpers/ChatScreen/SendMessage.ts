@@ -1,27 +1,22 @@
 import { Alert } from "react-native";
 
 import { db } from "../../firebase/config";
-import {
-  collection,
-  addDoc,
-  getDoc,
-  doc
-} from "firebase/firestore";
+import { collection, addDoc, getDoc, doc } from "firebase/firestore";
 
 import scrollToBottom from "./ScrollToBottom";
 
 import MessageType from "../../types/MessageType";
 
-const SendMessage = async (
-  chatID: any,
-  currentUser: any,
-  fetchData: any,
-  scrollViewRef: any,
-  sending: any,
-  setSending: any,
-  typedMessage: any,
-  setTypedMessage: any
-) => {
+const SendMessage = async ({
+  chatIDProp: chatID,
+  currentUserProp: currentUser,
+  fetchDataProp: fetchData,
+  scrollViewRefProp: scrollViewRef,
+  sendingProp: sending,
+  setSendingProp: setSending,
+  typedMessageProp: typedMessage,
+  setTypedMessageProp: setTypedMessage,
+}: any) => {
   if (currentUser && !sending && typedMessage.length > 0) {
     try {
       setSending(true);
@@ -46,7 +41,7 @@ const SendMessage = async (
     }
   } else {
     if (sending) {
-      Alert.alert("Wait To Send Another Message")
+      Alert.alert("Wait To Send Another Message");
     } else if (typedMessage.length == 0) {
       Alert.alert("Please Type a Message");
     } else {

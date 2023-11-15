@@ -34,7 +34,6 @@ function ExampleChatScreen() {
   const scrollViewRef = useRef();
 
   const [title, setTitle] = useState("Loading Chat");
-  const [userName, setUserName] = useState("")
   const [messages, setMessages] = useState(LoadingChatData[0]?.Messages);
   const [currentUser, setCurrentUser] = useState<DocumentReference | null>(
     null
@@ -76,6 +75,7 @@ function ExampleChatScreen() {
                   })
                   .toString();
               }
+
               return (
                 <SpecificChatMessage
                   message={messageObj.Text}
@@ -92,16 +92,16 @@ function ExampleChatScreen() {
           <TextBox
             onTextChange={setTypedMessage}
             onMessageSend={() =>
-              sendMessage(
-                chatID,
-                currentUser,
-                () => fetchData(chatID, setTitle, setMessages),
-                scrollViewRef,
-                sending,
-                setSending,
-                typedMessage,
-                setTypedMessage
-              )
+              sendMessage({
+                chatIDProp: chatID,
+                currentUserProp: currentUser,
+                fetchDataProp: () => fetchData(chatID, setTitle, setMessages),
+                scrollViewRefProp: scrollViewRef,
+                sendingProp: sending,
+                setSendingProp: setSending,
+                typedMessageProp: typedMessage,
+                setTypedMessageProp: setTypedMessage,
+              })
             }
             sending={sending}
           />

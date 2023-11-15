@@ -37,7 +37,7 @@ function HomeScreen() {
             let displayTime = "";
             let displayMessage = "";
             let onPressFunc = () => null;
-            const recentMessage = chatObj.Messages[chatObj.Messages.length - 1];
+            const recentMessage = chatObj.Messages[0];
             if (chatObj.Id != "-1") {
               onPressFunc = () =>
                 //console.log(chatObj.Id)
@@ -61,7 +61,6 @@ function HomeScreen() {
                 senderName={chatObj.Title}
                 message={displayMessage}
                 timestamp={displayTime}
-                isRead={true}
                 onPress={onPressFunc}
                 key={chatObj.Id}
               />
@@ -75,4 +74,3 @@ function HomeScreen() {
 }
 
 export default HomeScreen;
-

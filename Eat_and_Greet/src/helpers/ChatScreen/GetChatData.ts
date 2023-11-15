@@ -21,9 +21,8 @@ const GetChatData = async (uid: string): Promise<ChatType[]> => {
       }
     );
 
-    chatData.Messages = messagesData.sort(
-      (a, b) => b.Time.toMillis() - a.Time.toMillis()
-    );
+    messagesData.sort((a, b) => a.Time.toMillis() - b.Time.toMillis());
+    chatData.Messages = messagesData;
     fetchedChatData.push(chatData);
     return fetchedChatData;
   } catch (error) {
