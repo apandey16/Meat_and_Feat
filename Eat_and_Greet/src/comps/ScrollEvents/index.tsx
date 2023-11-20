@@ -2,23 +2,24 @@ import React, { useState, useCallback} from "react";
 import { Text, View, ScrollView, TouchableOpacity, RefreshControl } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { EventData, toDateTime } from "../../logic/eventDataInterface";
-import RNRestart from 'react-native-restart';
 
 import browseStyle from "../../screens/BrowseEvents/index.styles";
 
 interface ScrollEventProps {
-    data : EventData[];
+    inputData : EventData[];
     canJoin : boolean;
+    currentPage : string;
+    refreshParameters: any;
   }
 
-
-const ScrollEvents = ({ data, canJoin }: ScrollEventProps) => {
+const ScrollEvents = ({ inputData, canJoin, currentPage, refreshParameters}: ScrollEventProps) => {
     const navigation = useNavigation();
     const [refreshing, setRefreshing] = React.useState(false);
 
     const onRefresh = React.useCallback(() => {
       setRefreshing(true);
-      RNRestart.Restart();
+      navigation.goBack();
+      navigation.navigate(currentPage, refreshParameters);
       setTimeout(() => {
         setRefreshing(false);
       }, 2000);
@@ -28,7 +29,7 @@ const ScrollEvents = ({ data, canJoin }: ScrollEventProps) => {
         <ScrollView refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh}></RefreshControl>
         }>
-            {data.length > 0 ? data.map((postObj) => (
+            {inputData.map((postObj) => (
               
                 <View
                   style={browseStyle.PostContainer}
@@ -41,12 +42,12 @@ const ScrollEvents = ({ data, canJoin }: ScrollEventProps) => {
                     {toDateTime(postObj.Date.seconds).toDateString()}
                     {"\n"}
                     {postObj.StartTime} - {postObj.EndTime}
-                    {"\n"}{postObj.spots-postObj.participants.length} Spots Left
+                    {"\n"}{postObj.spots - postObj.participants.length} Spots Left
                   </Text>
                   </TouchableOpacity>
                 </View>
               
-            )) : <View/>}
+            ))}
         </ScrollView>
     );
 };

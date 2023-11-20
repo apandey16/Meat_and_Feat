@@ -7,7 +7,7 @@ import { StatusBar } from "expo-status-bar";
 
 import { db } from "../../firebase/config";
 import { collection, setDoc, getDocs, updateDoc, query, where, doc, QuerySnapshot } from "firebase/firestore";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { getAuth } from "firebase/auth";
 
 import { Toolbar } from "../../comps/Toolbar/toolbar";
@@ -20,9 +20,11 @@ import styles from "../../style";
 import postStyle from "./index.styles";
 
 
+
 export default function PostEvent() {
+  const route = useRoute();
+  const forumName : number = route.params?.forumName;
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
   const [dateOfEvent, setDateOfEvent] = useState(new Date());
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
@@ -33,8 +35,8 @@ export default function PostEvent() {
   const navigation = useNavigation();
 
   
-  let inputs = [title, category, dateOfEvent, startTime, endTime, description];
-  const inputsAsString = ["Title", "Category", "Event Date", "Start Time", "End Time", "Description"];
+  let inputs = [title, dateOfEvent, startTime, endTime, description];
+  const inputsAsString = ["Title", "Event Date", "Start Time", "End Time", "Description"];
 
 
   const getUser = async () : Promise<void> => {
@@ -82,7 +84,7 @@ export default function PostEvent() {
           query(
             collection(db, "Events"),
             where("Title", "==", title),
-            where("Category", "==", category),
+            where("Category", "==", forumName),
             where("Date", "==", dateOfEvent)
           )
         );
@@ -93,7 +95,7 @@ export default function PostEvent() {
           const numberOfEventsSnapshot = await getDocs(collection(db, "Number of Events"));
           let uid : number = await getNumberOfEventsData(numberOfEventsSnapshot) + 1;
           await setDoc(doc(db, "Events", uid.toString()), {
-            Category: category,
+            Category: forumName,
             Date: dateOfEvent,
             EndTime: endTime.toTimeString().split(' ')[0],
             Host: name,
@@ -141,16 +143,6 @@ export default function PostEvent() {
             height={"50%"}
             width={"90%"}
             onTextChange={setTitle}
-          />
-        </View>
-        <View style={postStyle.TitleCategoryContainer}>
-          <Text style={postStyle.LabelText}> Category {"\n"}</Text>
-          <TextBox
-            placeholder="Enter Category Here..."
-            top={"-60%"}
-            height={"50%"}
-            width={"90%"}
-            onTextChange={setCategory}
           />
         </View>
         <View style={postStyle.ImageContainer}>
