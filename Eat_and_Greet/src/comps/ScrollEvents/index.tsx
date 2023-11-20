@@ -1,4 +1,4 @@
-import React, { useState, useCallback} from "react";
+import React from "react";
 import { Text, View, ScrollView, TouchableOpacity, RefreshControl } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { EventData, toDateTime } from "../../logic/eventDataInterface";
