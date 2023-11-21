@@ -1,12 +1,13 @@
 import React from "react";
 import { Text, View, ScrollView, TouchableOpacity, RefreshControl } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { EventData, toDateTime } from "../../logic/eventDataInterface";
+import Event from "../../logic/event";
 
 import browseStyle from "../../screens/BrowseEvents/index.styles";
+import eventManager from "../../logic/eventManager";
 
 interface ScrollEventProps {
-    inputData : EventData[];
+    inputData : Event[];
     canJoin : boolean;
     currentPage : string;
     refreshParameters: any;
@@ -15,6 +16,8 @@ interface ScrollEventProps {
 const ScrollEvents = ({ inputData, canJoin, currentPage, refreshParameters}: ScrollEventProps) => {
     const navigation = useNavigation();
     const [refreshing, setRefreshing] = React.useState(false);
+
+    const eventController = new eventManager("All");
 
     const onRefresh = React.useCallback(() => {
       setRefreshing(true);
@@ -39,7 +42,7 @@ const ScrollEvents = ({ inputData, canJoin, currentPage, refreshParameters}: Scr
                   <Text style={browseStyle.PostText}>
                     {postObj.Title}
                     {"\n"}
-                    {toDateTime(postObj.Date.seconds).toDateString()}
+                    {eventController.toDateTime(postObj.Date.seconds).toDateString()}
                     {"\n"}
                     {postObj.StartTime} - {postObj.EndTime}
                     {"\n"}{postObj.spots - postObj.participants.length} Spots Left

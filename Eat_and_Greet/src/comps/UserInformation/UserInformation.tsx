@@ -22,11 +22,9 @@ const UserInformation = () => {
 
             <View id="Photos" style={styles.FlexOne}>
             <Text style={localstyles.Margin10}>Photos:</Text>
-                {/* <ArrowIcon> on click switch which photo is displayed in the require, probably through state</ArrowIcon> */}
                 <View id="Photo Placeholder" style={localstyles.PhotoPlaceholder}>
                     <Image style={localstyles.ImageStyling} source={require('../../../assets/images/placeholder.png')}></Image>
                 </View>
-                {/* <ArrowIcon></ArrowIcon> */}
             </View>
         </View>
     );
@@ -35,7 +33,8 @@ const UserInformation = () => {
 const localstyles = StyleSheet.create({
     OuterFlexBox: {
         flexDirection: 'column', 
-        flex: 1
+        flex: 1,
+        backgroundColor: "#E5E0FF"
     },
     Margin10: {
         margin: 10
@@ -54,8 +53,8 @@ const localstyles = StyleSheet.create({
     ImageStyling : {
         alignSelf: 'center', 
         resizeMode: "cover", 
-        height: 150, 
-        width: 200
+        height: 100, 
+        width: 100
     }
 });
 

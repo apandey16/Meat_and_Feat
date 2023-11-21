@@ -15,6 +15,7 @@ import RoundedButton from "../../comps/RoundedButton/RoundedButton";
 import GrowingTextbox from "../../comps/GrowingTextbox/textbox";
 import TextBox from "../../comps/Textbox/textbox";
 import NumberInput from "../../comps/NumberInput";
+import userManager from "../../logic/userManager";
 
 import styles from "../../style";
 import postStyle from "./index.styles";
@@ -22,6 +23,7 @@ import postStyle from "./index.styles";
 
 
 export default function PostEvent() {
+  const userController = new userManager();
   const route = useRoute();
   const forumName : number = route.params?.forumName;
   const [title, setTitle] = useState("");
@@ -37,27 +39,13 @@ export default function PostEvent() {
   
   let inputs = [title, dateOfEvent, startTime, endTime, description];
   const inputsAsString = ["Title", "Event Date", "Start Time", "End Time", "Description"];
+  let host = "";
 
-
-  const getUser = async () : Promise<void> => {
-    try{
-      let user = getAuth().currentUser;
-      const querySnapshot = await getDocs(
-        query(
-          collection(db, "Users"),
-          where("email", "==", user?.email)
-        )
-      );
-      querySnapshot.forEach((doc) => {
-        const first = doc.data().firstName as string;
-        const last = doc.data().lastName as string;
-        setName(first.concat(" ", last));
-      });
-    } catch (error) {
-      console.error("Error Getting Data From DB: ", error);
-    }
+  const getHost = async() => {
+    host = await userController.getUser();
   }
-  getUser();
+
+  getHost();
   const getNumberOfEventsData = async (numberOfEventsSnapshot : QuerySnapshot): Promise<number> => {
     try {
       let fetchedEventData: number = -1;
@@ -98,7 +86,7 @@ export default function PostEvent() {
             Category: forumName,
             Date: dateOfEvent,
             EndTime: endTime.toTimeString().split(' ')[0],
-            Host: name,
+            Host: host,
             StartTime: startTime.toTimeString().split(' ')[0],
             Title: title,
             id: uid,

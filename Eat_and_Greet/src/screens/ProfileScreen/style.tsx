@@ -73,7 +73,7 @@ const ProfileStyles = StyleSheet.create({
         flex: 4, 
         flexDirection: 'column', 
         margin: 5, 
-        backgroundColor: '#E5E0FF'
+        backgroundColor: '#8EA7E9'
       },
       BottomMargin: {
         marginBottom: 10
