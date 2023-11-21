@@ -1,16 +1,12 @@
 import { getAuth } from "firebase/auth";
 import { db } from "../../firebase/config";
-import {
-  collection,
-  getDocs,
-  query,
-  where,
-} from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 const GetUser = async (setCurrentUser: any): Promise<void> => {
   try {
     let user = getAuth().currentUser;
     if (user == null) {
+      setCurrentUser("User Not Found");
       return;
     }
     const querySnapshot = await getDocs(
@@ -21,6 +17,7 @@ const GetUser = async (setCurrentUser: any): Promise<void> => {
     }
   } catch (error) {
     console.error("Error Getting Data From DB: ", error);
+    setCurrentUser("User Not Found");
   }
 };
 

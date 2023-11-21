@@ -15,6 +15,7 @@ import sendMessage from "../../helpers/ChatScreen/SendMessage";
 import fetchData from "../../helpers/ChatScreen/FetchData";
 
 import ChatType from "../../types/ChatType";
+import UserStringType from "../../types/UserStringType";
 
 import styles from "../../style";
 import localstyles from "./style";
@@ -35,6 +36,9 @@ function ExampleChatScreen() {
 
   const [title, setTitle] = useState("Loading Chat");
   const [messages, setMessages] = useState(LoadingChatData[0]?.Messages);
+  const [memberStrings, setMemberStrings] = useState<[UserStringType] | null>(
+    null
+  );
   const [currentUser, setCurrentUser] = useState<DocumentReference | null>(
     null
   );
@@ -43,16 +47,26 @@ function ExampleChatScreen() {
 
   useEffect(() => {
     getUser(setCurrentUser);
-    fetchData(chatID, setTitle, setMessages);
   }, []);
+
+  useEffect(() => {
+    if (currentUser) {
+      fetchData(
+        chatID,
+        title,
+        setTitle,
+        setMessages,
+        setMemberStrings,
+        currentUser
+      );
+    }
+  }, [currentUser]);
 
   return (
     <View style={styles.ScreenContainer}>
-      <View style={styles.OuterBox}>
+      <KeyboardAwareScrollView contentContainerStyle={styles.OuterBox}>
         <SpecificChatHeader title={title} />
-        <KeyboardAwareScrollView
-          contentContainerStyle={[styles.InnerBox, localstyles.InnerBox]}
-        >
+        <View style={[styles.InnerBox, localstyles.InnerBox]}>
           <ScrollView
             ref={scrollViewRef}
             onContentSizeChange={() => scrollToBottom(scrollViewRef)}
@@ -61,6 +75,7 @@ function ExampleChatScreen() {
             {messages?.map((messageObj) => {
               let displayTime = "";
               let fromMe = false;
+              let sender: String | undefined = "User Unknown";
               if (messageObj.User.id.toString() == currentUser?.id.toString()) {
                 fromMe = true;
               }
@@ -75,12 +90,23 @@ function ExampleChatScreen() {
                   })
                   .toString();
               }
+              if (memberStrings) {
+                for (let i = 0; i < memberStrings.length; i++) {
+                  if (memberStrings[i]?.Id == messageObj.User.id.toString()) {
+                    sender = memberStrings[i]?.Name;
+                  }
+                }
+                if (sender == "Unknown User") {
+                  console.log(messageObj.User.id.toString());
+                }
+              }
 
               return (
                 <SpecificChatMessage
                   message={messageObj.Text}
                   sentFromMe={fromMe}
                   timeStamp={displayTime}
+                  sender={sender}
                   key={
                     messageObj.User.id.toString() +
                     messageObj.Time.toDate().toString()
@@ -95,7 +121,15 @@ function ExampleChatScreen() {
               sendMessage({
                 chatIDProp: chatID,
                 currentUserProp: currentUser,
-                fetchDataProp: () => fetchData(chatID, setTitle, setMessages),
+                fetchDataProp: () =>
+                  fetchData(
+                    chatID,
+                    title,
+                    setTitle,
+                    setMessages,
+                    setMemberStrings,
+                    currentUser
+                  ),
                 scrollViewRefProp: scrollViewRef,
                 sendingProp: sending,
                 setSendingProp: setSending,
@@ -105,8 +139,8 @@ function ExampleChatScreen() {
             }
             sending={sending}
           />
-        </KeyboardAwareScrollView>
-      </View>
+        </View>
+      </KeyboardAwareScrollView>
       <Toolbar />
     </View>
   );
