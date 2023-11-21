@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import Event from "../../logic/event";
 
 import browseStyle from "../../screens/BrowseEvents/index.styles";
-import eventManager from "../../logic/eventManager";
+import EventManager from "../../logic/EventManager";
 
 interface ScrollEventProps {
     inputData : Event[];
@@ -17,7 +17,7 @@ const ScrollEvents = ({ inputData, canJoin, currentPage, refreshParameters}: Scr
     const navigation = useNavigation();
     const [refreshing, setRefreshing] = React.useState(false);
 
-    const eventController = new eventManager("All");
+    const eventController = new EventManager("All");
 
     const onRefresh = React.useCallback(() => {
       setRefreshing(true);

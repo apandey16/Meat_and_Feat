@@ -15,7 +15,7 @@ import RoundedButton from "../../comps/RoundedButton/RoundedButton";
 import GrowingTextbox from "../../comps/GrowingTextbox/textbox";
 import TextBox from "../../comps/Textbox/textbox";
 import NumberInput from "../../comps/NumberInput";
-import userManager from "../../logic/userManager";
+import UserManager from "../../logic/UserManager";
 
 import styles from "../../style";
 import postStyle from "./index.styles";
@@ -23,7 +23,7 @@ import postStyle from "./index.styles";
 
 
 export default function PostEvent() {
-  const userController = new userManager();
+  const userController = new UserManager();
   const route = useRoute();
   const forumName : number = route.params?.forumName;
   const [title, setTitle] = useState("");

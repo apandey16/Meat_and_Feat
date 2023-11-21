@@ -11,14 +11,14 @@ import { Toolbar } from "../../comps/Toolbar/toolbar";
 import ScrollEvents from "../../comps/ScrollEvents/index"
 
 import createDefaultPostData from "../../logic/Factory";
-import eventManager from "../../logic/eventManager";
+import EventManager from "../../logic/EventManager";
 
 const postData = [ createDefaultPostData() ];
 
 export default function MyEvents() {
 
   const [data, setData] = useState(postData);
-  const eventController = new eventManager("All");
+  const eventController = new EventManager("All");
 
   const dataSetter = async () => {
     setData(await eventController.fetchData("My Events"))

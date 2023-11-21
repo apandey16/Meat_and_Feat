@@ -7,7 +7,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Toolbar } from '../../comps/Toolbar/toolbar';
 import RoundedButton from '../../comps/RoundedButton/RoundedButton';
 import Event from "../../logic/event";
-import eventManager from "../../logic/eventManager";
+import EventManager from "../../logic/EventManager";
 import  createDefaultPostData from "../../logic/Factory";
 
 import styles from '../../style';
@@ -25,7 +25,7 @@ function ViewEventScreen() {
 
   const [data, setData] = useState(postData);
 
- const eventController = new eventManager("All");
+ const eventController = new EventManager("All");
 
  const dataSetter = async () => {
    const dataList : Event[] = await eventController.fetchData("View Events", id.toString());
