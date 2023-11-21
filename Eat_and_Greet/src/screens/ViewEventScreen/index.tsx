@@ -10,7 +10,7 @@ import { getAuth } from "firebase/auth";
 
 import { Toolbar } from '../../comps/Toolbar/toolbar';
 import RoundedButton from '../../comps/RoundedButton/RoundedButton';
-import { EventData } from "../../logic/eventDataInterface";
+import { EventData, toDateTime } from "../../logic/eventDataInterface";
 import  createDefaultPostData from "../../logic/Factory";
 
 import styles from '../../style';
@@ -97,7 +97,7 @@ function ViewEventScreen() {
                 </View>
               </View>
               <View style={localstyles.descriptionContainerStyling}>
-                <Text style={localstyles.descriptionTextStyling}>Date: {data?.Date} </Text>
+                <Text style={localstyles.descriptionTextStyling}>Date: {toDateTime(data?.Date).toDateString()} </Text>
                 <Text style={localstyles.descriptionTextStyling}>Time: {data?.StartTime} - {data?.EndTime} </Text>
                 <Text style={localstyles.descriptionTextStyling}>Host Name: {data?.Host} </Text>
                 <Text style={localstyles.descriptionTextStyling}>Spots Filled: {(data?.participants??[]).length}/{data?.spots} </Text>

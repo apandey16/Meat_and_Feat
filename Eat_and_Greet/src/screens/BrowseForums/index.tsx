@@ -77,6 +77,7 @@ export default function BrowseForum() {
             });
             Alert.alert("Forum Successfully Created!");
             navigation.goBack();
+            navigation.navigate("Browse Forums");
           }
         } catch (error) {
           console.error("Error adding document: ", error);
@@ -94,7 +95,7 @@ export default function BrowseForum() {
           {data.map((forumObj) => (  
             <TouchableOpacity style={browseStyle.PostContainer}
             key={forumObj.ForumName}
-            onPress={() => navigation.navigate('Browse Event')}>
+            onPress={() => navigation.navigate('Browse Event', { forumName : forumObj.ForumName })}>
             <Text style={browseStyle.PostText}> {forumObj.ForumName} </Text>
             </TouchableOpacity>
             ))}

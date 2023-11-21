@@ -1,21 +1,35 @@
 import React from "react";
-import { Text, View, ScrollView, TouchableOpacity } from "react-native";
+import { Text, View, ScrollView, TouchableOpacity, RefreshControl } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { EventData } from "../../logic/eventDataInterface";
+import { EventData, toDateTime } from "../../logic/eventDataInterface";
 
 import browseStyle from "../../screens/BrowseEvents/index.styles";
 
 interface ScrollEventProps {
-    data : EventData[];
+    inputData : EventData[];
     canJoin : boolean;
+    currentPage : string;
+    refreshParameters: any;
   }
 
-const ScrollEvents = ({ data, canJoin } : ScrollEventProps) => {
+const ScrollEvents = ({ inputData, canJoin, currentPage, refreshParameters}: ScrollEventProps) => {
     const navigation = useNavigation();
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const onRefresh = React.useCallback(() => {
+      setRefreshing(true);
+      navigation.goBack();
+      navigation.navigate(currentPage, refreshParameters);
+      setTimeout(() => {
+        setRefreshing(false);
+      }, 2000);
+    }, []);
 
     return (
-        <ScrollView>
-            {data.length > 0 ? data.map((postObj) => (
+        <ScrollView refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh}></RefreshControl>
+        }>
+            {inputData.map((postObj) => (
               
                 <View
                   style={browseStyle.PostContainer}
@@ -25,15 +39,15 @@ const ScrollEvents = ({ data, canJoin } : ScrollEventProps) => {
                   <Text style={browseStyle.PostText}>
                     {postObj.Title}
                     {"\n"}
-                    {postObj.Date}
+                    {toDateTime(postObj.Date.seconds).toDateString()}
                     {"\n"}
                     {postObj.StartTime} - {postObj.EndTime}
-                    {"\n"}{postObj.spots-postObj.participants.length} Spots Left
+                    {"\n"}{postObj.spots - postObj.participants.length} Spots Left
                   </Text>
                   </TouchableOpacity>
                 </View>
               
-            )) : <View/>}
+            ))}
         </ScrollView>
     );
 };
