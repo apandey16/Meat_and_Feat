@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Text, View, TouchableOpacity, ScrollView} from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useNavigation, useRoute } from "@react-navigation/native";
 
@@ -10,9 +10,9 @@ import localstyles from './style';
 import SplitButton from '../../comps/SplitButtons/SplitButton';
 import UserInformation from '../../comps/UserInformation/UserInformation';
 import ScrollEvents from '../../comps/ScrollEvents';
-import eventManager from '../../logic/eventManager';
+import EventManager from '../../logic/EventManager';
 import createDefaultPostData from '../../logic/Factory';
-import userManager from '../../logic/userManager';
+import UserManager from '../../logic/UserManager';
 
 function ProfileScreen() {
   const route = useRoute();
@@ -21,8 +21,8 @@ function ProfileScreen() {
   const [attendedData, setAttendedData] = useState([createDefaultPostData()]);
   const [hostedData, setHostedData] = useState([createDefaultPostData()]);
   const [userName, setUserName] = useState("Name Loading");
-  const userController = new userManager();
-  const eventController = new eventManager("All");
+  const userController = new UserManager();
+  const eventController = new EventManager("All");
   const navigation = useNavigation();
   const toggleUserInfoVisibility = () => {
     setVisibleState(0);

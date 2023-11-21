@@ -11,7 +11,7 @@ import RoundedButton from "../../comps/RoundedButton/RoundedButton";
 import ScrollEvents from "../../comps/ScrollEvents";
 
 import createDefaultPostData from "../../logic/Factory";
-import eventManager from "../../logic/eventManager";
+import EventManager from "../../logic/EventManager";
 
 const postData = [createDefaultPostData()];
 
@@ -22,7 +22,7 @@ export default function BrowseEvent() {
   const route = useRoute();
   const forumName : string = route.params?.forumName;
 
-  const eventController = new eventManager(forumName);
+  const eventController = new EventManager(forumName);
 
   const dataSetter = async () => {
     setData(await eventController.fetchData("Browse Event"))

@@ -2,9 +2,7 @@ import { db } from "../firebase/config";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
-export default class userManager{
-
-    constructor(){};
+export default class UserManager{
 
     getUser = async () : Promise<string> => {
         try{

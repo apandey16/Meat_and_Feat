@@ -1,21 +1,21 @@
 import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import Event from "../logic/event";
+import Event from "./event";
 import createDefaultPostData from "./Factory";
 
 import { db } from "../firebase/config";
 import { collection, getDocs, query, where, getDoc, doc, updateDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-import userManager from "./userManager";
+import UserManager from "./UserManager";
 
-export default class eventManager{
+export default class EventManager{
 
     forumName : string;
     navigation = useNavigation();
 
     user = getAuth().currentUser?.email;
-    userController = new userManager();
+    userController = new UserManager();
     userName = "";
 
     getHost = async() => {
