@@ -27,7 +27,6 @@ const ScrollEvents = ({ inputData, canJoin, currentPage, refreshParameters}: Scr
         setRefreshing(false);
       }, 2000);
     }, []);
-
     return (
         <ScrollView refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh}></RefreshControl>

@@ -1,6 +1,5 @@
 export default class Event {
-    parameter : {
-        Category: string;
+    Category: string;
     Date: Date;
     EndTime: string;
     Host: string;
@@ -10,19 +9,18 @@ export default class Event {
     description: string;
     spots: number;
     participants: string[];
-}
 
     constructor(parameter : any){
-        this.parameter.Category = parameter.category;
-        this.parameter.Date = parameter.date;
-        this.parameter.EndTime = parameter.endTime;
-        this.parameter.Host = parameter.host;
-        this.parameter.StartTime = parameter.startTime;
-        this.parameter.Title = parameter.title;
-        this.parameter.id = parameter.id;
-        this.parameter.description = parameter.description;
-        this.parameter.spots = parameter.spots;
-        this.parameter.participants = parameter.participants;
+        this.Category = parameter.Category;
+        this.Date = parameter.Date;
+        this.EndTime = parameter.EndTime;
+        this.Host = parameter.Host;
+        this.StartTime = parameter.StartTime;
+        this.Title = parameter.Title;
+        this.id = parameter.id;
+        this.description = parameter.description;
+        this.spots = parameter.spots;
+        this.participants = parameter.participants;
     }
 
   }

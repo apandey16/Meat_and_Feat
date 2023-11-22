@@ -8,12 +8,10 @@ import { db } from "../firebase/config";
 import { collection, getDocs, query, where, getDoc, doc, updateDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import UserManager from "./UserManager";
-import Factory from "./Factory";
 
 export default class EventManager{
 
     forumName : string;
-
     user = getAuth().currentUser?.email;
     userController = new UserManager();
     userName = "";
@@ -28,12 +26,9 @@ export default class EventManager{
     
     getForumEventsData = async (forum: string): Promise<Event[]> => {
         try {
-        let upcomingEvents = null;
+        let upcomingEvents  = query(collection(db, "Events"), where("Date", ">=", new Date()), where("Category", "==", forum));
         if(forum == "All Events"){
             upcomingEvents  = query(collection(db, "Events"), where("Date", ">=", new Date()));
-
-        }else{
-            upcomingEvents  = query(collection(db, "Events"), where("Date", ">=", new Date()), where("Category", "==", forum));
         }
           const docRef = await getDocs(upcomingEvents);
           let fetchedEventData: Event[] = [];
@@ -51,7 +46,6 @@ export default class EventManager{
     getUserEventsData = async (): Promise<Event[]> => {
     try {
     const user = getAuth().currentUser;
-    const navigation = useNavigation();
         const ownedEvents  = query(collection(db, "Events"), where("participants","array-contains", user?.email), where("Date", ">=", new Date()));
         const docRef = await getDocs(ownedEvents);
         let fetchedEventData: Event[] = [];
@@ -60,7 +54,6 @@ export default class EventManager{
         });
         if(fetchedEventData.length == 0){
         Alert.alert("You Have No Joined Events");
-        navigation.goBack();
         }
         return fetchedEventData;
     } catch (error) {
@@ -111,10 +104,10 @@ export default class EventManager{
 
     handleJoin = async (data : Event, id : number) => {
         const navigation = useNavigation();
-        if(this.user != null && !data?.parameter.participants.includes(this.user)){
+        if(this.user != null && !data?.participants.includes(this.user)){
     
-          if(data?.parameter.spots > data?.parameter.participants.length) {
-            let participants = data?.parameter.participants;
+          if(data?.spots > data?.participants.length) {
+            let participants = data?.participants;
             participants.push(this.user);
     
             try {   
@@ -140,7 +133,7 @@ export default class EventManager{
 
     fetchData = async (page : string, uid ?: string) => {
     try {
-    let data : Event[] = [Factory()];
+    let data : Event[] = [createDefaultPostData()];
     if(page == "Browse Event"){
             data = await this.getForumEventsData(this.forumName);
     }

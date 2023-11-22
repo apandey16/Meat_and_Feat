@@ -13,9 +13,9 @@ import ScrollEvents from "../../comps/ScrollEvents/index"
 import createDefaultPostData from "../../logic/Factory";
 import EventManager from "../../logic/EventManager";
 
-const postData = [ createDefaultPostData() ];
 
 export default function MyEvents() {
+  const postData = [ createDefaultPostData() ];
 
   const [data, setData] = useState(postData);
   const eventController = new EventManager("All");
