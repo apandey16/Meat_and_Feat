@@ -15,8 +15,6 @@ import localstyles from './style';
 
 const postData = createDefaultPostData();
 
-
-
 function ViewEventScreen() {
 
   const route = useRoute();
@@ -25,7 +23,7 @@ function ViewEventScreen() {
 
   const [data, setData] = useState(postData);
 
- const eventController = new EventManager("All");
+ const eventController = new EventManager("All Events");
 
  const dataSetter = async () => {
    const dataList : Event[] = await eventController.fetchData("View Events", id.toString());

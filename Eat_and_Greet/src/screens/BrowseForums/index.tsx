@@ -107,7 +107,6 @@ export default function BrowseForum() {
         top={"-2%"}
       />
       <Toolbar/>
-      <StatusBar style="auto" />
     </SafeAreaView>
   );
 }

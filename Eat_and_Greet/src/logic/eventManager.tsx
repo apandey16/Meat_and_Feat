@@ -5,7 +5,7 @@ import Event from "./event";
 import createDefaultPostData from "./Factory";
 
 import { db } from "../firebase/config";
-import { collection, getDocs, query, where, getDoc, doc, updateDoc } from "firebase/firestore";
+import { collection, getDocs, query, where, getDoc, doc, updateDoc, setDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import UserManager from "./UserManager";
 
@@ -13,7 +13,7 @@ export default class EventManager{
 
     forumName : string;
     navigation = useNavigation();
-
+    inputsAsString = ["Title", "Event Date", "Start Time", "End Time", "Description"];
     user = getAuth().currentUser?.email;
     userController = new UserManager();
     userName = "";
@@ -158,6 +158,67 @@ export default class EventManager{
         return [];
     }
     };
+
+    getNumberOfEventsData = async (numberOfEventsSnapshot : QuerySnapshot): Promise<number> => {
+        try {
+          let fetchedEventData: number = -1;
+          numberOfEventsSnapshot.forEach((doc) => {
+            fetchedEventData = (doc.data().numberOfEvents as number);
+          });
+          return fetchedEventData;
+        } catch (error) {
+          console.error("Error Getting Data From DB: ", error);
+          return -1;
+        }
+      };
+    
+      addPostToDB = async (inputs : any) => {
+        let missing = new Array();
+        for (let i = 0; i < inputs.length; i++){
+          if(inputs[i].length <= 0){
+            missing.push(this.inputsAsString[i])
+          }
+        }
+        if (missing.length == 0) {
+          try {
+            const querySnapshot = await getDocs(
+              query(
+                collection(db, "Events"),
+                where("Title", "==", inputs.title),
+                where("Category", "==", inputs.forumName),
+                where("Date", "==", inputs.dateOfEvent)
+              )
+            );
+    
+            if (!querySnapshot.empty) {
+              Alert.alert("This Event is Already Happening Today");
+            } else {
+              const numberOfEventsSnapshot = await getDocs(collection(db, "Number of Events"));
+              let uid : number = await this.getNumberOfEventsData(numberOfEventsSnapshot) + 1;
+              await setDoc(doc(db, "Events", uid.toString()), {
+                Category: inputs.forumName,
+                Date: inputs.dateOfEvent,
+                EndTime: inputs.endTime.toTimeString().split(' ')[0],
+                Host: this.userName,
+                StartTime: inputs.startTime.toTimeString().split(' ')[0],
+                Title: inputs.title,
+                id: uid,
+                description: inputs.description,
+                spots: inputs.spots,
+                participants: [this.user]
+              });
+              await updateDoc(doc(db, "Number of Events", "Counter"),  { numberOfEvents: uid });
+              Alert.alert("Post Successfully Added!");
+              this.navigation.goBack();
+            }
+          } catch (error) {
+            console.error("Error adding document: ", error);
+          }
+        } else {
+          Alert.alert("Event Posting Is Missing The Following Data: " + missing.toString());
+        }
+      };
+
 
     toDateTime(secs : number) {
         const t = new Date(1970, 0, 1); 

@@ -1,21 +1,18 @@
 import React, { useState } from "react";
-import { Text, View, Image, Alert } from "react-native";
+import { Text, View, Image } from "react-native";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 import { StatusBar } from "expo-status-bar";
 
-import { db } from "../../firebase/config";
-import { collection, setDoc, getDocs, updateDoc, query, where, doc, QuerySnapshot } from "firebase/firestore";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import { getAuth } from "firebase/auth";
+import { useRoute } from "@react-navigation/native";
 
 import { Toolbar } from "../../comps/Toolbar/toolbar";
 import RoundedButton from "../../comps/RoundedButton/RoundedButton";
 import GrowingTextbox from "../../comps/GrowingTextbox/textbox";
 import TextBox from "../../comps/Textbox/textbox";
 import NumberInput from "../../comps/NumberInput";
-import UserManager from "../../logic/UserManager";
+import EventManager from "../../logic/EventManager";
 
 import styles from "../../style";
 import postStyle from "./index.styles";
@@ -23,87 +20,15 @@ import postStyle from "./index.styles";
 
 
 export default function PostEvent() {
-  const userController = new UserManager();
   const route = useRoute();
   const forumName : number = route.params?.forumName;
+  const eventController = new EventManager("All");
   const [title, setTitle] = useState("");
   const [dateOfEvent, setDateOfEvent] = useState(new Date());
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
   const [description, setDescription] = useState("");
   const [spots, setSpots] = useState("");
-
-  const navigation = useNavigation();
-
-  
-  let inputs = [title, dateOfEvent, startTime, endTime, description];
-  const inputsAsString = ["Title", "Event Date", "Start Time", "End Time", "Description"];
-  let host = "";
-
-  const getHost = async() => {
-    host = await userController.getUser();
-  }
-
-  getHost();
-  const getNumberOfEventsData = async (numberOfEventsSnapshot : QuerySnapshot): Promise<number> => {
-    try {
-      let fetchedEventData: number = -1;
-      numberOfEventsSnapshot.forEach((doc) => {
-        fetchedEventData = (doc.data().numberOfEvents as number);
-      });
-      return fetchedEventData;
-    } catch (error) {
-      console.error("Error Getting Data From DB: ", error);
-      return -1;
-    }
-  };
-
-  const addPostToDB = async () => {
-    let missing = new Array();
-    for (let i = 0; i < inputs.length; i++){
-      if(inputs[i].length <= 0){
-        missing.push(inputsAsString[i])
-      }
-    }
-    if (missing.length == 0) {
-      try {
-        const querySnapshot = await getDocs(
-          query(
-            collection(db, "Events"),
-            where("Title", "==", title),
-            where("Category", "==", forumName),
-            where("Date", "==", dateOfEvent)
-          )
-        );
-
-        if (!querySnapshot.empty) {
-          Alert.alert("This Event is Already Happening Today");
-        } else {
-          const numberOfEventsSnapshot = await getDocs(collection(db, "Number of Events"));
-          let uid : number = await getNumberOfEventsData(numberOfEventsSnapshot) + 1;
-          await setDoc(doc(db, "Events", uid.toString()), {
-            Category: forumName,
-            Date: dateOfEvent,
-            EndTime: endTime.toTimeString().split(' ')[0],
-            Host: host,
-            StartTime: startTime.toTimeString().split(' ')[0],
-            Title: title,
-            id: uid,
-            description: description,
-            spots: spots,
-            participants: [getAuth().currentUser?.email]
-          });
-          await updateDoc(doc(db, "Number of Events", "Counter"),  { numberOfEvents: uid });
-          Alert.alert("Post Successfully Added!");
-          navigation.goBack();
-        }
-      } catch (error) {
-        console.error("Error adding document: ", error);
-      }
-    } else {
-      Alert.alert("Event Posting Is Missing The Following Data: " + missing.toString());
-    }
-  };
 
   const date = (event: any, selectedDate: Date) => {
     setDateOfEvent(selectedDate);
@@ -188,7 +113,7 @@ export default function PostEvent() {
         </View>
       </KeyboardAwareScrollView>
       </View>
-      <RoundedButton name="Post Event" onPress={addPostToDB} />
+      <RoundedButton name="Post Event" onPress={() => eventController.addPostToDB({title : title, dateOfEvent : dateOfEvent, startTime : startTime, endTime : endTime, description : description, spots : spots, forumName : forumName})} />
       <Toolbar />
     </View>
   );
