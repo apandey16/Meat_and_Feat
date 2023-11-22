@@ -25,7 +25,7 @@
   },
   "include": [
     "./**/*.tsx"
-, "src/comps/RoundedHomeButton"  ],
+, "src/comps/RoundedHomeButton", "tests/authTests/login.test.ts"  ],
   "exclude": [
     "node_modules/**/*"
   ],
