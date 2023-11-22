@@ -31,7 +31,6 @@ export default function PostEvent() {
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
   const [description, setDescription] = useState("");
-  const [name, setName] = useState("");
   const [spots, setSpots] = useState("");
 
   const navigation = useNavigation();
