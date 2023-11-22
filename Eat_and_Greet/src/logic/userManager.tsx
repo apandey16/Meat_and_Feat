@@ -2,6 +2,8 @@ import { Alert } from "react-native";
 import { db } from "../firebase/config";
 import { collection, getDocs, query, where, updateDoc, doc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList} from 'App';
 
 export default class UserManager{
     user = getAuth().currentUser?.email;
@@ -69,6 +71,7 @@ export default class UserManager{
         }
       }
       addInterest = async(interest : string) : Promise<void> => {
+        const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
         try{
             const querySnapshot = await getDocs(
               query(

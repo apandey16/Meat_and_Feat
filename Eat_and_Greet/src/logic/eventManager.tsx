@@ -8,6 +8,7 @@ import { db } from "../firebase/config";
 import { collection, getDocs, query, where, getDoc, doc, updateDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import UserManager from "./UserManager";
+import Factory from "./Factory";
 
 export default class EventManager{
 
@@ -46,6 +47,7 @@ export default class EventManager{
     getUserEventsData = async (): Promise<Event[]> => {
     try {
     const user = getAuth().currentUser;
+    const navigation = useNavigation();
         const ownedEvents  = query(collection(db, "Events"), where("participants","array-contains", user?.email), where("Date", ">=", new Date()));
         const docRef = await getDocs(ownedEvents);
         let fetchedEventData: Event[] = [];
@@ -104,7 +106,6 @@ export default class EventManager{
 
     handleJoin = async (data : Event, id : number) => {
         const navigation = useNavigation();
-        if(this.user != null && !data?.participants.includes(this.user)){
     
           if(data?.spots > data?.participants.length) {
             let participants = data?.participants;
