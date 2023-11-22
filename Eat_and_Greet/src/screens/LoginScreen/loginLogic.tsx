@@ -5,8 +5,8 @@ import { auth } from '../../firebase/config';
 
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
-const navigation = useNavigation();
 function loginUser(email: string, password: string) {   
+    const navigation = useNavigation();
     return async () => {   
         try {
             await signInWithEmailAndPassword(auth, email, password);
