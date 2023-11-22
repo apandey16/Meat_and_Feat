@@ -5,6 +5,7 @@ import { collection, getDocs, query, where, updateDoc, doc } from "firebase/fire
 import { getAuth } from "firebase/auth";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList} from 'App';
+
 export default class UserManager{
     user = getAuth().currentUser?.email;
 
