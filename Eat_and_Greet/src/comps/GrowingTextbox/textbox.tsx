@@ -31,12 +31,12 @@ export default class GrowingTextbox extends Component {
 
     return (
     <TextInput
-      placeholder="Your Placeholder"
+      placeholder={this.props.placeholder}
       onChangeText={(value) => this.handleText(value)}
       style={newStyle}
       editable={true}
       multiline={true}
-      value={value}
+      value={this.props.onProfile ? this.props.placeholder : value}
       onContentSizeChange={(e) => this.updateSize(e.nativeEvent.contentSize.height)}
     />
     )

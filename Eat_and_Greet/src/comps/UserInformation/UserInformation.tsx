@@ -1,32 +1,43 @@
-import React from 'react';
-import { Image, ScrollView, Text, View, StyleSheet } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { Image, ScrollView, Text, View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import CircularIcon from '../CircularIcon/CircularIcon';
 import styles from '../../style';
- 
+ import UserManager from '../../logic/UserManager';
+
+interface UserInformationProps {
+    editing : boolean;
+}
 
 
-const UserInformation = () => {
+
+const UserInformation = ({editing} : UserInformationProps) => {
+    const userController = new UserManager();
+
+    const [data, setData] = useState([]);
+
+    const getData = async() => {
+        setData(await userController.getInterests());
+      }
+      useEffect(() => {
+        getData();
+      }, []);
     return (
         <View style={localstyles.OuterFlexBox}>
             <View id="Interests" style={styles.FlexOne}>
                 <Text style={localstyles.Margin10}>Interests:</Text>
                 <ScrollView id="Interest boxes" horizontal={true} style={localstyles.InterestBoxes}>
-                    <CircularIcon title="Cooking" buttonSize={80}></CircularIcon>
-                    <CircularIcon title="Sleeping" buttonSize={80}></CircularIcon>
-                    <CircularIcon title="Coding" buttonSize={80}></CircularIcon>
-                    <CircularIcon title="Cleaning" buttonSize={80}></CircularIcon>
-                    <CircularIcon title="Philosophy" buttonSize={80}></CircularIcon>
-
+                {data.map((interest) => (
+                    <CircularIcon key={interest} title={interest} buttonSize={80}></CircularIcon>
+                    ))}                    
+                {editing ? <TouchableOpacity onPress={() => Alert.prompt("Add An Interest!", "Max 14 Characters", text => userController.addInterest(text))}><CircularIcon title="+" buttonSize={80}></CircularIcon></TouchableOpacity> : <View></View>}
                 </ScrollView>
             </View>
 
             <View id="Photos" style={styles.FlexOne}>
             <Text style={localstyles.Margin10}>Photos:</Text>
-                {/* <ArrowIcon> on click switch which photo is displayed in the require, probably through state</ArrowIcon> */}
                 <View id="Photo Placeholder" style={localstyles.PhotoPlaceholder}>
                     <Image style={localstyles.ImageStyling} source={require('../../../assets/images/placeholder.png')}></Image>
                 </View>
-                {/* <ArrowIcon></ArrowIcon> */}
             </View>
         </View>
     );
@@ -35,7 +46,8 @@ const UserInformation = () => {
 const localstyles = StyleSheet.create({
     OuterFlexBox: {
         flexDirection: 'column', 
-        flex: 1
+        flex: 1,
+        backgroundColor: "#E5E0FF"
     },
     Margin10: {
         margin: 10
@@ -54,8 +66,8 @@ const localstyles = StyleSheet.create({
     ImageStyling : {
         alignSelf: 'center', 
         resizeMode: "cover", 
-        height: 150, 
-        width: 200
+        height: 100, 
+        width: 100
     }
 });
 

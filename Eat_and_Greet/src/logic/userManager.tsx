@@ -1,0 +1,130 @@
+import { Alert } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { db } from "../firebase/config";
+import { collection, getDocs, query, where, updateDoc, doc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+
+export default class UserManager{
+    user = getAuth().currentUser?.email;
+    navigation = useNavigation();
+
+    getEmail = () => {
+        return getAuth().currentUser?.email
+    }
+
+    getUser = async () : Promise<string> => {
+        try{
+          const querySnapshot = await getDocs(
+            query(
+              collection(db, "Users"),
+              where("email", "==", this.getEmail())
+            )
+          );
+          let fullName = "";
+          querySnapshot.forEach((doc) => {
+            const first = doc.data().firstName as string;
+            const last = doc.data().lastName as string;
+            fullName = (first.concat(" ", last));
+          });
+          return fullName;
+        } catch (error) {
+          console.error("Error Getting Data From DB: ", error);
+          return "";
+        }
+      }
+
+      getDescription = async () : Promise<string> => {
+        try{
+          const querySnapshot = await getDocs(
+            query(
+              collection(db, "Users"),
+              where("email", "==", this.getEmail())
+            )
+          );
+          let description = "";
+          querySnapshot.forEach((doc) => {
+            description = doc.data().description as string;
+          });
+          return description;
+        } catch (error) {
+          console.error("Error Getting Data From DB: ", error);
+          return "";
+        }
+      }
+
+      getInterests = async () : Promise<string[]> => {
+        try{
+          const querySnapshot = await getDocs(
+            query(
+              collection(db, "Users"),
+              where("email", "==", this.getEmail())
+            )
+          );
+          let interests = [];
+          querySnapshot.forEach((doc) => {
+            interests = doc.data().interests;
+          });
+          return interests;
+        } catch (error) {
+          console.error("Error Getting Data From DB: ", error);
+          return [];
+        }
+      }
+
+      addInterest = async(interest : string) : Promise<void> => {
+        try{
+            const querySnapshot = await getDocs(
+              query(
+                collection(db, "Users"),
+                where("email", "==", this.getEmail())
+              )
+            );
+            let interests : string[] = [];
+            let id = ""
+            querySnapshot.forEach((doc) => {
+              interests = doc.data().interests;
+              id = doc.data().uid;
+            });
+            if(interests.includes(interest)){
+                Alert.alert("That Is Already One Of Your Interests!")
+            }else{
+                try {  
+                    interests.push(interest); 
+                    await updateDoc(doc(db, "Users", id),  { interests: interests });
+                    Alert.alert("Interest Added Successfully!");
+                    this.navigation.goBack();
+                    this.navigation.navigate("Profile", {visibleScreen : 0, editing : 1});
+                } catch (error) {
+                  console.error("Error adding document: ", error);
+                  Alert.alert("There Was An Issue Adding This Interest, Please Try Again Later")
+                }
+            }
+          } catch (error) {
+            console.error("Error Getting Data From DB: ", error);
+          }
+      } 
+
+      addDescription = async(description : string) : Promise<void> => {
+        try{
+            const querySnapshot = await getDocs(
+              query(
+                collection(db, "Users"),
+                where("email", "==", this.getEmail())
+              )
+            );
+            let id = "";
+            querySnapshot.forEach((doc) => {
+              id = doc.data().uid;
+            });
+            
+            try {  
+                await updateDoc(doc(db, "Users", id),  { description: description });
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                Alert.alert("There Was An Issue Saving The Changes, Please Try Again Later")
+            }
+          } catch (error) {
+            console.error("Error Getting Data From DB: ", error);
+          }
+      } 
+}
