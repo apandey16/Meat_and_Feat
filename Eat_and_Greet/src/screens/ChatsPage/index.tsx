@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { View, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { DocumentReference } from "firebase/firestore";
 
 import ChatCard from "../../comps/ChatCard/ChatCard";
 import { Toolbar } from "../../comps/Toolbar/toolbar";
 
 import fetchData from "../../helpers/ChatsScreen/FetchData";
+import getUser from "../../helpers/ChatScreen/GetUser";
 
 import ChatType from "../../types/ChatType";
 
@@ -16,18 +18,40 @@ const LoadingChatData: ChatType[] = [
     Id: "-1",
     Members: [],
     Messages: [],
-    Title: "Loading Chats Now",
+    Title: "Loading Chats...",
+  },
+];
+
+const LoggedOutChatData: ChatType[] = [
+  {
+    Id: "-1",
+    Members: [],
+    Messages: [],
+    Title: "You Need to Log In To View Chats",
   },
 ];
 
 function HomeScreen() {
   const [data, setData] = useState(LoadingChatData);
+  const [currentUser, setCurrentUser] = useState<
+    DocumentReference | string | null
+  >(null);
 
   const navigation = useNavigation();
 
   useEffect(() => {
-    fetchData(setData);
+    getUser(setCurrentUser);
   }, []);
+
+  useEffect(() => {
+    if (currentUser) {
+      if (currentUser == "User Not Found") {
+        setData(LoggedOutChatData);
+      } else {
+        fetchData(setData, currentUser);
+      }
+    }
+  }, [currentUser]);
 
   return (
     <View style={styles.ScreenContainer}>
