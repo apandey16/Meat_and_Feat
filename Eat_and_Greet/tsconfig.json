@@ -5,13 +5,15 @@
       "ESNext",
       "dom"
     ],
+    "paths": {
+      "@firebase/auth": ["./node_modules/@firebase/auth/dist/index.rn.d.ts"]
+    },
     "outDir": "lib",
     "removeComments": true,
     "target": "ES6",
     "baseUrl": "./",
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "paths": {},
     "sourceMap": true,
     "sourceRoot": "/",
     "alwaysStrict": true,
@@ -25,7 +27,7 @@
   },
   "include": [
     "./**/*.tsx"
-, "src/comps/RoundedHomeButton"  ],
+, "src/comps/RoundedHomeButton", "tests/authTests/login.test.ts"  ],
   "exclude": [
     "node_modules/**/*"
   ],

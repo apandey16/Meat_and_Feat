@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Alert, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import React, { useState} from 'react';
 
 import { useNavigation } from '@react-navigation/native';
@@ -6,35 +6,18 @@ import { StatusBar } from 'expo-status-bar';
 
 import RoundedButton from '../../comps/RoundedButton/RoundedButton';
 import ScreenSplitLine from '../../comps/ScreenSplitLine';
-import { auth } from '../../firebase/config';
 
 
 import localStyles from './index.styles';
 import styles from '../../style';
 import textboxStyles from '../../comps/Textbox/style';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import loginUser from './loginLogic';
 
 
 function LoginScreen() {
     const navigation = useNavigation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    const loginUser = async () => {
-        try {
-          await signInWithEmailAndPassword(auth, email, password);
-          console.log('User logged in successfully');
-          navigation.navigate('Home');
-        } catch (error) {
-          if (error.code === 'auth/invalid-email' || error.code === 'auth/wrong-password') {
-            Alert.alert('Your email or password was incorrect');
-          } else if (error.code === 'auth/email-already-in-use') {
-            Alert.alert('An account with this email already exists');
-          } else {
-            Alert.alert('There was a problem with your request. Please try again later.');
-          }
-        }
-      };
 
     return (
       <ScrollView>
@@ -55,7 +38,7 @@ function LoginScreen() {
                   <TouchableOpacity onPress={() => navigation.navigate('Password Reset')}>
                         <Text style={[localStyles.link]}>Reset Password</Text>
                     </TouchableOpacity>
-                    <RoundedButton name="Sign In" top="-5%" width="65%" height="15%" onPress={loginUser}/>
+                    <RoundedButton name="Sign In" top="-5%" width="65%" height="15%" onPress={loginUser(email, password)}/>
                 </View>                 
                 
             </View>
