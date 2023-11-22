@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.19.7",
     "@react-native-async-storage/root": "github:react-native-async-storage/async-storage",
     "@react-native-community/datetimepicker": "7.2.0",
     "@react-navigation/native": "^6.1.8",
@@ -44,5 +45,6 @@
     "ts-jest": "^29.1.1",
     "typescript": "^5.2.2"
   },
-  "private": true
+  "private": true,
+  "type": "module"
 }

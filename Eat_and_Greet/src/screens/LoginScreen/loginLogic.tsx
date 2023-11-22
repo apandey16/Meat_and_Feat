@@ -4,9 +4,12 @@ import { useNavigation } from '@react-navigation/native';
 import { auth } from '../../firebase/config';
 
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from 'App';
+
 
 function loginUser(email: string, password: string) {   
-    const navigation = useNavigation();
+    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
     return async () => {   
         try {
             await signInWithEmailAndPassword(auth, email, password);

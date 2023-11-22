@@ -55,6 +55,11 @@ const onboardingStackArray = [ { name:"Basic Info", comp: BasicInfoScreen },
 const Stack = createNativeStackNavigator();
 const OnboardingNavigation = createNativeStackNavigator();
 
+export type RootStackParamList = {
+  Home: undefined,
+  Settings: { itemId: number, otherParams: string}; 
+};
+
 const headerLeftFunction = () => <HeaderBackButton />;
 
 export default function App() {

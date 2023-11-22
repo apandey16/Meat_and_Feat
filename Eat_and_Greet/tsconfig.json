@@ -5,13 +5,15 @@
       "ESNext",
       "dom"
     ],
+    "paths": {
+      "@firebase/auth": ["./node_modules/@firebase/auth/dist/index.rn.d.ts"]
+    },
     "outDir": "lib",
     "removeComments": true,
     "target": "ES6",
     "baseUrl": "./",
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "paths": {},
     "sourceMap": true,
     "sourceRoot": "/",
     "alwaysStrict": true,
