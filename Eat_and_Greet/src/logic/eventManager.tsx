@@ -8,11 +8,11 @@ import { db } from "../firebase/config";
 import { collection, getDocs, query, where, getDoc, doc, updateDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import UserManager from "./UserManager";
+import Factory from "./Factory";
 
 export default class EventManager{
 
     forumName : string;
-    navigation = useNavigation();
 
     user = getAuth().currentUser?.email;
     userController = new UserManager();
@@ -51,6 +51,7 @@ export default class EventManager{
     getUserEventsData = async (): Promise<Event[]> => {
     try {
     const user = getAuth().currentUser;
+    const navigation = useNavigation();
         const ownedEvents  = query(collection(db, "Events"), where("participants","array-contains", user?.email), where("Date", ">=", new Date()));
         const docRef = await getDocs(ownedEvents);
         let fetchedEventData: Event[] = [];
@@ -59,7 +60,7 @@ export default class EventManager{
         });
         if(fetchedEventData.length == 0){
         Alert.alert("You Have No Joined Events");
-        this.navigation.goBack();
+        navigation.goBack();
         }
         return fetchedEventData;
     } catch (error) {
@@ -109,7 +110,7 @@ export default class EventManager{
     };
 
     handleJoin = async (data : Event, id : number) => {
-
+        const navigation = useNavigation();
         if(this.user != null && !data?.parameter.participants.includes(this.user)){
     
           if(data?.parameter.spots > data?.parameter.participants.length) {
@@ -119,7 +120,7 @@ export default class EventManager{
             try {   
               await updateDoc(doc(db, "Events", id.toString()),  { participants: participants });
               Alert.alert("Event Joined Successfully!");
-              this.navigation.goBack();
+              navigation.goBack();
     
           } catch (error) {
             console.error("Error adding document: ", error);
@@ -128,25 +129,25 @@ export default class EventManager{
     
           }else{
             Alert.alert("This Event Is Already Full!");
-            this.navigation.goBack();
+            navigation.goBack();
           }
         }else{
           Alert.alert("User Is Already Enrolled In This Event");
-          this.navigation.goBack();
+          navigation.goBack();
         }
      }
 
 
     fetchData = async (page : string, uid ?: string) => {
     try {
-    let data = [];
+    let data : Event[] = [Factory()];
     if(page == "Browse Event"){
             data = await this.getForumEventsData(this.forumName);
     }
     else if(page == "My Events"){
         data = await this.getUserEventsData();
     }else if(page == "View Events"){
-        data = [await this.getEventDataById(uid)];
+        data = [await this.getEventDataById(uid??"")];
     }else if(page == "Attended Events"){
         data = await this.getUserPastEventsData(false);
     }else if(page == "Hosted Events"){

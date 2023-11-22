@@ -57,6 +57,12 @@ const OnboardingNavigation = createNativeStackNavigator();
 
 const headerLeftFunction = () => <HeaderBackButton />;
 
+export type RootStackParamList = {
+  Home : undefined,
+  Settings : undefined,
+  Profile : {visibleScreen : number, editing : number}
+};
+
 export default function App() {
 
   return (
@@ -85,3 +91,4 @@ function OnboardingPagesNavigation(){
     </OnboardingNavigation.Navigator>
   );
 }
+
