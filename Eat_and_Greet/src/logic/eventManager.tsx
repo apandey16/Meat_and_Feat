@@ -110,10 +110,10 @@ export default class EventManager{
 
     handleJoin = async (data : Event, id : number) => {
 
-        if(this.user != null && !data?.participants.includes(this.user)){
+        if(this.user != null && !data?.parameter.participants.includes(this.user)){
     
-          if(data?.spots > data?.participants.length) {
-            let participants = data?.participants;
+          if(data?.parameter.spots > data?.parameter.participants.length) {
+            let participants = data?.parameter.participants;
             participants.push(this.user);
     
             try {   
