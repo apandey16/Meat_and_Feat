@@ -6,8 +6,8 @@ import UserStringType from "../../types/UserStringType";
 const FetchData = async (members: any, setMemberStrings: any) => {
   try {
     const memberIDStrings: string[] = [];
-    for (let i = 0; i < members.length; i++) {
-      memberIDStrings.push(members[i].id.toString());
+    for (const member of members) {
+      memberIDStrings.push(member.id.toString());
     }
 
     const userDocs = await getDocs(collection(db, "Users"));

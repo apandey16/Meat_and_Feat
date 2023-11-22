@@ -75,7 +75,7 @@ function ExampleChatScreen() {
             {messages?.map((messageObj) => {
               let displayTime = "";
               let fromMe = false;
-              let sender: String | undefined = "User Unknown";
+              let sender: string | undefined = "User Unknown";
               if (messageObj.User.id.toString() == currentUser?.id.toString()) {
                 fromMe = true;
               }
@@ -91,9 +91,9 @@ function ExampleChatScreen() {
                   .toString();
               }
               if (memberStrings) {
-                for (let i = 0; i < memberStrings.length; i++) {
-                  if (memberStrings[i]?.Id == messageObj.User.id.toString()) {
-                    sender = memberStrings[i]?.Name;
+                for (const memberString of memberStrings) {
+                  if (memberString.Id == messageObj.User.id.toString()) {
+                    sender = memberString.Name;
                   }
                 }
                 if (sender == "Unknown User") {

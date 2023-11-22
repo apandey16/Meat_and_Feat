@@ -25,12 +25,12 @@ const GetChatsData = async (currentUser: any): Promise<ChatType[]> => {
       chatData.Messages = messagesData;
 
       let UserIsAMember = false;
-      for (let i = 0; i < chatData.Members.length; i++) {
-        if (currentUser.id.toString() == chatData.Members[i]?.id.toString()) {
+      for (const member of chatData.Members) {
+        if (currentUser.id.toString() == member.id.toString()) {
           UserIsAMember = true;
         }
       }
-      if (UserIsAMember == true) {
+      if (UserIsAMember) {
         if (chatData.Title == "DM") {
           chatData.Title = await SetDMTitle(currentUser, chatData.Members);
         }

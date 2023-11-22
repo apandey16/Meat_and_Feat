@@ -1,6 +1,6 @@
 interface UserStringType {
-  Id: String;
-  Name: String;
+  Id: string;
+  Name: string;
 }
 
 export default UserStringType;

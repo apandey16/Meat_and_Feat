@@ -3,9 +3,10 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 
 const SetDMTitle = async (currentUser: any, memberList: any) => {
   let dmToUser = "";
-  for (let i = 0; i < memberList.length; i++) {
-    if (memberList[i].id.toString() != currentUser.id.toString()) {
-      dmToUser = memberList[i].id.toString();
+  for (const member of memberList) {
+    if (member.id.toString() !== currentUser.id.toString()) {
+      dmToUser = member.id.toString();
+      break;
     }
   }
   if (dmToUser != "") {
