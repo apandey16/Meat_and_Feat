@@ -44,7 +44,7 @@ function HomeScreen() {
             />
           </View>
           <View style={localStyles.ButtonLine}>
-            <HomePageButton onPress={() => navigation.navigate('Profile', {visibleScreen : 0})}
+            <HomePageButton onPress={() => navigation.navigate('Profile', {visibleScreen : 0, editing : 0})}
                           textLine1='Account'
                           fontSize={ getFontSize(32) }
             />
