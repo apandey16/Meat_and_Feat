@@ -35,8 +35,7 @@ if (!getApps().length) {
 } else {
   app = getApp();
   auth = getAuth(app);
-  db = getFirestore(app);
+  db = getFirestore(app); 
 }
 
-
-export { auth, db }
+export { auth, db, app }
