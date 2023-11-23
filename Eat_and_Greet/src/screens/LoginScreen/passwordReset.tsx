@@ -9,7 +9,6 @@ import { auth } from '../../firebase/config';
 
 import localStyles from './index.styles';
 import styles from '../../style';
-import { sendPasswordResetEmail } from 'firebase/auth';
 import resetUserPassword from '../../logic/PasswordResetLogic';
 
 function PasswordReset() {
