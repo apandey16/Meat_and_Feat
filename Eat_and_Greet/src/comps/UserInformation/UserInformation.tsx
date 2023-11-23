@@ -13,9 +13,13 @@ const UserInformation = ({editing} : UserInformationProps) => {
     const userController = new UserManager();
     const spaceController = new SpaceManager();
     const [data, setData] = useState([]);
+    const [email, setEmail] = useState("");
 
     const getData = async() => {
-        setData(await userController.getInterests());
+        const email = await userController.getEmail();
+        setEmail(email!);
+
+        setData(await userController.getInterests(email));
       }
       useEffect(() => {
         getData();
@@ -29,7 +33,7 @@ const UserInformation = ({editing} : UserInformationProps) => {
                 {data.map((interest) => (
                     <CircularIcon key={interest} title={interest} buttonSize={80}></CircularIcon>
                     ))}                    
-                {editing ? <TouchableOpacity onPress={() => Alert.prompt("Add An Interest!", "Max 14 Characters", text => spaceController.implementInterest(userController, text))}><CircularIcon title="+" buttonSize={80}></CircularIcon></TouchableOpacity> : <View></View>}
+                {editing ? <TouchableOpacity onPress={() => Alert.prompt("Add An Interest!", "Max 14 Characters", text => spaceController.implementInterest(userController, email,  text))}><CircularIcon title="+" buttonSize={80}></CircularIcon></TouchableOpacity> : <View></View>}
                 </ScrollView>
             </View>
 

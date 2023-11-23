@@ -7,9 +7,10 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "jest"
-  },
+    "test" : "jest"
+    },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.19.8",
     "@react-native-async-storage/root": "github:react-native-async-storage/async-storage",
     "@react-native-community/datetimepicker": "7.2.0",
     "@react-navigation/native": "^6.1.8",
@@ -46,21 +47,26 @@
     "typescript": "^5.3.2"
   },
   "jest": {
-    "presets": ["@babel/preset-env", "@babel/preset-react"],
+    "setupFiles" : ["dotenv/config"],
     "moduleFileExtensions": [
       "ts",
       "tsx",
-      "js"
+      "js",
+      "d.ts",
+      ".env"
     ],
     "transform": {
       "^.+\\.(js)$": "<rootDir>/node_modules/babel-jest",
       "\\.(ts|tsx)$": "ts-jest"
     },
     "transformIgnorePatterns": [
-      "<rootDir>/node_modules/(?!react|@react-native|react-native|react-navigation|@react-navigation|firebase|@firebase/)"],
+      "<rootDir>/node_modules/(?!react|@react-native|react-native|react-navigation|@react-navigation|firebase|@firebase/)"
+    ],
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
     "cacheDirectory": ".jest/cache",
-    "globals" : { "__DEV__" : true }
+    "globals": {
+      "__DEV__": true
+    }
   },
   "private": true,
   "type": "module"

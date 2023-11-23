@@ -33,6 +33,7 @@ yarn-error.*
 # local env files
 .env*.local
 .env
+src/firebase/eatngreet-42c5d-firebase-adminsdk-tv9j8-c30b6c946e.json
 
 # typescript
 *.tsbuildinfo

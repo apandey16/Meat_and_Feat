@@ -5,25 +5,27 @@ import Event from "./event";
 import createDefaultPostData from "./Factory";
 
 import { db } from "../firebase/config";
-import { collection, getDocs, query, where, getDoc, doc, updateDoc } from "firebase/firestore";
+import { collection, getDocs, query, where, getDoc, doc, updateDoc, setDoc, QuerySnapshot, deleteDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import UserManager from "./UserManager";
 
 export default class EventManager{
 
     forumName : string;
-    user = getAuth().currentUser?.email;
     userController = new UserManager();
     userName = "";
+    email : string
+    user : string;
+    inputsAsString = ["Title", "Event Date", "Start Time", "End Time", "Description"];
+    constructor(forumName : string, user : string){
+        this.forumName = forumName;
+        this.user = user
+    };
 
     getHost = async() => {
-      this.userName = await this.userController.getUser();
-    }
-
-    constructor(forumName : string){
-        this.forumName = forumName;
-    };
-    
+        this.userName = await this.userController.getUser(this.user);
+      }
+      
     getForumEventsData = async (forum: string): Promise<Event[]> => {
         try {
         let upcomingEvents  = query(collection(db, "Events"), where("Date", ">=", new Date()), where("Category", "==", forum));
@@ -33,7 +35,9 @@ export default class EventManager{
           const docRef = await getDocs(upcomingEvents);
           let fetchedEventData: Event[] = [];
           docRef.forEach((doc) => {
-            fetchedEventData.push(doc.data() as Event);
+            if(doc.data().Category != "Testing"){
+                fetchedEventData.push(doc.data() as Event);
+            }
           });
           return fetchedEventData;
         } catch (error) {
@@ -45,7 +49,7 @@ export default class EventManager{
 
     getUserEventsData = async (): Promise<Event[]> => {
     try {
-    const user = getAuth().currentUser;
+        const user = getAuth().currentUser;
         const ownedEvents  = query(collection(db, "Events"), where("participants","array-contains", user?.email), where("Date", ">=", new Date()));
         const docRef = await getDocs(ownedEvents);
         let fetchedEventData: Event[] = [];
@@ -152,6 +156,73 @@ export default class EventManager{
         return [];
     }
     };
+
+    getNumberOfEventsData = async (numberOfEventsSnapshot : QuerySnapshot): Promise<number> => {
+        try {
+          let fetchedEventData: number = -1;
+          numberOfEventsSnapshot.forEach((doc) => {
+            fetchedEventData = (doc.data().numberOfEvents as number);
+          });
+          return fetchedEventData;
+        } catch (error) {
+          console.error("Error Getting Data From DB: ", error);
+          return -1;
+        }
+      };
+    
+      addPostToDB = async (eventDetails : Event) => {
+        const inputs = [eventDetails.Title, eventDetails.Date.toDateString(), eventDetails.StartTime, eventDetails.EndTime, eventDetails.description];
+
+        let missing = new Array();
+        for (let i = 0; i < inputs.length; i++){
+          if(inputs[i]!.length <= 0){
+            missing.push(this.inputsAsString[i])
+          }
+        }
+        if (missing.length == 0) {
+          try {
+            const querySnapshot = await getDocs(
+              query(
+                collection(db, "Events"),
+                where("Title", "==", eventDetails.Title),
+                where("Category", "==", eventDetails.Category),
+                where("Date", "==", eventDetails.Date)
+              )
+            );
+    
+            if (!querySnapshot.empty) {
+              Alert.alert("This Event is Already Happening Today");
+            } else {
+              const numberOfEventsSnapshot = await getDocs(collection(db, "Number of Events"));
+              let uid : number = await this.getNumberOfEventsData(numberOfEventsSnapshot) + 1;
+              console.log(uid);
+              let newUid : string = uid.toString();
+              await setDoc(doc(db, "Events", newUid), {
+                Category: eventDetails.Category,
+                Date: eventDetails.Date,
+                EndTime: eventDetails.EndTime,
+                Host: eventDetails.Host,
+                StartTime: eventDetails.StartTime,
+                Title: eventDetails.Title,
+                id: newUid,
+                description: eventDetails.description,
+                spots: eventDetails.spots,
+                participants: [getAuth().currentUser?.email]
+              });
+              await updateDoc(doc(db, "Number of Events", "Counter"),  { numberOfEvents: uid });
+              Alert.alert("Post Successfully Added!");
+            }
+          } catch (error) {
+            console.error("Error adding document: ", error);
+          }
+        } else {
+          Alert.alert("Event Posting Is Missing The Following Data: " + missing.toString());
+        }
+      };
+
+      delete = async(id : string) => {
+        await deleteDoc(doc(db, "Events", id));
+      }
 
     toDateTime(secs : number) {
         const t = new Date(1970, 0, 1); 

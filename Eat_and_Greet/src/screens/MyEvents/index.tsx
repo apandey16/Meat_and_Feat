@@ -12,13 +12,14 @@ import ScrollEvents from "../../comps/ScrollEvents/index"
 
 import createDefaultPostData from "../../logic/Factory";
 import EventManager from "../../logic/EventManager";
-
+import UserManager from "../../logic/UserManager";
 
 export default function MyEvents() {
   const postData = [ createDefaultPostData() ];
-
+  const userController = new UserManager();
+  const email : string = userController.getEmail() ?? "";
   const [data, setData] = useState(postData);
-  const eventController = new EventManager("All");
+  const eventController = new EventManager("All", email);
 
   const dataSetter = async () => {
     setData(await eventController.fetchData("My Events"))

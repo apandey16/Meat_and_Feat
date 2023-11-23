@@ -19,21 +19,22 @@ function ProfileScreen() {
   const route = useRoute();
   const visibleScreen : number = route.params?.visibleScreen;
   const isEditing : number = route.params?.editing;
+  const userController = new UserManager();
+  const email : string = userController.getEmail() ?? "";
   const [visibleState, setVisibleState] = useState(visibleScreen);
   const [editing, setEditing] = useState(isEditing);
   const [attendedData, setAttendedData] = useState([createDefaultPostData()]);
   const [hostedData, setHostedData] = useState([createDefaultPostData()]);
   const [userName, setUserName] = useState("Name Loading");
   const [description, setDescription] = useState("Description Loading");
-  const userController = new UserManager();
-  const eventController = new EventManager("All");
+  const eventController = new EventManager("All", email);
   const navigation = useNavigation();
   const toggleEditingOn = () => {
     setEditing(1);
   }
   const toggleEditingOff = () => {
     setEditing(0);
-    userController.addDescription(description);
+    userController.addDescription(email, description);
   }
 
   const toggleUserInfoVisibility = () => {
@@ -51,8 +52,8 @@ function ProfileScreen() {
   const dataSetter = async () => {
     setAttendedData(await eventController.fetchData("Attended Events"));
     setHostedData(await eventController.fetchData("Hosted Events"));
-    setUserName(await userController.getUser());
-    setDescription(await userController.getDescription());
+    setUserName(await userController.getUser(email));
+    setDescription(await userController.getDescription(email));
    }
    
    useEffect(() => {
