@@ -24,12 +24,10 @@ function LoginScreen() {
       if (retVal === 1){
         console.log('User logged in successfully');
         navigation.navigate('Home');
-      } else {
-        if (retVal === 'auth/invalid-email' || retVal === 'auth/invalid-login-credentials') {
+      } else if (retVal === 'auth/invalid-email' || retVal === 'auth/invalid-login-credentials') {
           Alert.alert('Your email or password was incorrect');
-        } else {
-            Alert.alert('There was a problem with your request. Please try again later.');
-        }
+      } else {
+          Alert.alert('There was a problem with your request. Please try again later.');
       }
     }
 
