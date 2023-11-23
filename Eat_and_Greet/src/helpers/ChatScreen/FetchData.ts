@@ -12,17 +12,19 @@ const FetchData = async (
 ) => {
   try {
     const data = await getChatData(chatID.toString());
-    const dataTitle = data[0] ? data[0].Title : "Error Getting Chat";
-    if (title == "Loading Chat" || title == "Log In PLZ") {
-      if (dataTitle == "DM") {
-        const newTitle = await SetDMTitle(currentUser, data[0]?.Members);
-        setTitle(newTitle);
-      } else {
-        setTitle(dataTitle);
+    if (typeof data !== "string") {
+      const dataTitle = data[0] ? data[0].Title : "Error Getting Chat";
+      if (title == "Loading Chat" || title == "Log In PLZ") {
+        if (dataTitle == "DM") {
+          const newTitle = await SetDMTitle(currentUser.id.toString(), data[0]?.Members);
+          setTitle(newTitle);
+        } else {
+          setTitle(dataTitle);
+        }
       }
+      SetMemberStrings(data[0]?.Members, setMemberStrings);
+      setMessages(data[0]?.Messages);
     }
-    SetMemberStrings(data[0]?.Members, setMemberStrings);
-    setMessages(data[0]?.Messages);
   } catch (error) {
     console.error("Error in Fetching Data: ", error);
   }
