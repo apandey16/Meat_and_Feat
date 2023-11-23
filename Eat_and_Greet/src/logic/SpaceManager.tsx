@@ -1,6 +1,7 @@
 import EventManager from "./EventManager";
 import UserManager from "./UserManager";
 import Event from "./event";
+
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList} from 'App';
@@ -16,5 +17,6 @@ export default class SpaceManager{
     implementAddPost(eventController : EventManager, eventDetails : Event){
         eventController.addPostToDB(eventDetails);
         this.navigation.goBack();
+
     }
 }
