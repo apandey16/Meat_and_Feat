@@ -8,7 +8,6 @@ import { db } from "../firebase/config";
 import { collection, getDocs, query, where, getDoc, doc, updateDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import UserManager from "./UserManager";
-import Factory from "./Factory";
 
 export default class EventManager{
 
@@ -47,7 +46,6 @@ export default class EventManager{
     getUserEventsData = async (): Promise<Event[]> => {
     try {
     const user = getAuth().currentUser;
-    const navigation = useNavigation();
         const ownedEvents  = query(collection(db, "Events"), where("participants","array-contains", user?.email), where("Date", ">=", new Date()));
         const docRef = await getDocs(ownedEvents);
         let fetchedEventData: Event[] = [];
@@ -106,30 +104,28 @@ export default class EventManager{
 
     handleJoin = async (data : Event, id : number) => {
         const navigation = useNavigation();
-    
           if(data?.spots > data?.participants.length) {
             let participants = data?.participants;
-            participants.push(this.user);
-    
-            try {   
-              await updateDoc(doc(db, "Events", id.toString()),  { participants: participants });
-              Alert.alert("Event Joined Successfully!");
-              navigation.goBack();
-    
-          } catch (error) {
-            console.error("Error adding document: ", error);
-            Alert.alert("There Was An Issue Joining This Event, Please Try Again Later")
-          }
-    
+            if(participants.includes(this.user!)){
+                participants.push(this.user!);
+                try { 
+                  await updateDoc(doc(db, "Events", id.toString()),  { participants: participants });
+                  Alert.alert("Event Joined Successfully!");
+                  navigation.goBack();
+        
+              } catch (error) {
+                console.error("Error adding document: ", error);
+                Alert.alert("There Was An Issue Joining This Event, Please Try Again Later")
+              }
+            }else{
+          Alert.alert("User Is Already Enrolled In This Event");
+          navigation.goBack();
+        }
           }else{
             Alert.alert("This Event Is Already Full!");
             navigation.goBack();
           }
-        }else{
-          Alert.alert("User Is Already Enrolled In This Event");
-          navigation.goBack();
         }
-     }
 
 
     fetchData = async (page : string, uid ?: string) => {
