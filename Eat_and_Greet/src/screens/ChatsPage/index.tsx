@@ -50,6 +50,8 @@ function HomeScreen() {
       } else {
         if (typeof currentUser !== 'string') {
           fetchData(setData, currentUser.id.toString());
+        }else{
+          console.error("type issue");
         }
       }
     }

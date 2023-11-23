@@ -4,7 +4,6 @@ import React from 'react';
 interface ChooseImageProps {
   onPress?: () => void;
   buttonSize: number;
-  imagePath?: string;
   color?: string;
 }
 
