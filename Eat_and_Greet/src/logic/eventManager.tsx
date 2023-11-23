@@ -132,7 +132,7 @@ export default class EventManager{
           Alert.alert("User Is Already Enrolled In This Event");
           navigation.goBack();
         }
-
+    }
 
     fetchData = async (page : string, uid ?: string) => {
     try {
