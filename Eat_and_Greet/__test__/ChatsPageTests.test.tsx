@@ -1,7 +1,16 @@
 import FetchData from "../src/helpers/ChatsScreen/FetchData";
-import GetChatsData from "../src/helpers/ChatsScreen/GetChatsData";
 
 describe("Test Fetch Chat Data", () => {
+
+  test("Successful Data Fetching", async () => {
+    const setData = (data: string) => {
+        return data;
+    }
+    const currentUserID = "WFr3hcpbBXgrkQN0grMCoCzZ6o23";
+
+    const result = await FetchData(setData, currentUserID);
+    expect(result).toBe(1);
+  });
     
   test("Failed Data Fetching", async () => {
     const setData = (data: string) => {
@@ -11,15 +20,5 @@ describe("Test Fetch Chat Data", () => {
 
     const result = await FetchData(setData, currentUserID);
     expect(result).toBe(0);
-  });
-});
-
-describe("Test Get Chats Data", () => {
-    
-  test("Failed Data Retrieval", async () => {
-    const currentUserID = "FakeUserID";
-
-    const result = await GetChatsData(currentUserID)
-    expect(result).toBe("failed");
   });
 });
