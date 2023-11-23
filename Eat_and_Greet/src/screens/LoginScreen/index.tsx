@@ -27,8 +27,6 @@ function LoginScreen() {
       } else {
         if (retVal === 'auth/invalid-email' || retVal === 'auth/invalid-login-credentials') {
           Alert.alert('Your email or password was incorrect');
-        } else if (retVal === 'auth/email-already-in-use') {
-            Alert.alert('An account with this email already exists');
         } else {
             Alert.alert('There was a problem with your request. Please try again later.');
         }
