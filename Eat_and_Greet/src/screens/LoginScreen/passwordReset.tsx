@@ -9,29 +9,24 @@ import { auth } from '../../firebase/config';
 
 import localStyles from './index.styles';
 import styles from '../../style';
-import { sendPasswordResetEmail } from 'firebase/auth';
+import resetUserPassword from '../../logic/PasswordResetLogic';
 
 function PasswordReset() {
     const navigation = useNavigation();
     const [email, setEmail] = useState('');
 
-    const resetUserPassword = async () => {
-      try {
-        await sendPasswordResetEmail(auth, email);
+    const resetPass = async () => {
+      const resVal = await resetUserPassword(email, auth);
+      if (resVal === 1){
         Alert.alert('Password reset email sent');
         navigation.navigate('Login');
-      } catch (error) {
-        console.log(error);
-        if (error.code === 'auth/user-not-found') {
-          Alert.alert('User not found');
-        } else if (error.code === 'auth/invalid-email' || error.code === 'auth/missing-email') {
+      } else if (resVal === 'auth/invalid-email') {
           Alert.alert('Invalid email');
-        }
-        else {
-          Alert.alert('There was a problem with your request');
-        }
+      } else {
+          Alert.alert('There was a problem with your request. Please try again later.');
       }
     };
+
 
     return (
       <ScrollView>
@@ -51,7 +46,7 @@ function PasswordReset() {
                     style={[localStyles.input, localStyles.container]}
                   />
                 </View>
-                <RoundedButton name="Reset Password" top="-3%" width="90%" height="15%" onPress={ resetUserPassword }/>
+                <RoundedButton name="Reset Password" top="-3%" width="90%" height="15%" onPress={ resetPass }/>
                 <RoundedButton name="Back to Login" width="90%" height="15%" onPress={() => navigation.navigate('Login')}/>
             </View>
         </View>
