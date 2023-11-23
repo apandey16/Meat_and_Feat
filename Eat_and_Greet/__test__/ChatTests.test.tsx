@@ -5,7 +5,7 @@ describe("Get Chat Data Test", () => {
 
   test("Failed Data Retrieval", async () => {
     const uid = "fakeUID";
-    const result = await GetChatData(uid);
+    const result= await GetChatData(uid);
     expect(result).toBe("failed");
   });
 });

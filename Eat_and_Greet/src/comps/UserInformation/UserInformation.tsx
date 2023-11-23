@@ -17,7 +17,7 @@ const UserInformation = ({editing} : UserInformationProps) => {
 
     const getData = async() => {
         const email = await userController.getEmail();
-        setEmail(email!);
+        setEmail(email);
 
         setData(await userController.getInterests(email));
       }

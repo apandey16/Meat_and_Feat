@@ -8,9 +8,9 @@ describe('Test GetUserManager Functions Response', () => {
         const testEmail = "eatngreetrome@gmail.com";
         userController.addDescription(testEmail, "test description");
         const interests = await userController.getInterests(testEmail);
-        for(let i = 0; i < interests.length; i ++){
-            if(interests[i] != null){
-                await userController.removeInterest(testEmail, interests[i]!);
+        for(const interest of interests){
+            if(interest != null){
+                await userController.removeInterest(testEmail, interest);
             }
         }
         await userController.addInterest(testEmail, "Foo");
