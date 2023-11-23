@@ -6,6 +6,7 @@ const auth = getAuth(app);
 const validEmail = "eatngreetrome@gmail.com";
 const vEat = "password";
 
+
 describe('Successful Login', () => {  
   test('Login', async () => {
     const output = 1;
