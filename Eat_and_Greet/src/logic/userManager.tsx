@@ -10,12 +10,12 @@ export default class UserManager{
         return getAuth().currentUser?.email
     }
 
-    getUser = async () : Promise<string> => {
+    getUser = async (userEmail : string) : Promise<string> => {
         try{
           const querySnapshot = await getDocs(
             query(
               collection(db, "Users"),
-              where("email", "==", this.getEmail())
+              where("email", "==", userEmail)
             )
           );
           let fullName = "";
@@ -31,12 +31,12 @@ export default class UserManager{
         }
       }
 
-      getDescription = async () : Promise<string> => {
+      getDescription = async (userEmail : string) : Promise<string> => {
         try{
           const querySnapshot = await getDocs(
             query(
               collection(db, "Users"),
-              where("email", "==", this.getEmail())
+              where("email", "==", userEmail)
             )
           );
           let description = "";
@@ -50,12 +50,12 @@ export default class UserManager{
         }
       }
 
-      getInterests = async () : Promise<string[]> => {
+      getInterests = async (userEmail : string) : Promise<string[]> => {
         try{
           const querySnapshot = await getDocs(
             query(
               collection(db, "Users"),
-              where("email", "==", this.getEmail())
+              where("email", "==", userEmail)
             )
           );
           let interests : string[] = [];
@@ -68,13 +68,13 @@ export default class UserManager{
           return [];
         }
       }
-      addInterest = async(interest : string) : Promise<void> => {
-        
+      addInterest = async(userEmail : string, interest : string) : Promise<void> => {
+
         try{
             const querySnapshot = await getDocs(
               query(
                 collection(db, "Users"),
-                where("email", "==", this.getEmail())
+                where("email", "==", userEmail)
               )
             );
             let interests : string[] = [];
@@ -100,19 +100,52 @@ export default class UserManager{
           }
       } 
 
-      addDescription = async(description : string) : Promise<void> => {
+      removeInterest = async(userEmail : string, interestName : string) : Promise<void> => {
         try{
             const querySnapshot = await getDocs(
               query(
                 collection(db, "Users"),
-                where("email", "==", this.getEmail())
+                where("email", "==", userEmail)
+              )
+            );
+            let interests : string[] = [];
+            let id = ""
+            querySnapshot.forEach((doc) => {
+              interests = doc.data().interests;
+              id = doc.data().uid;
+            });
+            if(interests.includes(interestName)){
+                const index = interests.indexOf(interestName);
+                if (index > -1){
+                    interests.splice(index, 1);
+                }
+                try {
+                    await updateDoc(doc(db, "Users", id),  { interests: interests });
+                    Alert.alert("Interest Removed Successfully!");
+                }catch (error) {
+                    console.error("Error adding document: ", error);
+                    Alert.alert("There Was An Issue Adding This Interest, Please Try Again Later")
+                }
+            }else{
+                Alert.alert("That Interest Does Not Exist");
+            }
+          } catch (error) {
+            console.error("Error Getting Data From DB: ", error);
+          }
+      } 
+
+      addDescription = async(userEmail : string, description : string) : Promise<void> => {
+        try{
+            const querySnapshot = await getDocs(
+              query(
+                collection(db, "Users"),
+                where("email", "==", userEmail)
               )
             );
             let id = "";
             querySnapshot.forEach((doc) => {
               id = doc.data().uid;
             });
-            
             try {  
                 await updateDoc(doc(db, "Users", id),  { description: description });
             } catch (error) {

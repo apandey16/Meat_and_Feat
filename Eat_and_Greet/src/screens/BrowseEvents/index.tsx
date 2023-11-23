@@ -12,14 +12,17 @@ import ScrollEvents from "../../comps/ScrollEvents";
 
 import createDefaultPostData from "../../logic/Factory";
 import EventManager from "../../logic/EventManager";
+import UserManager from "../../logic/UserManager";
 
 export default function BrowseEvent() {
   const [data, setData] = useState([createDefaultPostData()]);
   const navigation = useNavigation();
   const route = useRoute();
+  const userController = new UserManager();
+  const email : string = userController.getEmail() ?? "";
   const forumName : string = route.params?.forumName;
 
-  const eventController = new EventManager(forumName);
+  const eventController = new EventManager(forumName, email);
 
   const dataSetter = async () => {
     setData(await eventController.fetchData("Browse Event"))
