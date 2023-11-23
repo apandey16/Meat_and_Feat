@@ -11,16 +11,19 @@ const NoChatData: ChatType[] = [
   },
 ];
 
-const fetchData = async (setData: any, currentUser: any) => {
+const fetchData = async (setData: any, currentUserID: any): Promise<number> => {
   try {
-    const data = await getChatsData(currentUser);
-    if (data.length > 0) {
+    const data = await getChatsData(currentUserID);
+    if (typeof data !== 'string' && data.length > 0) {
       setData(data);
+      return 1;
     } else {
       setData(NoChatData);
+      return 0;
     }
   } catch (error) {
     console.error("Error in Fetching Data: ", error);
+    return 0;
   }
 };
 
