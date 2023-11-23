@@ -47,13 +47,14 @@
     "typescript": "^5.3.2"
   },
   "jest": {
-    "setupFiles" : ["dotenv/config"],
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
     "moduleFileExtensions": [
       "ts",
       "tsx",
-      "js",
-      "d.ts",
-      ".env"
+      "js"
     ],
     "transform": {
       "^.+\\.(js)$": "<rootDir>/node_modules/babel-jest",

@@ -12,7 +12,9 @@
     "baseUrl": "./",
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "paths": {},
+    "paths": {
+      "@firebase/auth": ["./node_modules/@firebase/auth/dist/index.rn.d.ts"]
+    },
     "sourceMap": true,
     "sourceRoot": "/",
     "alwaysStrict": true,

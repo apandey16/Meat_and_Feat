@@ -69,6 +69,7 @@ export default class UserManager{
         }
       }
       addInterest = async(userEmail : string, interest : string) : Promise<void> => {
+
         try{
             const querySnapshot = await getDocs(
               query(

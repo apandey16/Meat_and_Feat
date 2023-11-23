@@ -1,10 +1,10 @@
 import { db } from "../../firebase/config";
 import { collection, getDocs, query, where } from "firebase/firestore";
 
-const SetDMTitle = async (currentUser: any, memberList: any) => {
+const SetDMTitle = async (currentUserID: any, memberList: any) => {
   let dmToUser = "";
   for (const member of memberList) {
-    if (member.id.toString() !== currentUser.id.toString()) {
+    if (member.id.toString() !== currentUserID) {
       dmToUser = member.id.toString();
       break;
     }
@@ -21,7 +21,7 @@ const SetDMTitle = async (currentUser: any, memberList: any) => {
       return "DM";
     }
   } else {
-    return "DM";
+    return "Failed To Find Title";
   }
 };
 
