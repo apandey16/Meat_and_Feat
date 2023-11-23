@@ -3,16 +3,15 @@ import { Image, ScrollView, Text, View, StyleSheet, TouchableOpacity, Alert } fr
 import CircularIcon from '../CircularIcon/CircularIcon';
 import styles from '../../style';
  import UserManager from '../../logic/UserManager';
+import SpaceManager from '../../logic/SpaceManager';
 
 interface UserInformationProps {
     editing : boolean;
 }
 
-
-
 const UserInformation = ({editing} : UserInformationProps) => {
     const userController = new UserManager();
-
+    const spaceController = new SpaceManager();
     const [data, setData] = useState([]);
 
     const getData = async() => {
@@ -21,6 +20,7 @@ const UserInformation = ({editing} : UserInformationProps) => {
       useEffect(() => {
         getData();
       }, []);
+
     return (
         <View style={localstyles.OuterFlexBox}>
             <View id="Interests" style={styles.FlexOne}>
@@ -29,7 +29,7 @@ const UserInformation = ({editing} : UserInformationProps) => {
                 {data.map((interest) => (
                     <CircularIcon key={interest} title={interest} buttonSize={80}></CircularIcon>
                     ))}                    
-                {editing ? <TouchableOpacity onPress={() => Alert.prompt("Add An Interest!", "Max 14 Characters", text => userController.addInterest(text))}><CircularIcon title="+" buttonSize={80}></CircularIcon></TouchableOpacity> : <View></View>}
+                {editing ? <TouchableOpacity onPress={() => Alert.prompt("Add An Interest!", "Max 14 Characters", text => spaceController.implementInterest(userController, text))}><CircularIcon title="+" buttonSize={80}></CircularIcon></TouchableOpacity> : <View></View>}
                 </ScrollView>
             </View>
 

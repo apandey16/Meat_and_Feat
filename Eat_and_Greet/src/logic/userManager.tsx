@@ -1,5 +1,4 @@
 import { Alert } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { db } from "../firebase/config";
 import { collection, getDocs, query, where, updateDoc, doc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
@@ -71,7 +70,6 @@ export default class UserManager{
           return [];
         }
       }
-
       addInterest = async(interest : string) : Promise<void> => {
         const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
         try{
@@ -94,8 +92,6 @@ export default class UserManager{
                     interests.push(interest); 
                     await updateDoc(doc(db, "Users", id),  { interests: interests });
                     Alert.alert("Interest Added Successfully!");
-                    navigation.goBack();
-                    navigation.navigate("Profile", {visibleScreen : 0, editing : 1});
                 } catch (error) {
                   console.error("Error adding document: ", error);
                   Alert.alert("There Was An Issue Adding This Interest, Please Try Again Later")
