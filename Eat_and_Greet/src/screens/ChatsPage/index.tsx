@@ -47,12 +47,10 @@ function HomeScreen() {
     if (currentUser) {
       if (currentUser == "User Not Found") {
         setData(LoggedOutChatData);
+      } else if (typeof currentUser !== "string") {
+        fetchData(setData, currentUser.id.toString());
       } else {
-        if (typeof currentUser !== 'string') {
-          fetchData(setData, currentUser.id.toString());
-        }else{
-          console.error("type issue");
-        }
+        console.error("type issue");
       }
     }
   }, [currentUser]);
